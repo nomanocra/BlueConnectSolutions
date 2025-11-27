@@ -1,13 +1,37 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Button, Header, Icon, Link, Logo, type IconVariant } from '@/components/ui';
 import { CodeBlock } from '@/components/CodeBlock';
 
 type Section = 'colors' | 'texts' | 'svg' | 'button' | 'link' | 'logo' | 'header';
 
+const VALID_SECTIONS: Section[] = ['colors', 'texts', 'svg', 'button', 'link', 'logo', 'header'];
+
 export default function DesignSystemPage() {
-  const [activeSection, setActiveSection] = useState<Section>('colors');
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const sectionParam = searchParams.get('section') as Section | null;
+  
+  // Initialiser avec le paramètre URL ou 'colors' par défaut
+  const [activeSection, setActiveSection] = useState<Section>(
+    sectionParam && VALID_SECTIONS.includes(sectionParam) ? sectionParam : 'colors'
+  );
+
+  // Synchroniser l'état avec l'URL quand le paramètre change
+  useEffect(() => {
+    if (sectionParam && VALID_SECTIONS.includes(sectionParam)) {
+      setActiveSection(sectionParam);
+    }
+  }, [sectionParam]);
+
+  // Fonction pour changer de section et mettre à jour l'URL
+  const handleSectionChange = (section: Section) => {
+    setActiveSection(section);
+    // Mettre à jour l'URL sans recharger la page
+    router.push(`/design-system?section=${section}`, { scroll: false });
+  };
 
   return (
     <div className="min-h-screen bg-background-1">
@@ -26,19 +50,19 @@ export default function DesignSystemPage() {
                 id="colors"
                 label="Colors"
                 active={activeSection === 'colors'}
-                onClick={() => setActiveSection('colors')}
+                onClick={() => handleSectionChange('colors')}
               />
               <NavItem
                 id="texts"
                 label="Texts"
                 active={activeSection === 'texts'}
-                onClick={() => setActiveSection('texts')}
+                onClick={() => handleSectionChange('texts')}
               />
               <NavItem
                 id="svg"
                 label="Icon"
                 active={activeSection === 'svg'}
-                onClick={() => setActiveSection('svg')}
+                onClick={() => handleSectionChange('svg')}
               />
               <div className="pt-4 border-t border-background-5">
                 <p className="text-legend-m text-foreground-terciary mb-2 px-3">
@@ -48,25 +72,25 @@ export default function DesignSystemPage() {
                   id="button"
                   label="Button"
                   active={activeSection === 'button'}
-                  onClick={() => setActiveSection('button')}
+                  onClick={() => handleSectionChange('button')}
                 />
                 <NavItem
                   id="link"
                   label="Link"
                   active={activeSection === 'link'}
-                  onClick={() => setActiveSection('link')}
+                  onClick={() => handleSectionChange('link')}
                 />
                 <NavItem
                   id="logo"
                   label="Logo"
                   active={activeSection === 'logo'}
-                  onClick={() => setActiveSection('logo')}
+                  onClick={() => handleSectionChange('logo')}
                 />
                 <NavItem
                   id="header"
                   label="Header"
                   active={activeSection === 'header'}
-                  onClick={() => setActiveSection('header')}
+                  onClick={() => handleSectionChange('header')}
                 />
               </div>
             </nav>
