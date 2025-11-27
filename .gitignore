@@ -3,12 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+.pnp.js
 
 # testing
 /coverage
@@ -29,10 +24,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# env files
+# local env files
 .env*.local
-.env
-!.env.example
 
 # vercel
 .vercel
@@ -40,24 +33,3 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
-# IDE
-.vscode/*
-!.vscode/settings.json
-!.vscode/extensions.json
-.idea
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Figma exports temporaires
-/public/images/temp/
-/public/images/references/
-
-# Backup files
-*.backup
-*.bak
