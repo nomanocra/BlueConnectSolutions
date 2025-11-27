@@ -1,0 +1,11 @@
+{
+  "light": [
+    {
+      "name": "ColorToken",
+      "color": "#000000",
+      "variable_id": "-",
+      "component_name": "ColorToken"
+    }
+  ],
+  "dark": []
+}

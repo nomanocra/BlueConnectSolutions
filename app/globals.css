@@ -1,26 +1,67 @@
 @import "tailwindcss";
+@import "./typography.css";
+
+/**
+ * Design System Configuration
+ * Colors, spacing, typography and other design tokens from Figma
+ * will be defined here using Tailwind CSS v4 @theme syntax
+ */
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* TODO: Add Figma design tokens here
+   * Extract these values using Figma MCP (mcp_Figma_get_variable_defs)
+   * 
+   * Example:
+   * --color-primary: #0ea5e9;
+   * --color-secondary: #8b5cf6;
+   * --spacing-xs: 0.25rem;
+   * --spacing-sm: 0.5rem;
+   * --font-size-body: 1rem;
+   * --font-weight-bold: 700;
+   */
 }
 
 @theme inline {
+  /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  
+  /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* TODO: Add custom design tokens from Figma
+   * These will be available as Tailwind utilities
+   * 
+   * Example:
+   * --color-primary-*: your primary color scale
+   * --spacing-*: your spacing scale
+   * --font-size-*: your typography scale
+   * --border-radius-*: your border radius values
+   */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    
+    /* TODO: Add dark mode variants if needed */
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
