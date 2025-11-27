@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Icon, Link, Logo, type IconVariant } from '@/components/ui';
+import { Button, Header, Icon, Link, Logo, type IconVariant } from '@/components/ui';
 import { CodeBlock } from '@/components/CodeBlock';
 
-type Section = 'colors' | 'texts' | 'svg' | 'button' | 'link' | 'logo';
+type Section = 'colors' | 'texts' | 'svg' | 'button' | 'link' | 'logo' | 'header';
 
 export default function DesignSystemPage() {
   const [activeSection, setActiveSection] = useState<Section>('colors');
@@ -62,6 +62,12 @@ export default function DesignSystemPage() {
                   active={activeSection === 'logo'}
                   onClick={() => setActiveSection('logo')}
                 />
+                <NavItem
+                  id="header"
+                  label="Header"
+                  active={activeSection === 'header'}
+                  onClick={() => setActiveSection('header')}
+                />
               </div>
             </nav>
           </div>
@@ -75,6 +81,7 @@ export default function DesignSystemPage() {
           {activeSection === 'button' && <ButtonSection />}
           {activeSection === 'link' && <LinkSection />}
           {activeSection === 'logo' && <LogoSection />}
+          {activeSection === 'header' && <HeaderSection />}
         </main>
       </div>
     </div>
@@ -1607,6 +1614,235 @@ function LogoCodeModal({ onClose }: { onClose: () => void }) {
               96px
             </p>
             <Logo size={96} />
+          </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function HeaderSection() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
+        Header
+      </h1>
+
+      <div className="space-y-12">
+        {/* Header with Links and CTA */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+              With Links and CTA
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="bg-background-2 p-8 rounded-lg">
+            <Header
+              links={[
+                { label: 'Home', href: '/', selected: true },
+                { label: 'Our Solution', href: '/solution' },
+                { label: 'About Us', href: '/about' },
+              ]}
+              ctaLabel="Contact Us"
+              ctaHref="/contact"
+            />
+          </div>
+        </section>
+
+        {/* Header with Different Number of Links */}
+        <section>
+          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+            Different Number of Links
+          </h2>
+          <div className="space-y-6">
+            <div className="bg-background-2 p-8 rounded-lg">
+              <p className="text-text-s text-foreground-terciary mb-4">2 links</p>
+              <Header
+                links={[
+                  { label: 'Home', href: '/', selected: true },
+                  { label: 'About', href: '/about' },
+                ]}
+                ctaLabel="Contact"
+              />
+            </div>
+            <div className="bg-background-2 p-8 rounded-lg">
+              <p className="text-text-s text-foreground-terciary mb-4">5 links</p>
+              <Header
+                links={[
+                  { label: 'Home', href: '/', selected: true },
+                  { label: 'Services', href: '/services' },
+                  { label: 'Portfolio', href: '/portfolio' },
+                  { label: 'Blog', href: '/blog' },
+                  { label: 'About', href: '/about' },
+                ]}
+                ctaLabel="Get Started"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Header with CTA Handler */}
+        <section>
+          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+            With CTA Click Handler
+          </h2>
+          <div className="bg-background-2 p-8 rounded-lg">
+            <Header
+              links={[
+                { label: 'Home', href: '/', selected: true },
+                { label: 'Services', href: '/services' },
+                { label: 'About', href: '/about' },
+              ]}
+              ctaLabel="Get Started"
+              onCtaClick={() => alert('CTA button clicked!')}
+            />
+          </div>
+        </section>
+
+        {/* Header without CTA */}
+        <section>
+          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+            Without CTA Button
+          </h2>
+          <div className="bg-background-2 p-8 rounded-lg">
+            <Header
+              links={[
+                { label: 'Home', href: '/', selected: true },
+                { label: 'Our Solution', href: '/solution' },
+                { label: 'About Us', href: '/about' },
+              ]}
+            />
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && <HeaderCodeModal onClose={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function HeaderCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `// Configuration du CTA avec un lien (href)
+// Le bouton devient un lien vers l'URL spécifiée
+<Header
+  links={[
+    { label: 'Home', href: '/', selected: true },
+    { label: 'Our Solution', href: '/solution' },
+    { label: 'About Us', href: '/about' },
+  ]}
+  ctaLabel="Contact Us"
+  ctaHref="/contact"  // ← Le bouton redirige vers /contact
+/>
+
+// Configuration du CTA avec un handler (onClick)
+// Le bouton exécute une fonction au clic
+<Header
+  links={[
+    { label: 'Home', href: '/', selected: true },
+    { label: 'Services', href: '/services' },
+    { label: 'About', href: '/about' },
+  ]}
+  ctaLabel="Get Started"
+  onCtaClick={() => {
+    // Votre logique ici
+    console.log('CTA clicked');
+    // Exemple: ouvrir un modal, tracker un événement, etc.
+  }}
+/>
+
+// Header sans CTA (seulement les liens de navigation)
+<Header
+  links={[
+    { label: 'Home', href: '/', selected: true },
+    { label: 'Our Solution', href: '/solution' },
+    { label: 'About Us', href: '/about' },
+  ]}
+/>
+
+// Header avec logo personnalisé et CTA
+<Header
+  logoHref="/home"
+  links={[
+    { label: 'Home', href: '/', selected: true },
+    { label: 'About', href: '/about' },
+  ]}
+  ctaLabel="Contact"
+  ctaHref="/contact"
+/>
+
+// Exemple avec différents nombres de liens
+<Header
+  links={[
+    { label: 'Home', href: '/', selected: true },
+    { label: 'About', href: '/about' },
+  ]}
+  ctaLabel="Contact"
+  ctaHref="/contact"
+/>`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            Header Component
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Header Examples */}
+        <div className="space-y-6 mb-8">
+          <div className="bg-background-3 p-6 rounded-lg">
+            <Header
+              links={[
+                { label: 'Home', href: '/', selected: true },
+                { label: 'Our Solution', href: '/solution' },
+                { label: 'About Us', href: '/about' },
+              ]}
+              ctaLabel="Contact Us"
+            />
           </div>
         </div>
 
