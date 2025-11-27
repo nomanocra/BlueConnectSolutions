@@ -7,6 +7,7 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 });
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${GeistSans.variable} ${inter.variable}`}>
+    <html lang="fr" className={`${GeistSans.variable} ${inter.variable}`.trim()}>
       <body className="font-geist antialiased bg-background-1 text-foreground-main">
         {children}
       </body>

@@ -160,9 +160,10 @@ function getButtonClasses(
   const variantConfig = variantClasses[variant] || variantClasses.primary;
   const forcedState = state !== 'default' ? stateClasses[variant]?.[state] : '';
 
-  // Si disabled, on n'ajoute pas les classes hover et active
+  // Si disabled, on n'ajoute pas les classes hover et active, et on ajoute opacity-30
   const hoverClasses = disabled ? '' : variantConfig.hover;
   const activeClasses = disabled ? '' : variantConfig.active;
+  const disabledClasses = disabled ? 'opacity-30' : '';
 
   return cn(
     baseClasses,
@@ -171,7 +172,8 @@ function getButtonClasses(
     variantConfig.base,
     hoverClasses,
     activeClasses,
-    forcedState
+    forcedState,
+    disabledClasses
   );
 }
 
@@ -190,6 +192,13 @@ function renderButtonContent(
     M: 24,
     S: 20,
     XS: 16,
+  };
+
+  // Classes de taille de texte selon la size
+  const textSizeClasses = {
+    M: 'text-text-m',
+    S: 'text-text-m',
+    XS: 'text-text-s',
   };
 
   // Rendre l'icône de gauche (priorité au variant, puis à l'icône personnalisée)
@@ -211,7 +220,12 @@ function renderButtonContent(
       {showLeftIcon && renderedLeftIcon && (
         <span className="relative shrink-0">{renderedLeftIcon}</span>
       )}
-      <span className="flex flex-col justify-center leading-normal relative shrink-0">
+      <span
+        className={cn(
+          'flex flex-col justify-center leading-normal relative shrink-0',
+          textSizeClasses[size]
+        )}
+      >
         {typeof content === 'string' ? (
           <span className="leading-normal whitespace-pre">{content}</span>
         ) : (

@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Icon, type IconVariant } from '@/components/ui';
+import { Button, Icon, Link, Logo, type IconVariant } from '@/components/ui';
+import { CodeBlock } from '@/components/CodeBlock';
 
-type Section = 'colors' | 'texts' | 'svg' | 'button';
+type Section = 'colors' | 'texts' | 'svg' | 'button' | 'link' | 'logo';
 
 export default function DesignSystemPage() {
   const [activeSection, setActiveSection] = useState<Section>('colors');
@@ -18,6 +19,9 @@ export default function DesignSystemPage() {
               Design System
             </h2>
             <nav className="space-y-2">
+              <p className="text-legend-m text-foreground-terciary mb-2 px-3">
+                Tokens
+              </p>
               <NavItem
                 id="colors"
                 label="Colors"
@@ -36,8 +40,8 @@ export default function DesignSystemPage() {
                 active={activeSection === 'svg'}
                 onClick={() => setActiveSection('svg')}
               />
-              <div className="pt-4 border-t border-background-4">
-                <p className="text-text-s font-geist font-medium text-foreground-secondary mb-2 px-3">
+              <div className="pt-4 border-t border-background-5">
+                <p className="text-legend-m text-foreground-terciary mb-2 px-3">
                   Components
                 </p>
                 <NavItem
@@ -45,6 +49,18 @@ export default function DesignSystemPage() {
                   label="Button"
                   active={activeSection === 'button'}
                   onClick={() => setActiveSection('button')}
+                />
+                <NavItem
+                  id="link"
+                  label="Link"
+                  active={activeSection === 'link'}
+                  onClick={() => setActiveSection('link')}
+                />
+                <NavItem
+                  id="logo"
+                  label="Logo"
+                  active={activeSection === 'logo'}
+                  onClick={() => setActiveSection('logo')}
                 />
               </div>
             </nav>
@@ -57,6 +73,8 @@ export default function DesignSystemPage() {
           {activeSection === 'texts' && <TextsSection />}
           {activeSection === 'svg' && <IconSection />}
           {activeSection === 'button' && <ButtonSection />}
+          {activeSection === 'link' && <LinkSection />}
+          {activeSection === 'logo' && <LogoSection />}
         </main>
       </div>
     </div>
@@ -78,15 +96,15 @@ function NavItem({
     <button
       onClick={onClick}
       className={`
-        w-full text-left px-3 py-2 rounded-lg transition-colors
+        w-full text-left px-3 h-8 rounded-lg transition-colors flex items-center
         ${
           active
             ? 'bg-primary-3 text-foreground-main'
-            : 'text-foreground-secondary hover:bg-background-3 hover:text-foreground-main'
+            : 'text-foreground-main hover:bg-background-3'
         }
       `}
     >
-      <span className="text-text-m font-geist font-medium">{label}</span>
+      <span className="text-text-s font-geist font-medium">{label}</span>
     </button>
   );
 }
@@ -148,7 +166,7 @@ function ColorsSection() {
           <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
             Primary
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {primaryColors.map((color) => (
               <ColorCard key={color.token} color={color} />
             ))}
@@ -160,7 +178,7 @@ function ColorsSection() {
           <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
             Background
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {backgroundColors.map((color) => (
               <ColorCard key={color.token} color={color} />
             ))}
@@ -172,7 +190,7 @@ function ColorsSection() {
           <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
             Foreground
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
             {foregroundColors.map((color) => (
               <ColorCard key={color.token} color={color} />
             ))}
@@ -188,14 +206,37 @@ function ColorCard({
 }: {
   color: { name: string; value: string; token: string };
 }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(color.value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy color:', err);
+    }
+  };
+
   return (
-    <div className="bg-background-3 border border-background-4 rounded-lg p-4">
+    <button
+      onClick={handleCopy}
+      className="bg-background-3 border border-background-4 rounded-lg p-3 text-left hover:border-primary-3 hover:bg-background-4 transition-colors cursor-pointer group"
+    >
       <div
-        className="w-full h-24 rounded-lg mb-3 border border-background-4"
+        className="w-full h-16 rounded-lg mb-2 border border-background-4 relative flex items-center justify-center"
         style={{ backgroundColor: color.value }}
-      />
-      <div className="space-y-1">
-        <p className="text-text-s font-geist font-medium text-foreground-main">
+      >
+        {copied && (
+          <div className="absolute inset-0 bg-black/70 rounded-lg flex items-center justify-center">
+            <span className="text-text-xs font-geist font-medium text-foreground-main text-center px-1">
+              Copied in clipboard
+            </span>
+          </div>
+        )}
+      </div>
+      <div className="space-y-0.5">
+        <p className="text-text-xs font-geist font-medium text-foreground-main">
           {color.name}
         </p>
         <p className="text-text-xs font-geist font-normal text-foreground-terciary font-mono">
@@ -205,7 +246,7 @@ function ColorCard({
           {color.token}
         </p>
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -392,12 +433,10 @@ function IconSection() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
-        Icon
-      </h1>
-
-      {/* Search Input */}
-      <div className="mb-8">
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-title-2 font-geist font-bold text-foreground-main">
+          Icon
+        </h1>
         <input
           type="text"
           placeholder="Search icons..."
@@ -408,18 +447,18 @@ function IconSection() {
       </div>
 
       {/* Icons Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {filteredIcons.map((variant) => (
           <button
             key={variant}
             onClick={() => setSelectedIcon(variant)}
-            className="bg-background-3 border border-background-4 rounded-lg p-6 flex flex-col items-center justify-center space-y-4 hover:border-primary-3 hover:bg-background-4 transition-colors cursor-pointer"
+            className="bg-background-3 border border-background-4 rounded-lg p-4 flex flex-col items-center justify-center space-y-2 hover:border-primary-3 hover:bg-background-4 transition-colors cursor-pointer"
           >
-            <div className="flex items-center justify-center w-16 h-16 bg-background-2 rounded-lg">
-              <Icon variant={variant} size={32} />
+            <div className="flex items-center justify-center w-12 h-12 bg-background-2 rounded-lg">
+              <Icon variant={variant} size={24} />
             </div>
             <div className="text-center">
-              <p className="text-text-m font-geist font-medium text-foreground-main mb-1">
+              <p className="text-text-s font-geist font-medium text-foreground-main mb-1">
                 {variant}
               </p>
               <code className="text-text-xs font-mono text-foreground-secondary bg-background-2 px-2 py-1 rounded">
@@ -500,22 +539,14 @@ function IconModal({
             <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
               Standalone Icon
             </h3>
-            <div className="bg-background-3 rounded-lg p-4 overflow-x-auto">
-              <pre className="text-text-s font-mono text-foreground-main">
-                <code>{codeExample}</code>
-              </pre>
-            </div>
+            <CodeBlock code={codeExample} language="tsx" />
           </div>
 
           <div>
             <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
               In Button
             </h3>
-            <div className="bg-background-3 rounded-lg p-4 overflow-x-auto">
-              <pre className="text-text-s font-mono text-foreground-main whitespace-pre">
-                <code>{buttonExample}</code>
-              </pre>
-            </div>
+            <CodeBlock code={buttonExample} language="tsx" />
           </div>
         </div>
       </div>
@@ -524,6 +555,8 @@ function IconModal({
 }
 
 function ButtonSection() {
+  const [openModal, setOpenModal] = useState<string | null>(null);
+
   return (
     <div className="max-w-6xl mx-auto">
       <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
@@ -533,9 +566,17 @@ function ButtonSection() {
       <div className="space-y-12">
         {/* Primary Variant */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
-            Primary
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+              Primary
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('primary')}
+            />
+          </div>
           <div className="space-y-6">
             <div className="flex flex-wrap gap-4">
               <Button label="Size M" variant="primary" size="M" />
@@ -557,9 +598,17 @@ function ButtonSection() {
 
         {/* Secondary Variant */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
-            Secondary
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+              Secondary
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('secondary')}
+            />
+          </div>
           <div className="space-y-6">
             <div className="flex flex-wrap gap-4">
               <Button label="Size M" variant="secondary" size="M" />
@@ -591,9 +640,17 @@ function ButtonSection() {
 
         {/* Ghost Variant */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
-            Ghost
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+              Ghost
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('ghost')}
+            />
+          </div>
           <div className="space-y-6">
             <div className="flex flex-wrap gap-4">
               <Button label="Size M" variant="ghost" size="M" />
@@ -607,6 +664,959 @@ function ButtonSection() {
             </div>
           </div>
         </section>
+
+        {/* Icons Section */}
+        <section>
+          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+            With Icons
+          </h2>
+          <div className="space-y-8">
+            {/* Left Icon */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-text-l font-geist font-bold text-foreground-main">
+                  Left Icon
+                </h3>
+                <Button
+                  label="View code"
+                  variant="ghost"
+                  size="XS"
+                  onClick={() => setOpenModal('left-icon')}
+                />
+              </div>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="M"
+                    leftIconVariant="arrow-left"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="M"
+                    leftIconVariant="arrow-left"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="M"
+                    leftIconVariant="arrow-left"
+                  />
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="S"
+                    leftIconVariant="arrow-left"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="S"
+                    leftIconVariant="arrow-left"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="S"
+                    leftIconVariant="arrow-left"
+                  />
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="XS"
+                    leftIconVariant="arrow-left"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="XS"
+                    leftIconVariant="arrow-left"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="XS"
+                    leftIconVariant="arrow-left"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Icon */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-text-l font-geist font-bold text-foreground-main">
+                  Right Icon
+                </h3>
+                <Button
+                  label="View code"
+                  variant="ghost"
+                  size="XS"
+                  onClick={() => setOpenModal('right-icon')}
+                />
+              </div>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="M"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="M"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="M"
+                    rightIconVariant="arrow-right"
+                  />
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="S"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="S"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="S"
+                    rightIconVariant="arrow-right"
+                  />
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="XS"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="XS"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="XS"
+                    rightIconVariant="arrow-right"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Both Icons */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-text-l font-geist font-bold text-foreground-main">
+                  Both Icons
+                </h3>
+                <Button
+                  label="View code"
+                  variant="ghost"
+                  size="XS"
+                  onClick={() => setOpenModal('both-icons')}
+                />
+              </div>
+              <div className="space-y-4">
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="M"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="M"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="M"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="S"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="S"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="S"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                </div>
+                <div className="flex flex-wrap gap-4">
+                  <Button
+                    label="Primary"
+                    variant="primary"
+                    size="XS"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Secondary"
+                    variant="secondary"
+                    size="XS"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Ghost"
+                    variant="ghost"
+                    size="XS"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Modals */}
+      {openModal && (
+        <ButtonCodeModal type={openModal} onClose={() => setOpenModal(null)} />
+      )}
+    </div>
+  );
+}
+
+function ButtonCodeModal({
+  type,
+  onClose,
+}: {
+  type: string;
+  onClose: () => void;
+}) {
+  const getModalContent = () => {
+    switch (type) {
+      case 'primary':
+      case 'secondary':
+      case 'ghost':
+        return {
+          title: type.charAt(0).toUpperCase() + type.slice(1),
+          buttons: (
+            <>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Size M"
+                  variant={type as 'primary' | 'secondary' | 'ghost'}
+                  size="M"
+                />
+                <Button
+                  label="Size S"
+                  variant={type as 'primary' | 'secondary' | 'ghost'}
+                  size="S"
+                />
+                <Button
+                  label="Size XS"
+                  variant={type as 'primary' | 'secondary' | 'ghost'}
+                  size="XS"
+                />
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Disabled M"
+                  variant={type as 'primary' | 'secondary' | 'ghost'}
+                  size="M"
+                  disabled
+                />
+                <Button
+                  label="Disabled S"
+                  variant={type as 'primary' | 'secondary' | 'ghost'}
+                  size="S"
+                  disabled
+                />
+                <Button
+                  label="Disabled XS"
+                  variant={type as 'primary' | 'secondary' | 'ghost'}
+                  size="XS"
+                  disabled
+                />
+              </div>
+            </>
+          ),
+          code: `<Button label="Click me" variant="${type}" size="M" />
+<Button label="Click me" variant="${type}" size="S" />
+<Button label="Click me" variant="${type}" size="XS" />
+<Button label="Disabled" variant="${type}" size="M" disabled />`,
+        };
+      case 'left-icon':
+        return {
+          title: 'Left Icon',
+          buttons: (
+            <>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="M"
+                  leftIconVariant="arrow-left"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="M"
+                  leftIconVariant="arrow-left"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="M"
+                  leftIconVariant="arrow-left"
+                />
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="S"
+                  leftIconVariant="arrow-left"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="S"
+                  leftIconVariant="arrow-left"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="S"
+                  leftIconVariant="arrow-left"
+                />
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="XS"
+                  leftIconVariant="arrow-left"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="XS"
+                  leftIconVariant="arrow-left"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="XS"
+                  leftIconVariant="arrow-left"
+                />
+              </div>
+            </>
+          ),
+          code: `<Button 
+  label="Click me" 
+  variant="primary" 
+  size="M" 
+  leftIconVariant="arrow-left" 
+/>
+
+<Button 
+  label="Click me" 
+  variant="primary" 
+  size="S" 
+  leftIconVariant="arrow-left" 
+/>
+
+<Button 
+  label="Click me" 
+  variant="primary" 
+  size="XS" 
+  leftIconVariant="arrow-left" 
+/>`,
+        };
+      case 'right-icon':
+        return {
+          title: 'Right Icon',
+          buttons: (
+            <>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="M"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="M"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="M"
+                  rightIconVariant="arrow-right"
+                />
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="S"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="S"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="S"
+                  rightIconVariant="arrow-right"
+                />
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="XS"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="XS"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="XS"
+                  rightIconVariant="arrow-right"
+                />
+              </div>
+            </>
+          ),
+          code: `<Button 
+  label="Click me" 
+  variant="primary" 
+  size="M" 
+  rightIconVariant="arrow-right" 
+/>
+
+<Button 
+  label="Click me" 
+  variant="primary" 
+  size="S" 
+  rightIconVariant="arrow-right" 
+/>
+
+<Button 
+  label="Click me" 
+  variant="primary" 
+  size="XS" 
+  rightIconVariant="arrow-right" 
+/>`,
+        };
+      case 'both-icons':
+        return {
+          title: 'Both Icons',
+          buttons: (
+            <>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="M"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="M"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="M"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="S"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="S"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="S"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <Button
+                  label="Primary"
+                  variant="primary"
+                  size="XS"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Secondary"
+                  variant="secondary"
+                  size="XS"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Ghost"
+                  variant="ghost"
+                  size="XS"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+              </div>
+            </>
+          ),
+          code: `<Button 
+  label="Click me" 
+  variant="primary" 
+  size="M" 
+  leftIconVariant="arrow-left"
+  rightIconVariant="arrow-right" 
+/>
+
+<Button 
+  label="Click me" 
+  variant="primary" 
+  size="S" 
+  leftIconVariant="arrow-left"
+  rightIconVariant="arrow-right" 
+/>
+
+<Button 
+  label="Click me" 
+  variant="primary" 
+  size="XS" 
+  leftIconVariant="arrow-left"
+  rightIconVariant="arrow-right" 
+/>`,
+        };
+      default:
+        return {
+          title: 'Button',
+          buttons: null,
+          code: '',
+        };
+    }
+  };
+
+  const { title, buttons, code } = getModalContent();
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            {title}
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Button Examples */}
+        {buttons && <div className="space-y-4 mb-8">{buttons}</div>}
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LinkSection() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
+        Link
+      </h1>
+
+      <div className="space-y-12">
+        {/* Variants Matrix */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+              Variants
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-auto border-collapse">
+              <thead>
+                <tr>
+                  <th className="text-text-s font-geist font-medium text-foreground-terciary text-left"></th>
+                  <th className="text-text-s font-geist font-medium text-foreground-terciary text-center px-12">
+                    Selected
+                  </th>
+                  <th className="text-text-s font-geist font-medium text-foreground-terciary text-center p-6">
+                    Not Selected
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="text-text-s font-geist font-medium text-foreground-terciary text-right px-9">
+                    Enabled
+                  </td>
+                  <td className="p-6 text-center">
+                    <Link href="#" selected>
+                      Home
+                    </Link>
+                  </td>
+                  <td className="p- text-center">
+                    <Link href="#">Home</Link>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-text-s font-geist font-medium text-foreground-terciary px-9 text-right">
+                    Disabled
+                  </td>
+                  <td className="p-3 text-center">
+                    <Link href="#" selected disabled>
+                      Home
+                    </Link>
+                  </td>
+                  <td className="p-3 text-center">
+                    <Link href="#" disabled>
+                      Home
+                    </Link>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && <LinkCodeModal onClose={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function LinkCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `<Link href="/home" selected>
+  Home
+</Link>
+
+<Link href="/home">
+  Home
+</Link>
+
+<Link href="/home" selected disabled>
+  Home
+</Link>
+
+<Link href="/home" disabled>
+  Home
+</Link>`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            Link Variants
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Link Examples */}
+        <div className="space-y-4 mb-8">
+          <div className="flex flex-wrap gap-4">
+            <Link href="#" selected disabled={false}>
+              Selected, Enabled
+            </Link>
+            <Link href="#" selected={false} disabled={false}>
+              Not Selected, Enabled
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <Link href="#" selected disabled>
+              Selected, Disabled
+            </Link>
+            <Link href="#" selected={false} disabled>
+              Not Selected, Disabled
+            </Link>
+          </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LogoSection() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
+        Logo
+      </h1>
+
+      <div className="space-y-12">
+        {/* Sizes */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+              Sizes
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="flex flex-col gap-6 items-start">
+            <div className="flex items-center gap-3">
+              <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+                Default (32px)
+              </p>
+              <Logo />
+            </div>
+            <div className="flex items-center gap-3">
+              <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+                48px
+              </p>
+              <Logo size={48} />
+            </div>
+            <div className="flex items-center gap-3">
+              <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+                64px
+              </p>
+              <Logo size={64} />
+            </div>
+            <div className="flex items-center gap-3">
+              <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+                96px
+              </p>
+              <Logo size={96} />
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && <LogoCodeModal onClose={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function LogoCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `<Logo />
+
+<Logo size={48} />
+
+<Logo size={64} />
+
+<Logo size={96} />`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            Logo Sizes
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Logo Examples */}
+        <div className="space-y-6 mb-8">
+          <div className="flex items-center gap-3">
+            <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+              Default (32px)
+            </p>
+            <Logo />
+          </div>
+          <div className="flex items-center gap-3">
+            <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+              48px
+            </p>
+            <Logo size={48} />
+          </div>
+          <div className="flex items-center gap-3">
+            <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+              64px
+            </p>
+            <Logo size={64} />
+          </div>
+          <div className="flex items-center gap-3">
+            <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+              96px
+            </p>
+            <Logo size={96} />
+          </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
       </div>
     </div>
   );
