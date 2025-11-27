@@ -51,9 +51,6 @@ const config: Config = {
         'text-m': ['16px', { lineHeight: '100%' }],
         'text-s': ['14px', { lineHeight: '100%' }],
         'text-xs': ['12px', { lineHeight: '100%' }],
-        // Heading styles (Inter)
-        'heading-h3': ['36px', { lineHeight: '56px', fontWeight: '700' }],
-        'heading-h5': ['24px', { lineHeight: '40px', fontWeight: '500' }],
         // Body styles (Inter)
         'body-regular': ['16px', { lineHeight: '24px', fontWeight: '400' }],
         // Legend styles (Inter)

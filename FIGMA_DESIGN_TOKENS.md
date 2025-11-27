@@ -92,13 +92,6 @@ Documentation des tokens de design récupérés depuis Figma.
 | `Text/XS/Medium`  | Geist   | Medium  | 12px   | 500   | 100%        | Texte très petit medium  |
 | `Text/XS/Bold`    | Geist   | Bold    | 12px   | 700   | 100%        | Texte très petit en gras |
 
-### Heading (Inter)
-
-| Token        | Famille | Style  | Taille | Poids | Line Height | Description      |
-| ------------ | ------- | ------ | ------ | ----- | ----------- | ---------------- |
-| `Heading/H3` | Inter   | Bold   | 36px   | 700   | 56px        | Heading niveau 3 |
-| `Heading/H5` | Inter   | Medium | 24px   | 500   | 40px        | Heading niveau 5 |
-
 ### Body (Inter)
 
 | Token                 | Famille | Style   | Taille | Poids | Line Height | Description          |
@@ -139,7 +132,6 @@ Documentation des tokens de design récupérés depuis Figma.
 - Police secondaire: **Inter** (pour les headings, body et légendes)
 - Système de typographie hiérarchique bien défini avec :
   - 3 tailles de titres Geist (Title/1, Title/2, Title/3)
-  - 2 tailles de headings Inter (Heading/H3, Heading/H5)
   - Système de texte complet avec 4 tailles (L, M, S, XS) et 3 poids (Regular, Medium, Bold)
   - Body text avec Inter (Body/Regular/Medium)
   - Styles de légende avec Inter (Legend/M, Legend/S)

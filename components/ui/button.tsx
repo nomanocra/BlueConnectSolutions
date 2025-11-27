@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { ArrowRightIcon } from './icons/arrow-right';
+import { Icon, IconVariant } from './icon';
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -9,6 +9,8 @@ export interface ButtonProps
   children?: React.ReactNode;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  leftIconVariant?: IconVariant;
+  rightIconVariant?: IconVariant;
   showRightIcon?: boolean;
   showLeftIcon?: boolean;
 
@@ -29,6 +31,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       leftIcon,
       rightIcon,
+      leftIconVariant,
+      rightIconVariant,
       showRightIcon = true,
       showLeftIcon = true,
       state = 'default',
@@ -47,13 +51,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       return (
         <a
           href={href}
-          className={cn(getButtonClasses(state, variant, size), className)}
+          className={cn(
+            getButtonClasses(state, variant, size, disabled),
+            className
+          )}
           {...(props as any)}
         >
           {renderButtonContent(
             label || children,
             leftIcon,
             rightIcon,
+            leftIconVariant,
+            rightIconVariant,
             showRightIcon,
             showLeftIcon,
             size
@@ -63,8 +72,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const buttonClasses = cn(
-      getButtonClasses(state, variant, size),
-      disabled && 'opacity-50 cursor-not-allowed',
+      getButtonClasses(state, variant, size, disabled),
+      disabled && 'opacity-50',
       className
     );
 
@@ -79,6 +88,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           label || children,
           leftIcon,
           rightIcon,
+          leftIconVariant,
+          rightIconVariant,
           showRightIcon,
           showLeftIcon,
           size
@@ -94,10 +105,12 @@ Button.displayName = 'Button';
 function getButtonClasses(
   state: 'default' | 'hover' | 'pressed',
   variant: 'primary' | 'secondary' | 'ghost',
-  size: 'M' | 'S' | 'XS'
+  size: 'M' | 'S' | 'XS',
+  disabled?: boolean
 ): string {
+  const cursorClass = disabled ? 'cursor-default' : 'cursor-pointer';
   const baseClasses =
-    'box-border flex items-center justify-center relative rounded-[6px] font-geist font-medium text-center whitespace-nowrap transition-colors cursor-pointer';
+    'box-border flex items-center justify-center relative rounded-[6px] font-geist font-medium text-center whitespace-nowrap transition-colors';
 
   // Classes de taille
   const sizeClasses = {
@@ -147,12 +160,17 @@ function getButtonClasses(
   const variantConfig = variantClasses[variant] || variantClasses.primary;
   const forcedState = state !== 'default' ? stateClasses[variant]?.[state] : '';
 
+  // Si disabled, on n'ajoute pas les classes hover et active
+  const hoverClasses = disabled ? '' : variantConfig.hover;
+  const activeClasses = disabled ? '' : variantConfig.active;
+
   return cn(
     baseClasses,
+    cursorClass,
     sizeClasses[size],
     variantConfig.base,
-    variantConfig.hover,
-    variantConfig.active,
+    hoverClasses,
+    activeClasses,
     forcedState
   );
 }
@@ -162,6 +180,8 @@ function renderButtonContent(
   content: React.ReactNode,
   leftIcon?: React.ReactNode,
   rightIcon?: React.ReactNode,
+  leftIconVariant?: IconVariant,
+  rightIconVariant?: IconVariant,
   showRightIcon: boolean = true,
   showLeftIcon: boolean = true,
   size: 'M' | 'S' | 'XS' = 'M'
@@ -172,12 +192,24 @@ function renderButtonContent(
     XS: 16,
   };
 
-  const defaultRightIcon = <ArrowRightIcon size={iconSize[size]} />;
+  // Rendre l'icône de gauche (priorité au variant, puis à l'icône personnalisée)
+  const renderedLeftIcon = leftIconVariant ? (
+    <Icon variant={leftIconVariant} size={iconSize[size]} />
+  ) : (
+    leftIcon
+  );
+
+  // Rendre l'icône de droite (priorité au variant, puis à l'icône personnalisée)
+  const renderedRightIcon = rightIconVariant ? (
+    <Icon variant={rightIconVariant} size={iconSize[size]} />
+  ) : (
+    rightIcon
+  );
 
   return (
     <>
-      {showLeftIcon && leftIcon && (
-        <span className="relative shrink-0">{leftIcon}</span>
+      {showLeftIcon && renderedLeftIcon && (
+        <span className="relative shrink-0">{renderedLeftIcon}</span>
       )}
       <span className="flex flex-col justify-center leading-normal relative shrink-0">
         {typeof content === 'string' ? (
@@ -186,10 +218,8 @@ function renderButtonContent(
           content
         )}
       </span>
-      {showRightIcon && (rightIcon || defaultRightIcon) && (
-        <span className="relative shrink-0">
-          {rightIcon || defaultRightIcon}
-        </span>
+      {showRightIcon && renderedRightIcon && (
+        <span className="relative shrink-0">{renderedRightIcon}</span>
       )}
     </>
   );

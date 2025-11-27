@@ -1,3 +1,3 @@
 export { Button, type ButtonProps } from './button';
-export { ArrowRightIcon, type ArrowRightIconProps } from './icons/arrow-right';
+export { Icon, type IconProps, type IconVariant } from './icon';
 
