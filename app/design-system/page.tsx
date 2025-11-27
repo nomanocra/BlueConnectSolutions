@@ -489,9 +489,9 @@ function IconModal({
 }) {
   const codeExample = `<Icon variant="${variant}" size={24} />`;
   const buttonExample = `<Button 
-  label="Click me" 
-  rightIconVariant="${variant}" 
-/>`;
+    label="Click me" 
+    rightIconVariant="${variant}" 
+  />`;
 
   return (
     <div
