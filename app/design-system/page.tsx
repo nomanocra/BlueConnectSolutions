@@ -1572,26 +1572,6 @@ function LinkCodeModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Link Examples */}
-        <div className="space-y-4 mb-8">
-          <div className="flex flex-wrap gap-4">
-            <Link href="#" selected disabled={false}>
-              Selected, Enabled
-            </Link>
-            <Link href="#" selected={false} disabled={false}>
-              Not Selected, Enabled
-            </Link>
-          </div>
-          <div className="flex flex-wrap gap-4">
-            <Link href="#" selected disabled>
-              Selected, Disabled
-            </Link>
-            <Link href="#" selected={false} disabled>
-              Not Selected, Disabled
-            </Link>
-          </div>
-        </div>
-
         {/* Code Example */}
         <div>
           <h3 className="text-text-l font-bold text-foreground-main mb-3">
@@ -1704,34 +1684,6 @@ function LogoCodeModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Logo Examples */}
-        <div className="space-y-6 mb-8">
-          <div className="flex items-center gap-3">
-            <p className="text-text-s font-medium text-foreground-terciary w-32">
-              Default (32px)
-            </p>
-            <Logo />
-          </div>
-          <div className="flex items-center gap-3">
-            <p className="text-text-s font-medium text-foreground-terciary w-32">
-              48px
-            </p>
-            <Logo size={48} />
-          </div>
-          <div className="flex items-center gap-3">
-            <p className="text-text-s font-medium text-foreground-terciary w-32">
-              64px
-            </p>
-            <Logo size={64} />
-          </div>
-          <div className="flex items-center gap-3">
-            <p className="text-text-s font-medium text-foreground-terciary w-32">
-              96px
-            </p>
-            <Logo size={96} />
-          </div>
-        </div>
-
         {/* Code Example */}
         <div>
           <h3 className="text-text-l font-bold text-foreground-main mb-3">
@@ -1745,7 +1697,7 @@ function LogoCodeModal({ onClose }: { onClose: () => void }) {
 }
 
 function LogosSection() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -1791,7 +1743,7 @@ function LogosSection() {
               label="View code"
               variant="ghost"
               size="XS"
-              onClick={() => setOpenModal(true)}
+              onClick={() => setOpenModal('default')}
             />
           </div>
           <div className="bg-background-3 p-8 rounded-lg overflow-hidden">
@@ -1801,9 +1753,17 @@ function LogosSection() {
 
         {/* Custom Spacing */}
         <section>
-          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
-            Custom Spacing
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Custom Spacing
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('custom-spacing')}
+            />
+          </div>
           <div
             ref={scrollContainerRef}
             className="bg-background-3 p-8 rounded-lg overflow-x-auto select-none"
@@ -1820,16 +1780,42 @@ function LogosSection() {
         </section>
       </div>
 
-      {/* Modal */}
-      {openModal && <LogosCodeModal onClose={() => setOpenModal(false)} />}
+      {/* Modals */}
+      {openModal && (
+        <LogosCodeModal type={openModal} onClose={() => setOpenModal(null)} />
+      )}
     </div>
   );
 }
 
-function LogosCodeModal({ onClose }: { onClose: () => void }) {
-  const code = `<Logos />
+function LogosCodeModal({
+  type,
+  onClose,
+}: {
+  type: string;
+  onClose: () => void;
+}) {
+  const getModalContent = () => {
+    switch (type) {
+      case 'default':
+        return {
+          title: 'Logos - Default',
+          code: `<Logos />`,
+        };
+      case 'custom-spacing':
+        return {
+          title: 'Logos - Custom Spacing',
+          code: `<Logos gap={100} paddingX={40} />`,
+        };
+      default:
+        return {
+          title: 'Logos Component',
+          code: '',
+        };
+    }
+  };
 
-<Logos gap={100} paddingX={40} />`;
+  const { title, code } = getModalContent();
 
   return (
     <div
@@ -1842,7 +1828,7 @@ function LogosCodeModal({ onClose }: { onClose: () => void }) {
       >
         <div className="flex items-start justify-between mb-6">
           <h2 className="text-title-3 font-semibold text-foreground-main">
-            Logos Component
+            {title}
           </h2>
           <button
             onClick={onClose}
@@ -1866,16 +1852,6 @@ function LogosCodeModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Examples */}
-        <div className="space-y-6 mb-8">
-          <div className="bg-background-3 p-6 rounded-lg overflow-hidden">
-            <Logos />
-          </div>
-          <div className="bg-background-3 p-6 rounded-lg overflow-x-auto">
-            <Logos gap={100} paddingX={40} />
-          </div>
-        </div>
-
         {/* Code Example */}
         <div>
           <h3 className="text-text-l font-bold text-foreground-main mb-3">
@@ -1889,7 +1865,7 @@ function LogosCodeModal({ onClose }: { onClose: () => void }) {
 }
 
 function HeaderSection() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<string | null>(null);
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -1908,7 +1884,7 @@ function HeaderSection() {
               label="View code"
               variant="ghost"
               size="XS"
-              onClick={() => setOpenModal(true)}
+              onClick={() => setOpenModal('with-cta')}
             />
           </div>
           <div className="bg-background-2 p-8 rounded-lg">
@@ -1926,9 +1902,17 @@ function HeaderSection() {
 
         {/* Header with Different Number of Links */}
         <section>
-          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
-            Different Number of Links
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Different Number of Links
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('different-links')}
+            />
+          </div>
           <div className="space-y-6">
             <div className="bg-background-2 p-8 rounded-lg">
               <p className="text-text-s text-foreground-terciary mb-4">
@@ -1962,9 +1946,17 @@ function HeaderSection() {
 
         {/* Header with CTA Handler */}
         <section>
-          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
-            With CTA Click Handler
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              With CTA Click Handler
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('cta-handler')}
+            />
+          </div>
           <div className="bg-background-2 p-8 rounded-lg">
             <Header
               links={[
@@ -1980,9 +1972,17 @@ function HeaderSection() {
 
         {/* Header without CTA */}
         <section>
-          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
-            Without CTA Button
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Without CTA Button
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('without-cta')}
+            />
+          </div>
           <div className="bg-background-2 p-8 rounded-lg">
             <Header
               links={[
@@ -1995,14 +1995,30 @@ function HeaderSection() {
         </section>
       </div>
 
-      {/* Modal */}
-      {openModal && <HeaderCodeModal onClose={() => setOpenModal(false)} />}
+      {/* Modals */}
+      {openModal && (
+        <HeaderCodeModal
+          type={openModal}
+          onClose={() => setOpenModal(null)}
+        />
+      )}
     </div>
   );
 }
 
-function HeaderCodeModal({ onClose }: { onClose: () => void }) {
-  const code = `// Configuration du CTA avec un lien (href)
+function HeaderCodeModal({
+  type,
+  onClose,
+}: {
+  type: string;
+  onClose: () => void;
+}) {
+  const getModalContent = () => {
+    switch (type) {
+      case 'with-cta':
+        return {
+          title: 'Header with Links and CTA',
+          code: `// Configuration du CTA avec un lien (href)
 // Le bouton devient un lien vers l'URL spécifiée
 <Header
   links={[
@@ -2011,10 +2027,37 @@ function HeaderCodeModal({ onClose }: { onClose: () => void }) {
     { label: 'About Us', href: '/about' },
   ]}
   ctaLabel="Contact Us"
-  ctaHref="/contact"  // ← Le bouton redirige vers /contact
+  ctaHref="/contact"
+/>`,
+        };
+      case 'different-links':
+        return {
+          title: 'Header with Different Number of Links',
+          code: `// Exemple avec 2 liens
+<Header
+  links={[
+    { label: 'Home', href: '/', selected: true },
+    { label: 'About', href: '/about' },
+  ]}
+  ctaLabel="Contact"
 />
 
-// Configuration du CTA avec un handler (onClick)
+// Exemple avec 5 liens
+<Header
+  links={[
+    { label: 'Home', href: '/', selected: true },
+    { label: 'Services', href: '/services' },
+    { label: 'Portfolio', href: '/portfolio' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'About', href: '/about' },
+  ]}
+  ctaLabel="Get Started"
+/>`,
+        };
+      case 'cta-handler':
+        return {
+          title: 'Header with CTA Click Handler',
+          code: `// Configuration du CTA avec un handler (onClick)
 // Le bouton exécute une fonction au clic
 <Header
   links={[
@@ -2028,37 +2071,29 @@ function HeaderCodeModal({ onClose }: { onClose: () => void }) {
     console.log('CTA clicked');
     // Exemple: ouvrir un modal, tracker un événement, etc.
   }}
-/>
-
-// Header sans CTA (seulement les liens de navigation)
+/>`,
+        };
+      case 'without-cta':
+        return {
+          title: 'Header without CTA Button',
+          code: `// Header sans CTA (seulement les liens de navigation)
 <Header
   links={[
     { label: 'Home', href: '/', selected: true },
     { label: 'Our Solution', href: '/solution' },
     { label: 'About Us', href: '/about' },
   ]}
-/>
+/>`,
+        };
+      default:
+        return {
+          title: 'Header Component',
+          code: '',
+        };
+    }
+  };
 
-// Header avec logo personnalisé et CTA
-<Header
-  logoHref="/home"
-  links={[
-    { label: 'Home', href: '/', selected: true },
-    { label: 'About', href: '/about' },
-  ]}
-  ctaLabel="Contact"
-  ctaHref="/contact"
-/>
-
-// Exemple avec différents nombres de liens
-<Header
-  links={[
-    { label: 'Home', href: '/', selected: true },
-    { label: 'About', href: '/about' },
-  ]}
-  ctaLabel="Contact"
-  ctaHref="/contact"
-/>`;
+  const { title, code } = getModalContent();
 
   return (
     <div
@@ -2071,7 +2106,7 @@ function HeaderCodeModal({ onClose }: { onClose: () => void }) {
       >
         <div className="flex items-start justify-between mb-6">
           <h2 className="text-title-3 font-semibold text-foreground-main">
-            Header Component
+            {title}
           </h2>
           <button
             onClick={onClose}
@@ -2095,20 +2130,6 @@ function HeaderCodeModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Header Examples */}
-        <div className="space-y-6 mb-8">
-          <div className="bg-background-3 p-6 rounded-lg">
-            <Header
-              links={[
-                { label: 'Home', href: '/', selected: true },
-                { label: 'Our Solution', href: '/solution' },
-                { label: 'About Us', href: '/about' },
-              ]}
-              ctaLabel="Contact Us"
-            />
-          </div>
-        </div>
-
         {/* Code Example */}
         <div>
           <h3 className="text-text-l font-bold text-foreground-main mb-3">
@@ -2122,7 +2143,7 @@ function HeaderCodeModal({ onClose }: { onClose: () => void }) {
 }
 
 function PillarIconSection() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<string | null>(null);
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -2141,7 +2162,7 @@ function PillarIconSection() {
               label="View code"
               variant="ghost"
               size="XS"
-              onClick={() => setOpenModal(true)}
+              onClick={() => setOpenModal('sizes')}
             />
           </div>
           <div className="flex flex-wrap gap-6 items-end">
@@ -2164,9 +2185,17 @@ function PillarIconSection() {
 
         {/* Icon Variants */}
         <section>
-          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
-            Icon Variants
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Icon Variants
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('variants')}
+            />
+          </div>
           <div className="flex flex-wrap gap-6 items-end">
             <div className="flex flex-col items-center gap-3">
               <PillarIcon iconVariant="edge" />
@@ -2184,24 +2213,51 @@ function PillarIconSection() {
         </section>
       </div>
 
-      {/* Modal */}
-      {openModal && <PillarIconCodeModal onClose={() => setOpenModal(false)} />}
+      {/* Modals */}
+      {openModal && (
+        <PillarIconCodeModal
+          type={openModal}
+          onClose={() => setOpenModal(null)}
+        />
+      )}
     </div>
   );
 }
 
-function PillarIconCodeModal({ onClose }: { onClose: () => void }) {
-  const code = `<PillarIcon />
+function PillarIconCodeModal({
+  type,
+  onClose,
+}: {
+  type: string;
+  onClose: () => void;
+}) {
+  const getModalContent = () => {
+    switch (type) {
+      case 'sizes':
+        return {
+          title: 'Pillar Icon - Sizes',
+          code: `<PillarIcon />
 
 <PillarIcon size={48} />
 <PillarIcon size={72} />
-<PillarIcon size={96} />
-
-<PillarIcon iconVariant="edge" />
+<PillarIcon size={96} />`,
+        };
+      case 'variants':
+        return {
+          title: 'Pillar Icon - Variants',
+          code: `<PillarIcon iconVariant="edge" />
 <PillarIcon iconVariant="security" />
-<PillarIcon iconVariant="broadcast" />
+<PillarIcon iconVariant="broadcast" />`,
+        };
+      default:
+        return {
+          title: 'Pillar Icon Component',
+          code: '',
+        };
+    }
+  };
 
-<PillarIcon icon={<CustomIcon />} />`;
+  const { title, code } = getModalContent();
 
   return (
     <div
@@ -2214,7 +2270,7 @@ function PillarIconCodeModal({ onClose }: { onClose: () => void }) {
       >
         <div className="flex items-start justify-between mb-6">
           <h2 className="text-title-3 font-semibold text-foreground-main">
-            Pillar Icon Component
+            {title}
           </h2>
           <button
             onClick={onClose}
@@ -2238,15 +2294,6 @@ function PillarIconCodeModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Examples */}
-        <div className="space-y-6 mb-8">
-          <div className="flex flex-wrap gap-6 items-end">
-            <PillarIcon size={48} />
-            <PillarIcon size={72} />
-            <PillarIcon size={96} />
-          </div>
-        </div>
-
         {/* Code Example */}
         <div>
           <h3 className="text-text-l font-bold text-foreground-main mb-3">
@@ -2260,7 +2307,7 @@ function PillarIconCodeModal({ onClose }: { onClose: () => void }) {
 }
 
 function TokenSection() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<string | null>(null);
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -2279,7 +2326,7 @@ function TokenSection() {
               label="View code"
               variant="ghost"
               size="XS"
-              onClick={() => setOpenModal(true)}
+              onClick={() => setOpenModal('default')}
             />
           </div>
           <div className="flex flex-wrap gap-4">
@@ -2292,9 +2339,17 @@ function TokenSection() {
 
         {/* Custom Flag Colors */}
         <section>
-          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
-            Custom Flag Colors
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Custom Flag Colors
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('custom')}
+            />
+          </div>
           <div className="flex flex-wrap gap-4">
             <Token
               label="Custom 1"
@@ -2316,26 +2371,64 @@ function TokenSection() {
         </section>
       </div>
 
-      {/* Modal */}
-      {openModal && <TokenCodeModal onClose={() => setOpenModal(false)} />}
+      {/* Modals */}
+      {openModal && (
+        <TokenCodeModal type={openModal} onClose={() => setOpenModal(null)} />
+      )}
     </div>
   );
 }
 
-function TokenCodeModal({ onClose }: { onClose: () => void }) {
-  const code = `<Token label="France" />
+function TokenCodeModal({
+  type,
+  onClose,
+}: {
+  type: string;
+  onClose: () => void;
+}) {
+  const getModalContent = () => {
+    switch (type) {
+      case 'default':
+        return {
+          title: 'Token - Default',
+          code: `<Token label="France" />
 
 <Token label="Made in France" />
+
 <Token label="IoT" />
 
-<Token
-  label="Custom"
+<Token label="Cybersecurity" />`,
+        };
+      case 'custom':
+        return {
+          title: 'Token - Custom Flag Colors',
+          code: `<Token
+  label="Custom 1"
   flagColors={{
     blue: '#10b981',
     white: '#fbbf24',
     red: '#8b5cf6',
   }}
-/>`;
+/>
+
+<Token
+  label="Custom 2"
+  flagColors={{
+    blue: '#ef4444',
+    white: '#f59e0b',
+    red: '#06b6d4',
+  }}
+/>`,
+        };
+      default:
+        return {
+          title: 'Token Component',
+          code: '',
+        };
+    }
+  };
+
+  const { title, code } = getModalContent();
 
   return (
     <div
@@ -2348,7 +2441,7 @@ function TokenCodeModal({ onClose }: { onClose: () => void }) {
       >
         <div className="flex items-start justify-between mb-6">
           <h2 className="text-title-3 font-semibold text-foreground-main">
-            Token Component
+            {title}
           </h2>
           <button
             onClick={onClose}
@@ -2372,15 +2465,6 @@ function TokenCodeModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Examples */}
-        <div className="space-y-4 mb-8">
-          <div className="flex flex-wrap gap-4">
-            <Token label="France" />
-            <Token label="Made in France" />
-            <Token label="IoT" />
-          </div>
-        </div>
-
         {/* Code Example */}
         <div>
           <h3 className="text-text-l font-bold text-foreground-main mb-3">
@@ -2394,7 +2478,7 @@ function TokenCodeModal({ onClose }: { onClose: () => void }) {
 }
 
 function KpiSection() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<string | null>(null);
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -2411,7 +2495,7 @@ function KpiSection() {
               label="View code"
               variant="ghost"
               size="XS"
-              onClick={() => setOpenModal(true)}
+              onClick={() => setOpenModal('with-description')}
             />
           </div>
           <div className="flex flex-wrap gap-8">
@@ -2431,9 +2515,17 @@ function KpiSection() {
 
         {/* KPI without Description */}
         <section>
-          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
-            Without Description
-          </h2>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Without Description
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal('without-description')}
+            />
+          </div>
           <div className="flex flex-wrap gap-8">
             <Kpi value="500+" label="Projects" />
             <Kpi value="50+" label="Countries" />
@@ -2442,22 +2534,62 @@ function KpiSection() {
         </section>
       </div>
 
-      {/* Modal */}
-      {openModal && <KpiCodeModal onClose={() => setOpenModal(false)} />}
+      {/* Modals */}
+      {openModal && (
+        <KpiCodeModal type={openModal} onClose={() => setOpenModal(null)} />
+      )}
     </div>
   );
 }
 
-function KpiCodeModal({ onClose }: { onClose: () => void }) {
-  const code = `<Kpi
+function KpiCodeModal({
+  type,
+  onClose,
+}: {
+  type: string;
+  onClose: () => void;
+}) {
+  const getModalContent = () => {
+    switch (type) {
+      case 'with-description':
+        return {
+          title: 'KPI with Description',
+          code: `<Kpi
   value="150+"
   label="Clients"
   description="Satisfied customers"
 />
 
-<Kpi value="99.9%" label="Uptime" description="Service availability" />
+<Kpi 
+  value="99.9%" 
+  label="Uptime" 
+  description="Service availability" 
+/>
 
-<Kpi value="500+" label="Projects" />`;
+<Kpi 
+  value="24/7" 
+  label="Support" 
+  description="Always available" 
+/>`,
+        };
+      case 'without-description':
+        return {
+          title: 'KPI without Description',
+          code: `<Kpi value="500+" label="Projects" />
+
+<Kpi value="50+" label="Countries" />
+
+<Kpi value="10+" label="Years" />`,
+        };
+      default:
+        return {
+          title: 'KPI Component',
+          code: '',
+        };
+    }
+  };
+
+  const { title, code } = getModalContent();
 
   return (
     <div
@@ -2470,7 +2602,7 @@ function KpiCodeModal({ onClose }: { onClose: () => void }) {
       >
         <div className="flex items-start justify-between mb-6">
           <h2 className="text-title-3 font-semibold text-foreground-main">
-            KPI Component
+            {title}
           </h2>
           <button
             onClick={onClose}
@@ -2492,18 +2624,6 @@ function KpiCodeModal({ onClose }: { onClose: () => void }) {
               />
             </svg>
           </button>
-        </div>
-
-        {/* Examples */}
-        <div className="space-y-6 mb-8">
-          <div className="flex flex-wrap gap-8">
-            <Kpi
-              value="150+"
-              label="Clients"
-              description="Satisfied customers"
-            />
-            <Kpi value="99.9%" label="Uptime" />
-          </div>
         </div>
 
         {/* Code Example */}
@@ -2596,16 +2716,6 @@ function PillarCodeModal({ onClose }: { onClose: () => void }) {
               />
             </svg>
           </button>
-        </div>
-
-        {/* Examples */}
-        <div className="space-y-6 mb-8">
-          <div className="flex flex-wrap gap-8 items-end">
-            <Pillar label="Edge" />
-            <Pillar label="Small" height={100} />
-            <Pillar label="Medium" height={200} />
-            <Pillar label="Heigher" height={400} />
-          </div>
         </div>
 
         {/* Code Example */}
@@ -2709,15 +2819,6 @@ function PillarTileDescriptionCodeModal({ onClose }: { onClose: () => void }) {
               />
             </svg>
           </button>
-        </div>
-
-        {/* Examples */}
-        <div className="space-y-6 mb-8">
-          <PillarTileDescription
-            title="Cyber-Security"
-            description="Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management."
-            iconVariant="security"
-          />
         </div>
 
         {/* Code Example */}
