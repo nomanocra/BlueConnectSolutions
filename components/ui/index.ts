@@ -4,6 +4,7 @@ export { Icon, type IconProps, type IconVariant } from './icon';
 export { Kpi, type KpiProps } from './kpi';
 export { Link, type LinkProps } from './link';
 export { Logo, type LogoProps } from './logo';
+export { Logos, type LogosProps } from './logos';
 export { Pillar, type PillarProps } from './pillar';
 export { PillarIcon, type PillarIconProps } from './pillar-icon';
 export { Token, type TokenProps } from './token';

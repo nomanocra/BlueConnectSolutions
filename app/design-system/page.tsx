@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
   Button,
@@ -9,6 +9,7 @@ import {
   Kpi,
   Link,
   Logo,
+  Logos,
   Pillar,
   PillarIcon,
   Token,
@@ -21,26 +22,28 @@ type Section =
   | 'texts'
   | 'svg'
   | 'button'
+  | 'header'
+  | 'kpi'
   | 'link'
   | 'logo'
-  | 'header'
-  | 'pillar-icon'
+  | 'logos'
   | 'pillar'
-  | 'token'
-  | 'kpi';
+  | 'pillar-icon'
+  | 'token';
 
 const VALID_SECTIONS: Section[] = [
   'colors',
   'texts',
   'svg',
   'button',
+  'header',
+  'kpi',
   'link',
   'logo',
-  'header',
-  'pillar-icon',
+  'logos',
   'pillar',
+  'pillar-icon',
   'token',
-  'kpi',
 ];
 
 export default function DesignSystemPage() {
@@ -111,6 +114,18 @@ export default function DesignSystemPage() {
                   onClick={() => handleSectionChange('button')}
                 />
                 <NavItem
+                  id="header"
+                  label="Header"
+                  active={activeSection === 'header'}
+                  onClick={() => handleSectionChange('header')}
+                />
+                <NavItem
+                  id="kpi"
+                  label="KPI"
+                  active={activeSection === 'kpi'}
+                  onClick={() => handleSectionChange('kpi')}
+                />
+                <NavItem
                   id="link"
                   label="Link"
                   active={activeSection === 'link'}
@@ -123,16 +138,10 @@ export default function DesignSystemPage() {
                   onClick={() => handleSectionChange('logo')}
                 />
                 <NavItem
-                  id="header"
-                  label="Header"
-                  active={activeSection === 'header'}
-                  onClick={() => handleSectionChange('header')}
-                />
-                <NavItem
-                  id="pillar-icon"
-                  label="Pillar Icon"
-                  active={activeSection === 'pillar-icon'}
-                  onClick={() => handleSectionChange('pillar-icon')}
+                  id="logos"
+                  label="Logos"
+                  active={activeSection === 'logos'}
+                  onClick={() => handleSectionChange('logos')}
                 />
                 <NavItem
                   id="pillar"
@@ -141,16 +150,16 @@ export default function DesignSystemPage() {
                   onClick={() => handleSectionChange('pillar')}
                 />
                 <NavItem
+                  id="pillar-icon"
+                  label="Pillar Icon"
+                  active={activeSection === 'pillar-icon'}
+                  onClick={() => handleSectionChange('pillar-icon')}
+                />
+                <NavItem
                   id="token"
                   label="Token"
                   active={activeSection === 'token'}
                   onClick={() => handleSectionChange('token')}
-                />
-                <NavItem
-                  id="kpi"
-                  label="KPI"
-                  active={activeSection === 'kpi'}
-                  onClick={() => handleSectionChange('kpi')}
                 />
               </div>
             </nav>
@@ -163,13 +172,14 @@ export default function DesignSystemPage() {
           {activeSection === 'texts' && <TextsSection />}
           {activeSection === 'svg' && <IconSection />}
           {activeSection === 'button' && <ButtonSection />}
+          {activeSection === 'header' && <HeaderSection />}
+          {activeSection === 'kpi' && <KpiSection />}
           {activeSection === 'link' && <LinkSection />}
           {activeSection === 'logo' && <LogoSection />}
-          {activeSection === 'header' && <HeaderSection />}
-          {activeSection === 'pillar-icon' && <PillarIconSection />}
+          {activeSection === 'logos' && <LogosSection />}
           {activeSection === 'pillar' && <PillarSection />}
+          {activeSection === 'pillar-icon' && <PillarIconSection />}
           {activeSection === 'token' && <TokenSection />}
-          {activeSection === 'kpi' && <KpiSection />}
         </main>
       </div>
     </div>
@@ -2428,6 +2438,144 @@ function PillarCodeModal({ onClose }: { onClose: () => void }) {
             <Pillar label="Small" height={70} />
             <Pillar label="Medium" height={200} />
             <Pillar label="Heigher" height={400} />
+          </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LogosSection() {
+  const [openModal, setOpenModal] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!scrollContainerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging || !scrollContainerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Multiplier pour un scroll plus rapide
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
+        Logos
+      </h1>
+
+      <div className="space-y-12">
+        {/* Default Logos */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Default
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="bg-background-3 p-8 rounded-lg overflow-hidden">
+            <Logos />
+          </div>
+        </section>
+
+        {/* Custom Spacing */}
+        <section>
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
+            Custom Spacing
+          </h2>
+          <div
+            ref={scrollContainerRef}
+            className="bg-background-3 p-8 rounded-lg overflow-x-auto max-w-full select-none"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+          >
+            <Logos gap={100} paddingX={40} />
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && <LogosCodeModal onClose={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function LogosCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `<Logos />
+
+<Logos gap={100} paddingX={40} />`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-[808px] w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
+            Logos Component
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Examples */}
+        <div className="space-y-6 mb-8">
+          <div className="bg-background-3 p-6 rounded-lg">
+            <Logos />
           </div>
         </div>
 
