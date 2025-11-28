@@ -53,11 +53,16 @@ export default function Home() {
     <main className="min-h-screen">
       {/* Header fixé à 32px du haut, centré, max-width 1200px */}
       <div
-        className={`fixed left-1/2 -translate-x-1/2 w-full max-w-[1200px] px-8 z-50 transition-all ease-in-out ${
+        className={`fixed left-1/2 -translate-x-1/2 w-full max-w-[1200px] px-8 z-50 ${
           isHeaderVisible
-            ? 'top-8 opacity-100 duration-300'
-            : '-top-20 opacity-0 duration-700'
+            ? 'top-8 opacity-100 pointer-events-auto'
+            : '-top-20 opacity-0 pointer-events-none'
         }`}
+        style={{
+          transition: isHeaderVisible
+            ? 'top 400ms ease-in-out, opacity 200ms ease-in-out 200ms, transform 0s'
+            : 'top 800ms ease-in-out, opacity 400ms ease-in-out, transform 0s',
+        }}
       >
         <Header
           logoHref="/"
