@@ -2,16 +2,19 @@ import { Button, Token, Pillar, PillarIcon } from '@/components/ui';
 
 export function HeroSection() {
   return (
-    <section
-      className="w-full relative"
-      style={{
-        backgroundImage: `
-          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
-        `,
-        backgroundSize: '100% 40px, 40px 100%',
-      }}
-    >
+    <section className="w-full relative">
+      {/* Grille de fond avec animation */}
+      <div
+        className="absolute inset-0 animate-grid-fade-in"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: '100% 40px, 40px 100%',
+        }}
+      />
+
       {/* Wrapper avec gradient - contient TitlesHero et AnimatedIllustration */}
       <div
         className="relative pt-20 px-20"
