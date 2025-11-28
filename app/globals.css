@@ -8,7 +8,7 @@
 }
 
 body {
-  @apply bg-background-1 text-foreground-main;
+  @apply bg-background-1 text-foreground-main font-geist;
 }
 
 /* Force font-weight rendering for Geist */

@@ -2,21 +2,57 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Button, Header, Icon, Link, Logo, type IconVariant } from '@/components/ui';
+import {
+  Button,
+  Header,
+  Icon,
+  Kpi,
+  Link,
+  Logo,
+  Pillar,
+  PillarIcon,
+  Token,
+  type IconVariant,
+} from '@/components/ui';
 import { CodeBlock } from '@/components/CodeBlock';
 
-type Section = 'colors' | 'texts' | 'svg' | 'button' | 'link' | 'logo' | 'header';
+type Section =
+  | 'colors'
+  | 'texts'
+  | 'svg'
+  | 'button'
+  | 'link'
+  | 'logo'
+  | 'header'
+  | 'pillar-icon'
+  | 'pillar'
+  | 'token'
+  | 'kpi';
 
-const VALID_SECTIONS: Section[] = ['colors', 'texts', 'svg', 'button', 'link', 'logo', 'header'];
+const VALID_SECTIONS: Section[] = [
+  'colors',
+  'texts',
+  'svg',
+  'button',
+  'link',
+  'logo',
+  'header',
+  'pillar-icon',
+  'pillar',
+  'token',
+  'kpi',
+];
 
 export default function DesignSystemPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const sectionParam = searchParams.get('section') as Section | null;
-  
+
   // Initialiser avec le paramètre URL ou 'colors' par défaut
   const [activeSection, setActiveSection] = useState<Section>(
-    sectionParam && VALID_SECTIONS.includes(sectionParam) ? sectionParam : 'colors'
+    sectionParam && VALID_SECTIONS.includes(sectionParam)
+      ? sectionParam
+      : 'colors'
   );
 
   // Synchroniser l'état avec l'URL quand le paramètre change
@@ -39,7 +75,7 @@ export default function DesignSystemPage() {
         {/* Sidebar */}
         <aside className="w-64 bg-background-2 border-r border-background-4 overflow-y-auto">
           <div className="p-6">
-            <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
               Design System
             </h2>
             <nav className="space-y-2">
@@ -92,6 +128,30 @@ export default function DesignSystemPage() {
                   active={activeSection === 'header'}
                   onClick={() => handleSectionChange('header')}
                 />
+                <NavItem
+                  id="pillar-icon"
+                  label="Pillar Icon"
+                  active={activeSection === 'pillar-icon'}
+                  onClick={() => handleSectionChange('pillar-icon')}
+                />
+                <NavItem
+                  id="pillar"
+                  label="Pillar"
+                  active={activeSection === 'pillar'}
+                  onClick={() => handleSectionChange('pillar')}
+                />
+                <NavItem
+                  id="token"
+                  label="Token"
+                  active={activeSection === 'token'}
+                  onClick={() => handleSectionChange('token')}
+                />
+                <NavItem
+                  id="kpi"
+                  label="KPI"
+                  active={activeSection === 'kpi'}
+                  onClick={() => handleSectionChange('kpi')}
+                />
               </div>
             </nav>
           </div>
@@ -106,6 +166,10 @@ export default function DesignSystemPage() {
           {activeSection === 'link' && <LinkSection />}
           {activeSection === 'logo' && <LogoSection />}
           {activeSection === 'header' && <HeaderSection />}
+          {activeSection === 'pillar-icon' && <PillarIconSection />}
+          {activeSection === 'pillar' && <PillarSection />}
+          {activeSection === 'token' && <TokenSection />}
+          {activeSection === 'kpi' && <KpiSection />}
         </main>
       </div>
     </div>
@@ -135,7 +199,7 @@ function NavItem({
         }
       `}
     >
-      <span className="text-text-s font-geist font-medium">{label}</span>
+      <span className="text-text-s font-medium">{label}</span>
     </button>
   );
 }
@@ -187,14 +251,14 @@ function ColorsSection() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
         Colors
       </h1>
 
       <div className="space-y-12">
         {/* Primary Colors */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-4">
             Primary
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -206,7 +270,7 @@ function ColorsSection() {
 
         {/* Background Colors */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-4">
             Background
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -218,7 +282,7 @@ function ColorsSection() {
 
         {/* Foreground Colors */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-4">
             Foreground
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
@@ -260,20 +324,20 @@ function ColorCard({
       >
         {copied && (
           <div className="absolute inset-0 bg-black/70 rounded-lg flex items-center justify-center">
-            <span className="text-text-xs font-geist font-medium text-foreground-main text-center px-1">
+            <span className="text-text-xs font-medium text-foreground-main text-center px-1">
               Copied in clipboard
             </span>
           </div>
         )}
       </div>
       <div className="space-y-0.5">
-        <p className="text-text-xs font-geist font-medium text-foreground-main">
+        <p className="text-text-xs font-medium text-foreground-main">
           {color.name}
         </p>
-        <p className="text-text-xs font-geist font-normal text-foreground-terciary font-mono">
+        <p className="text-text-xs font-normal text-foreground-terciary font-mono">
           {color.value}
         </p>
-        <p className="text-text-xs font-geist font-normal text-foreground-secondary font-mono">
+        <p className="text-text-xs font-normal text-foreground-secondary font-mono">
           {color.token}
         </p>
       </div>
@@ -285,17 +349,17 @@ function TextsSection() {
   const titleStyles = [
     {
       name: 'Title/1',
-      classes: 'text-title-1 font-geist font-bold',
+      classes: 'text-title-1 font-bold',
       description: '82px, Bold, Line Height: 86px',
     },
     {
       name: 'Title/2',
-      classes: 'text-title-2 font-geist font-bold',
+      classes: 'text-title-2 font-bold',
       description: '48px, Bold, Line Height: 48px',
     },
     {
       name: 'Title/3',
-      classes: 'text-title-3 font-geist font-semibold',
+      classes: 'text-title-3 font-semibold',
       description: '24px, SemiBold, Line Height: 32px',
     },
   ];
@@ -303,62 +367,62 @@ function TextsSection() {
   const textStyles = [
     {
       name: 'Text/L/Regular',
-      classes: 'text-text-l font-geist font-normal',
+      classes: 'text-text-l font-normal',
       description: '18px, Regular, Line Height: 100%',
     },
     {
       name: 'Text/L/Medium',
-      classes: 'text-text-l font-geist font-medium',
+      classes: 'text-text-l font-medium',
       description: '18px, Medium, Line Height: 100%',
     },
     {
       name: 'Text/L/Bold',
-      classes: 'text-text-l font-geist font-bold',
+      classes: 'text-text-l font-bold',
       description: '18px, Bold, Line Height: 100%',
     },
     {
       name: 'Text/M/Regular',
-      classes: 'text-text-m font-geist font-normal',
+      classes: 'text-text-m font-normal',
       description: '16px, Regular, Line Height: 100%',
     },
     {
       name: 'Text/M/Medium',
-      classes: 'text-text-m font-geist font-medium',
+      classes: 'text-text-m font-medium',
       description: '16px, Medium, Line Height: 100%',
     },
     {
       name: 'Text/M/Bold',
-      classes: 'text-text-m font-geist font-bold',
+      classes: 'text-text-m font-bold',
       description: '16px, Bold, Line Height: 100%',
     },
     {
       name: 'Text/S/Regular',
-      classes: 'text-text-s font-geist font-normal',
+      classes: 'text-text-s font-normal',
       description: '14px, Regular, Line Height: 100%',
     },
     {
       name: 'Text/S/Medium',
-      classes: 'text-text-s font-geist font-medium',
+      classes: 'text-text-s font-medium',
       description: '14px, Medium, Line Height: 100%',
     },
     {
       name: 'Text/S/Bold',
-      classes: 'text-text-s font-geist font-bold',
+      classes: 'text-text-s font-bold',
       description: '14px, Bold, Line Height: 100%',
     },
     {
       name: 'Text/XS/Regular',
-      classes: 'text-text-xs font-geist font-normal',
+      classes: 'text-text-xs font-normal',
       description: '12px, Regular, Line Height: 100%',
     },
     {
       name: 'Text/XS/Medium',
-      classes: 'text-text-xs font-geist font-medium',
+      classes: 'text-text-xs font-medium',
       description: '12px, Medium, Line Height: 100%',
     },
     {
       name: 'Text/XS/Bold',
-      classes: 'text-text-xs font-geist font-bold',
+      classes: 'text-text-xs font-bold',
       description: '12px, Bold, Line Height: 100%',
     },
   ];
@@ -373,14 +437,14 @@ function TextsSection() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
         Texts
       </h1>
 
       <div className="space-y-12">
         {/* Titles */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-4">
             Titles (Geist)
           </h2>
           <div className="space-y-6">
@@ -392,7 +456,7 @@ function TextsSection() {
 
         {/* Text Styles */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-4">
             Text Styles (Geist)
           </h2>
           <div className="space-y-4">
@@ -404,7 +468,7 @@ function TextsSection() {
 
         {/* Body */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-4">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-4">
             Body (Inter)
           </h2>
           <div className="space-y-4">
@@ -427,10 +491,10 @@ function TextCard({
     <div className="bg-background-3 border border-background-4 rounded-lg p-6">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <p className="text-text-m font-geist font-medium text-foreground-main mb-1">
+          <p className="text-text-m font-medium text-foreground-main mb-1">
             {style.name}
           </p>
-          <p className="text-text-s font-geist font-normal text-foreground-terciary">
+          <p className="text-text-s font-normal text-foreground-terciary">
             {style.description}
           </p>
         </div>
@@ -465,15 +529,13 @@ function IconSection() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-title-2 font-geist font-bold text-foreground-main">
-          Icon
-        </h1>
+        <h1 className="text-title-2 font-bold text-foreground-main">Icon</h1>
         <input
           type="text"
           placeholder="Search icons..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full max-w-md px-4 py-3 bg-background-2 border border-background-4 rounded-lg text-text-m font-geist text-foreground-main placeholder:text-foreground-terciary focus:outline-none focus:ring-2 focus:ring-primary-3 focus:border-transparent"
+          className="w-full max-w-md px-4 py-3 bg-background-2 border border-background-4 rounded-lg text-text-m text-foreground-main placeholder:text-foreground-terciary focus:outline-none focus:ring-2 focus:ring-primary-3 focus:border-transparent"
         />
       </div>
 
@@ -489,7 +551,7 @@ function IconSection() {
               <Icon variant={variant} size={24} />
             </div>
             <div className="text-center">
-              <p className="text-text-s font-geist font-medium text-foreground-main mb-1">
+              <p className="text-text-s font-medium text-foreground-main mb-1">
                 {variant}
               </p>
               <code className="text-text-xs font-mono text-foreground-secondary bg-background-2 px-2 py-1 rounded">
@@ -534,7 +596,7 @@ function IconModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-6">
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
             {variant}
           </h2>
           <button
@@ -567,14 +629,14 @@ function IconModal({
         {/* Code Examples */}
         <div className="space-y-6">
           <div>
-            <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+            <h3 className="text-text-l font-bold text-foreground-main mb-3">
               Standalone Icon
             </h3>
             <CodeBlock code={codeExample} language="tsx" />
           </div>
 
           <div>
-            <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+            <h3 className="text-text-l font-bold text-foreground-main mb-3">
               In Button
             </h3>
             <CodeBlock code={buttonExample} language="tsx" />
@@ -590,7 +652,7 @@ function ButtonSection() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
         Button
       </h1>
 
@@ -598,7 +660,7 @@ function ButtonSection() {
         {/* Primary Variant */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
               Primary
             </h2>
             <Button
@@ -630,7 +692,7 @@ function ButtonSection() {
         {/* Secondary Variant */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
               Secondary
             </h2>
             <Button
@@ -672,7 +734,7 @@ function ButtonSection() {
         {/* Ghost Variant */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
               Ghost
             </h2>
             <Button
@@ -698,14 +760,14 @@ function ButtonSection() {
 
         {/* Icons Section */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
             With Icons
           </h2>
           <div className="space-y-8">
             {/* Left Icon */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-text-l font-geist font-bold text-foreground-main">
+                <h3 className="text-text-l font-bold text-foreground-main">
                   Left Icon
                 </h3>
                 <Button
@@ -782,7 +844,7 @@ function ButtonSection() {
             {/* Right Icon */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-text-l font-geist font-bold text-foreground-main">
+                <h3 className="text-text-l font-bold text-foreground-main">
                   Right Icon
                 </h3>
                 <Button
@@ -859,7 +921,7 @@ function ButtonSection() {
             {/* Both Icons */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-text-l font-geist font-bold text-foreground-main">
+                <h3 className="text-text-l font-bold text-foreground-main">
                   Both Icons
                 </h3>
                 <Button
@@ -1310,7 +1372,7 @@ function ButtonCodeModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-6">
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
             {title}
           </h2>
           <button
@@ -1340,7 +1402,7 @@ function ButtonCodeModal({
 
         {/* Code Example */}
         <div>
-          <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
             Implementation
           </h3>
           <CodeBlock code={code} language="tsx" />
@@ -1355,15 +1417,13 @@ function LinkSection() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
-        Link
-      </h1>
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">Link</h1>
 
       <div className="space-y-12">
         {/* Variants Matrix */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
               Variants
             </h2>
             <Button
@@ -1377,18 +1437,18 @@ function LinkSection() {
             <table className="w-auto border-collapse">
               <thead>
                 <tr>
-                  <th className="text-text-s font-geist font-medium text-foreground-terciary text-left"></th>
-                  <th className="text-text-s font-geist font-medium text-foreground-terciary text-center px-12">
+                  <th className="text-text-s font-medium text-foreground-terciary text-left"></th>
+                  <th className="text-text-s font-medium text-foreground-terciary text-center px-12">
                     Selected
                   </th>
-                  <th className="text-text-s font-geist font-medium text-foreground-terciary text-center p-6">
+                  <th className="text-text-s font-medium text-foreground-terciary text-center p-6">
                     Not Selected
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="text-text-s font-geist font-medium text-foreground-terciary text-right px-9">
+                  <td className="text-text-s font-medium text-foreground-terciary text-right px-9">
                     Enabled
                   </td>
                   <td className="p-6 text-center">
@@ -1401,7 +1461,7 @@ function LinkSection() {
                   </td>
                 </tr>
                 <tr>
-                  <td className="text-text-s font-geist font-medium text-foreground-terciary px-9 text-right">
+                  <td className="text-text-s font-medium text-foreground-terciary px-9 text-right">
                     Disabled
                   </td>
                   <td className="p-3 text-center">
@@ -1454,7 +1514,7 @@ function LinkCodeModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-6">
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
             Link Variants
           </h2>
           <button
@@ -1501,7 +1561,7 @@ function LinkCodeModal({ onClose }: { onClose: () => void }) {
 
         {/* Code Example */}
         <div>
-          <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
             Implementation
           </h3>
           <CodeBlock code={code} language="tsx" />
@@ -1516,15 +1576,13 @@ function LogoSection() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
-        Logo
-      </h1>
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">Logo</h1>
 
       <div className="space-y-12">
         {/* Sizes */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
               Sizes
             </h2>
             <Button
@@ -1536,25 +1594,25 @@ function LogoSection() {
           </div>
           <div className="flex flex-col gap-6 items-start">
             <div className="flex items-center gap-3">
-              <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+              <p className="text-text-s font-medium text-foreground-terciary w-32">
                 Default (32px)
               </p>
               <Logo />
             </div>
             <div className="flex items-center gap-3">
-              <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+              <p className="text-text-s font-medium text-foreground-terciary w-32">
                 48px
               </p>
               <Logo size={48} />
             </div>
             <div className="flex items-center gap-3">
-              <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+              <p className="text-text-s font-medium text-foreground-terciary w-32">
                 64px
               </p>
               <Logo size={64} />
             </div>
             <div className="flex items-center gap-3">
-              <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+              <p className="text-text-s font-medium text-foreground-terciary w-32">
                 96px
               </p>
               <Logo size={96} />
@@ -1588,7 +1646,7 @@ function LogoCodeModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-6">
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
             Logo Sizes
           </h2>
           <button
@@ -1616,25 +1674,25 @@ function LogoCodeModal({ onClose }: { onClose: () => void }) {
         {/* Logo Examples */}
         <div className="space-y-6 mb-8">
           <div className="flex items-center gap-3">
-            <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+            <p className="text-text-s font-medium text-foreground-terciary w-32">
               Default (32px)
             </p>
             <Logo />
           </div>
           <div className="flex items-center gap-3">
-            <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+            <p className="text-text-s font-medium text-foreground-terciary w-32">
               48px
             </p>
             <Logo size={48} />
           </div>
           <div className="flex items-center gap-3">
-            <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+            <p className="text-text-s font-medium text-foreground-terciary w-32">
               64px
             </p>
             <Logo size={64} />
           </div>
           <div className="flex items-center gap-3">
-            <p className="text-text-s font-geist font-medium text-foreground-terciary w-32">
+            <p className="text-text-s font-medium text-foreground-terciary w-32">
               96px
             </p>
             <Logo size={96} />
@@ -1643,7 +1701,7 @@ function LogoCodeModal({ onClose }: { onClose: () => void }) {
 
         {/* Code Example */}
         <div>
-          <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
             Implementation
           </h3>
           <CodeBlock code={code} language="tsx" />
@@ -1658,7 +1716,7 @@ function HeaderSection() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <h1 className="text-title-2 font-geist font-bold text-foreground-main mb-8">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
         Header
       </h1>
 
@@ -1666,7 +1724,7 @@ function HeaderSection() {
         {/* Header with Links and CTA */}
         <section>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
               With Links and CTA
             </h2>
             <Button
@@ -1691,12 +1749,14 @@ function HeaderSection() {
 
         {/* Header with Different Number of Links */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
             Different Number of Links
           </h2>
           <div className="space-y-6">
             <div className="bg-background-2 p-8 rounded-lg">
-              <p className="text-text-s text-foreground-terciary mb-4">2 links</p>
+              <p className="text-text-s text-foreground-terciary mb-4">
+                2 links
+              </p>
               <Header
                 links={[
                   { label: 'Home', href: '/', selected: true },
@@ -1706,7 +1766,9 @@ function HeaderSection() {
               />
             </div>
             <div className="bg-background-2 p-8 rounded-lg">
-              <p className="text-text-s text-foreground-terciary mb-4">5 links</p>
+              <p className="text-text-s text-foreground-terciary mb-4">
+                5 links
+              </p>
               <Header
                 links={[
                   { label: 'Home', href: '/', selected: true },
@@ -1723,7 +1785,7 @@ function HeaderSection() {
 
         {/* Header with CTA Handler */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
             With CTA Click Handler
           </h2>
           <div className="bg-background-2 p-8 rounded-lg">
@@ -1741,7 +1803,7 @@ function HeaderSection() {
 
         {/* Header without CTA */}
         <section>
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
             Without CTA Button
           </h2>
           <div className="bg-background-2 p-8 rounded-lg">
@@ -1831,7 +1893,7 @@ function HeaderCodeModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-6">
-          <h2 className="text-title-3 font-geist font-semibold text-foreground-main">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
             Header Component
           </h2>
           <button
@@ -1872,7 +1934,506 @@ function HeaderCodeModal({ onClose }: { onClose: () => void }) {
 
         {/* Code Example */}
         <div>
-          <h3 className="text-text-l font-geist font-bold text-foreground-main mb-3">
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PillarIconSection() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
+        Pillar Icon
+      </h1>
+
+      <div className="space-y-12">
+        {/* Default Sizes */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Sizes
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="flex flex-wrap gap-6 items-end">
+            <div className="flex flex-col items-center gap-3">
+              <PillarIcon size={48} />
+              <p className="text-text-s text-foreground-terciary">48px</p>
+            </div>
+            <div className="flex flex-col items-center gap-3">
+              <PillarIcon size={72} />
+              <p className="text-text-s text-foreground-terciary">
+                72px (default)
+              </p>
+            </div>
+            <div className="flex flex-col items-center gap-3">
+              <PillarIcon size={96} />
+              <p className="text-text-s text-foreground-terciary">96px</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Icon Variants */}
+        <section>
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
+            Icon Variants
+          </h2>
+          <div className="flex flex-wrap gap-6 items-end">
+            <div className="flex flex-col items-center gap-3">
+              <PillarIcon iconVariant="edge" />
+              <p className="text-text-s text-foreground-terciary">Edge</p>
+            </div>
+            <div className="flex flex-col items-center gap-3">
+              <PillarIcon iconVariant="security" />
+              <p className="text-text-s text-foreground-terciary">Security</p>
+            </div>
+            <div className="flex flex-col items-center gap-3">
+              <PillarIcon iconVariant="broadcast" />
+              <p className="text-text-s text-foreground-terciary">Broadcast</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && <PillarIconCodeModal onClose={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function PillarIconCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `<PillarIcon />
+
+<PillarIcon size={48} />
+<PillarIcon size={72} />
+<PillarIcon size={96} />
+
+<PillarIcon iconVariant="edge" />
+<PillarIcon iconVariant="security" />
+<PillarIcon iconVariant="broadcast" />
+
+<PillarIcon icon={<CustomIcon />} />`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
+            Pillar Icon Component
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Examples */}
+        <div className="space-y-6 mb-8">
+          <div className="flex flex-wrap gap-6 items-end">
+            <PillarIcon size={48} />
+            <PillarIcon size={72} />
+            <PillarIcon size={96} />
+          </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TokenSection() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
+        Token
+      </h1>
+
+      <div className="space-y-12">
+        {/* Default Token */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Default
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <Token label="France" />
+            <Token label="Made in France" />
+            <Token label="IoT" />
+            <Token label="Cybersecurity" />
+          </div>
+        </section>
+
+        {/* Custom Flag Colors */}
+        <section>
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
+            Custom Flag Colors
+          </h2>
+          <div className="flex flex-wrap gap-4">
+            <Token
+              label="Custom 1"
+              flagColors={{
+                blue: '#10b981',
+                white: '#fbbf24',
+                red: '#8b5cf6',
+              }}
+            />
+            <Token
+              label="Custom 2"
+              flagColors={{
+                blue: '#ef4444',
+                white: '#f59e0b',
+                red: '#06b6d4',
+              }}
+            />
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && <TokenCodeModal onClose={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function TokenCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `<Token label="France" />
+
+<Token label="Made in France" />
+<Token label="IoT" />
+
+<Token
+  label="Custom"
+  flagColors={{
+    blue: '#10b981',
+    white: '#fbbf24',
+    red: '#8b5cf6',
+  }}
+/>`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
+            Token Component
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Examples */}
+        <div className="space-y-4 mb-8">
+          <div className="flex flex-wrap gap-4">
+            <Token label="France" />
+            <Token label="Made in France" />
+            <Token label="IoT" />
+          </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function KpiSection() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">KPI</h1>
+
+      <div className="space-y-12">
+        {/* Default KPI */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Default
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="flex flex-wrap gap-8">
+            <Kpi
+              value="150+"
+              label="Clients"
+              description="Satisfied customers"
+            />
+            <Kpi
+              value="99.9%"
+              label="Uptime"
+              description="Service availability"
+            />
+            <Kpi value="24/7" label="Support" description="Always available" />
+          </div>
+        </section>
+
+        {/* KPI without Description */}
+        <section>
+          <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
+            Without Description
+          </h2>
+          <div className="flex flex-wrap gap-8">
+            <Kpi value="500+" label="Projects" />
+            <Kpi value="50+" label="Countries" />
+            <Kpi value="10+" label="Years" />
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && <KpiCodeModal onClose={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function KpiCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `<Kpi
+  value="150+"
+  label="Clients"
+  description="Satisfied customers"
+/>
+
+<Kpi value="99.9%" label="Uptime" description="Service availability" />
+
+<Kpi value="500+" label="Projects" />`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
+            KPI Component
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Examples */}
+        <div className="space-y-6 mb-8">
+          <div className="flex flex-wrap gap-8">
+            <Kpi
+              value="150+"
+              label="Clients"
+              description="Satisfied customers"
+            />
+            <Kpi value="99.9%" label="Uptime" />
+          </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PillarSection() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
+        Pillar
+      </h1>
+
+      <div className="space-y-12">
+        {/* Default Pillar */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Default
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="flex flex-wrap gap-8 items-end">
+            <Pillar label="Edge" />
+            <Pillar label="Small" height={100} />
+            <Pillar label="Medium" height={200} />
+            <Pillar label="Heigher" height={400} />
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && <PillarCodeModal onClose={() => setOpenModal(false)} />}
+    </div>
+  );
+}
+
+function PillarCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `<Pillar label="Edge" />
+
+<Pillar label="Small" height={70} />
+<Pillar label="Medium" height={200} />
+<Pillar label="Heigher" height={400} />`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-[808px] w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
+            Pillar Component
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Examples */}
+        <div className="space-y-6 mb-8">
+          <div className="flex flex-wrap gap-8 items-end">
+            <Pillar label="Edge" />
+            <Pillar label="Small" height={70} />
+            <Pillar label="Medium" height={200} />
+            <Pillar label="Heigher" height={400} />
+          </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
             Implementation
           </h3>
           <CodeBlock code={code} language="tsx" />

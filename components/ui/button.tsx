@@ -110,7 +110,7 @@ function getButtonClasses(
 ): string {
   const cursorClass = disabled ? 'cursor-default' : 'cursor-pointer';
   const baseClasses =
-    'box-border flex items-center justify-center relative rounded-[6px] font-geist font-medium text-center whitespace-nowrap transition-colors';
+    'box-border flex items-center justify-center relative rounded-[6px] font-medium text-center whitespace-nowrap transition-colors';
 
   // Classes de taille
   const sizeClasses = {

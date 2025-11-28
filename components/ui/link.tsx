@@ -43,7 +43,7 @@ const LinkComponent = React.forwardRef<HTMLAnchorElement, LinkProps>(
       );
       // Disabled ressemble à default (text-foreground-main opacity-60) mais avec opacity-30
       const textClasses = cn(
-        'font-geist font-medium leading-normal relative shrink-0 text-text-l text-center whitespace-pre text-foreground-main opacity-30'
+        'font-medium leading-normal relative shrink-0 text-text-l text-center whitespace-pre text-foreground-main opacity-30'
       );
 
       return (
@@ -63,7 +63,7 @@ const LinkComponent = React.forwardRef<HTMLAnchorElement, LinkProps>(
     );
 
     const textClasses = cn(
-      'font-geist font-medium leading-normal relative shrink-0 text-text-l text-center whitespace-pre',
+      'font-medium leading-normal relative shrink-0 text-text-l text-center whitespace-pre',
       getTextStateClasses(effectiveState, isSelected)
     );
 

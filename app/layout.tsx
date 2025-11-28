@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${GeistSans.variable} ${inter.variable}`.trim()}>
-      <body className="font-geist antialiased bg-background-1 text-foreground-main">
+      <body className="antialiased">
         {children}
       </body>
     </html>

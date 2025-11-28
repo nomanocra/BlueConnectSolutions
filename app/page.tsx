@@ -4,14 +4,14 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <div className="container mx-auto px-4 py-16">
-        <h1 className="text-title-1 font-geist font-bold text-center mb-8">
+        <h1 className="text-title-1 font-bold text-center mb-8">
           Driving the next <br /> wave of{' '}
           <span className="text-primary-3">
             Digital <br />
             Transformation
           </span>
         </h1>
-        <p className="text-text-m font-geist text-foreground-terciary text-center max-w-2xl mx-auto mb-12">
+        <p className="text-text-m text-foreground-terciary text-center max-w-2xl mx-auto mb-12">
           Blue Connect Solutions drives digital transformation through 3
           pillars: IoT, Cybersecurity, and Video Broadcasting — Empowered by AI
           and Made-in-France hardware. We bring together innovation, trust, and
