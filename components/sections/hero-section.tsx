@@ -24,16 +24,27 @@ export function HeroSection() {
           {/* TitlesHero */}
           <div className="flex flex-col gap-10 items-center justify-center pb-5 pt-20 px-20">
             {/* Token */}
-            <Token label="100% French Occitan Solutions" />
+            <div
+              className="animate-fade-in-up"
+              style={{ animationDelay: '0ms' }}
+            >
+              <Token label="100% French Occitan Solutions" />
+            </div>
 
             {/* Title */}
-            <h1 className="text-title-1 font-bold text-center text-foreground-main max-w-[820px]">
+            <h1
+              className="text-title-1 font-bold text-center text-foreground-main max-w-[820px] animate-fade-in-up"
+              style={{ animationDelay: '50ms' }}
+            >
               Driving the next <br /> wave of{' '}
               <span className="text-primary-3">Digital Transformation</span>
             </h1>
 
             {/* Description */}
-            <p className="text-text-m text-foreground-terciary text-center max-w-[720px] leading-[1.5]">
+            <p
+              className="text-text-m text-foreground-terciary text-center max-w-[720px] leading-[1.5] animate-fade-in-up"
+              style={{ animationDelay: '100ms' }}
+            >
               Blue Connect Solutions drives digital transformation through 3
               pillars: IoT, Cybersecurity, and Video Broadcasting — Empowered by
               AI and Made-in-France hardware. We bring together innovation,
@@ -42,7 +53,10 @@ export function HeroSection() {
             </p>
 
             {/* Buttons */}
-            <div className="flex gap-4 items-center justify-center">
+            <div
+              className="flex gap-4 items-center justify-center animate-fade-in-up"
+              style={{ animationDelay: '150ms' }}
+            >
               <Button
                 label="Contact Us"
                 variant="primary"
