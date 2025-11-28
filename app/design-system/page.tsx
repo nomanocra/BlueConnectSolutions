@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
   Button,
@@ -46,7 +46,7 @@ const VALID_SECTIONS: Section[] = [
   'token',
 ];
 
-export default function DesignSystemPage() {
+function DesignSystemContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const sectionParam = searchParams.get('section') as Section | null;
@@ -183,6 +183,20 @@ export default function DesignSystemPage() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function DesignSystemPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-background-1 flex items-center justify-center">
+          <div className="text-foreground-main">Loading...</div>
+        </div>
+      }
+    >
+      <DesignSystemContent />
+    </Suspense>
   );
 }
 
@@ -2520,11 +2534,9 @@ function PillarSection() {
           </div>
           <div className="flex flex-wrap gap-8 items-end">
             <Pillar label="Edge Compute IoT" />
-            <Pillar label="123456789101112" />
-            <Pillar label="Edge " height={460} />
-            <Pillar label="Small " height={120} />
-            <Pillar label="Medium" height={200} />
-            <Pillar label="Heigher" height={400} />
+            <Pillar label="Small " height={0} />
+            <Pillar label="Medium" height={150} />
+            <Pillar label="Heigher" height={300} />
           </div>
         </section>
       </div>

@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 export interface TokenProps {
   // Contenu
-  label: string;
+  label?: string;
   
   // Variantes du drapeau
   flagColors?: {
@@ -19,7 +19,7 @@ export interface TokenProps {
 const Token = React.forwardRef<HTMLDivElement, TokenProps>(
   (
     {
-      label,
+      label = 'Label',
       flagColors = {
         blue: '#255da4', // primary-4
         white: '#eeeeee',
@@ -34,16 +34,16 @@ const Token = React.forwardRef<HTMLDivElement, TokenProps>(
       <div
         ref={ref}
         className={cn(
-          'bg-primary-t10 border border-primary-t30 border-solid h-10 relative rounded-[48px]',
+          'bg-primary-t10 border border-primary-t30 border-solid relative rounded-[48px]',
           className
         )}
         {...props}
       >
-        <div className="box-border flex gap-4 h-10 items-center justify-center overflow-clip px-4 py-3 relative rounded-[inherit]">
+        <div className="box-border content-stretch flex gap-4 items-center justify-center overflow-clip px-3 py-1 relative rounded-[inherit]">
           {/* Flag */}
-          <div className="flex h-1 items-start overflow-clip relative rounded-[36px] shrink-0 w-[37px]">
+          <div className="content-stretch flex h-1 items-start overflow-clip relative rounded-[36px] shrink-0 w-[37px]">
             <div
-              className="basis-0 grow h-6 min-h-px min-w-px shrink-0"
+              className="basis-0 bg-primary-4 grow h-6 min-h-px min-w-px shrink-0"
               style={{ backgroundColor: flagColors.blue }}
             />
             <div
@@ -57,8 +57,8 @@ const Token = React.forwardRef<HTMLDivElement, TokenProps>(
           </div>
           
           {/* Label */}
-          <div className="flex flex-col font-bold justify-center leading-normal opacity-80 relative shrink-0 text-text-l text-center whitespace-pre text-foreground-main">
-            {label}
+          <div className="flex flex-col font-geist font-medium justify-center leading-none relative shrink-0 text-text-m text-foreground-terciary text-center text-nowrap">
+            <p className="leading-[normal] whitespace-pre">{label}</p>
           </div>
         </div>
       </div>
