@@ -7,4 +7,5 @@ export { Logo, type LogoProps } from './logo';
 export { Logos, type LogosProps } from './logos';
 export { Pillar, type PillarProps } from './pillar';
 export { PillarIcon, type PillarIconProps } from './pillar-icon';
+export { PillarTileDescription, type PillarTileDescriptionProps } from './pillar-tile-description';
 export { Token, type TokenProps } from './token';

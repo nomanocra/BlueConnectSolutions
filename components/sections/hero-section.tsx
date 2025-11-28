@@ -33,7 +33,7 @@ export function HeroSection() {
             </h1>
 
             {/* Description */}
-            <p className="text-text-m text-foreground-terciary text-center max-w-[720px]">
+            <p className="text-text-m text-foreground-terciary text-center max-w-[720px] leading-[1.5]">
               Blue Connect Solutions drives digital transformation through 3
               pillars: IoT, Cybersecurity, and Video Broadcasting — Empowered by
               AI and Made-in-France hardware. We bring together innovation,

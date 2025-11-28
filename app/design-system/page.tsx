@@ -12,6 +12,7 @@ import {
   Logos,
   Pillar,
   PillarIcon,
+  PillarTileDescription,
   Token,
   type IconVariant,
 } from '@/components/ui';
@@ -29,6 +30,7 @@ type Section =
   | 'logos'
   | 'pillar'
   | 'pillar-icon'
+  | 'pillar-tile-description'
   | 'token';
 
 const VALID_SECTIONS: Section[] = [
@@ -43,6 +45,7 @@ const VALID_SECTIONS: Section[] = [
   'logos',
   'pillar',
   'pillar-icon',
+  'pillar-tile-description',
   'token',
 ];
 
@@ -156,6 +159,12 @@ function DesignSystemContent() {
                   onClick={() => handleSectionChange('pillar-icon')}
                 />
                 <NavItem
+                  id="pillar-tile-description"
+                  label="Pillar Tile Description"
+                  active={activeSection === 'pillar-tile-description'}
+                  onClick={() => handleSectionChange('pillar-tile-description')}
+                />
+                <NavItem
                   id="token"
                   label="Token"
                   active={activeSection === 'token'}
@@ -179,6 +188,9 @@ function DesignSystemContent() {
           {activeSection === 'logos' && <LogosSection />}
           {activeSection === 'pillar' && <PillarSection />}
           {activeSection === 'pillar-icon' && <PillarIconSection />}
+          {activeSection === 'pillar-tile-description' && (
+            <PillarTileDescriptionSection />
+          )}
           {activeSection === 'token' && <TokenSection />}
         </main>
       </div>
@@ -1421,9 +1433,6 @@ function ButtonCodeModal({
           </button>
         </div>
 
-        {/* Button Examples */}
-        {buttons && <div className="space-y-4 mb-8">{buttons}</div>}
-
         {/* Code Example */}
         <div>
           <h3 className="text-text-l font-bold text-foreground-main mb-3">
@@ -2597,6 +2606,118 @@ function PillarCodeModal({ onClose }: { onClose: () => void }) {
             <Pillar label="Medium" height={200} />
             <Pillar label="Heigher" height={400} />
           </div>
+        </div>
+
+        {/* Code Example */}
+        <div>
+          <h3 className="text-text-l font-bold text-foreground-main mb-3">
+            Implementation
+          </h3>
+          <CodeBlock code={code} language="tsx" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PillarTileDescriptionSection() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <div className="max-w-6xl mx-auto">
+      <h1 className="text-title-2 font-bold text-foreground-main mb-8">
+        Pillar Tile Description
+      </h1>
+
+      <div className="space-y-12">
+        {/* Default */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Default
+            </h2>
+            <Button
+              label="View code"
+              variant="ghost"
+              size="XS"
+              onClick={() => setOpenModal(true)}
+            />
+          </div>
+          <div className="flex flex-wrap gap-8">
+            <PillarTileDescription
+              title="Cyber-Security"
+              description="Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management."
+              iconVariant="security"
+            />
+          </div>
+        </section>
+      </div>
+
+      {/* Modal */}
+      {openModal && (
+        <PillarTileDescriptionCodeModal onClose={() => setOpenModal(false)} />
+      )}
+    </div>
+  );
+}
+
+function PillarTileDescriptionCodeModal({ onClose }: { onClose: () => void }) {
+  const code = `<PillarTileDescription
+  title="Cyber-Security"
+  description="Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management."
+  iconVariant="security"
+/>
+
+<PillarTileDescription
+  title="Video Broadcasting"
+  description="Advanced video streaming solutions."
+  iconVariant="broadcast"
+  width={645}
+  height={440}
+/>`;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-background-2 border border-background-4 rounded-lg p-8 max-w-[808px] w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between mb-6">
+          <h2 className="text-title-3 font-semibold text-foreground-main">
+            Pillar Tile Description Component
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-foreground-secondary hover:text-foreground-main transition-colors"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Examples */}
+        <div className="space-y-6 mb-8">
+          <PillarTileDescription
+            title="Cyber-Security"
+            description="Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management."
+            iconVariant="security"
+          />
         </div>
 
         {/* Code Example */}

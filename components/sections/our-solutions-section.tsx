@@ -1,4 +1,4 @@
-import { Pillar, PillarIcon } from '@/components/ui';
+import { Pillar, PillarTileDescription } from '@/components/ui';
 
 export function OurSolutionsSection() {
   const solution = {
@@ -19,7 +19,7 @@ export function OurSolutionsSection() {
             <h2 className="text-title-2 font-bold text-[#eaeff5] leading-[48px]">
               Our Tree Pilars
             </h2>
-            <p className="text-text-l text-foreground-terciary text-center w-[572px] leading-normal">
+            <p className="text-text-l text-foreground-terciary text-center w-[572px]">
               Everything you need to build, secure, and scale your digital
               operations
             </p>
@@ -45,34 +45,15 @@ export function OurSolutionsSection() {
               <div className="h-[49px] w-[126px]" />
             </div>
 
-            {/* Right Side - Description Card */}
-            <div className="flex-1 h-full border border-background-4 rounded-[12px] overflow-hidden relative">
-              {/* Background gradient */}
-              <div
-                className="absolute inset-0 opacity-100"
-                style={{
-                  background:
-                    'radial-gradient(ellipse at center, rgba(6,10,15,1) 53.526%, rgba(10,14,20,1) 100%)',
-                }}
+            {/* Right Side - Description Card using PillarTileDescription */}
+            <div className="flex-1">
+              <PillarTileDescription
+                title={solution.title}
+                description={solution.description}
+                iconVariant={solution.iconVariant}
+                width="100%"
+                height={396}
               />
-
-              {/* Card Content */}
-              <div className="relative flex flex-col gap-[24px] h-full p-[32px]">
-                {/* Icon */}
-                <div className="bg-[rgba(91,149,213,0.2)] flex items-center justify-center rounded-[8px] w-[48px] h-[48px]">
-                  <PillarIcon iconVariant={solution.iconVariant} size={40} />
-                </div>
-
-                {/* Title */}
-                <h3 className="text-title-3 font-semibold text-[#eaeff5] leading-[32px]">
-                  {solution.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-text-m text-foreground-terciary leading-normal">
-                  {solution.description}
-                </p>
-              </div>
             </div>
           </div>
         </div>
