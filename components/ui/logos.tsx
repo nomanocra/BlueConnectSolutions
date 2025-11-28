@@ -40,7 +40,11 @@ const Logos = React.forwardRef<HTMLDivElement, LogosProps>(
           }}
         >
           {duplicatedLogos.map((logo, index) => (
-            <div key={index} className="relative shrink-0" style={{ filter: 'grayscale(100%) brightness(0) invert(1)' }}>
+            <div
+              key={index}
+              className="relative shrink-0"
+              style={{ filter: 'grayscale(100%) brightness(0) invert(1)' }}
+            >
               <Image
                 src={logo}
                 alt={`Logo ${index + 1}`}
@@ -59,4 +63,3 @@ const Logos = React.forwardRef<HTMLDivElement, LogosProps>(
 Logos.displayName = 'Logos';
 
 export { Logos };
-

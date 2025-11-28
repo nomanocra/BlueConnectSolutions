@@ -26,6 +26,14 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Désactiver la restauration automatique de la position de scroll
+    // Pour que la page revienne toujours en haut au refresh
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  useEffect(() => {
     // Intercepter les clics sur les liens d'ancre pour un scroll smooth
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
