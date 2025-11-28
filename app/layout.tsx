@@ -13,6 +13,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Blue Connect Solutions',
   description: 'Driving the next wave of Digital Transformation',
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
@@ -21,10 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${GeistSans.variable} ${inter.variable}`.trim()}>
-      <body className="antialiased">
-        {children}
-      </body>
+    <html
+      lang="fr"
+      className={`${GeistSans.variable} ${inter.variable}`.trim()}
+    >
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

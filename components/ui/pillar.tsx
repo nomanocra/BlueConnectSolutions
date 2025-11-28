@@ -42,8 +42,10 @@ const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
     const centerX = (fixedWidth - rectangleWidth) / 2;
 
     // Position du losange bottom (décalé vers le haut pour laisser place au label)
-    const labelHeight = 20; // Hauteur approximative du label
-    const bottomSquareTop = actualHeight - squareBottomHeight - labelHeight - 4; // Position du losange bottom
+    // Selon Figma: label wrapper a padding 10px + line-height 20px = ~40px de hauteur totale
+    const labelWidth = 120; // Largeur du label wrapper
+    const labelHeight = 40; // Hauteur approximative du label wrapper (padding 10px * 2 + line-height 20px)
+    const bottomSquareTop = actualHeight - squareBottomHeight - labelHeight; // Position du losange bottom
     const rectangleBottom =
       actualHeight - bottomSquareTop - squareBottomHeight / 2; // Au milieu du losange bottom
 
@@ -188,10 +190,27 @@ const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
           </svg>
         </div>
 
-        {/* Label en bas - à l'intérieur du composant */}
-        <p className="absolute bottom-0 left-1/2 -translate-x-1/2 text-text-s text-foreground-main opacity-50 text-center whitespace-nowrap font-medium">
-          {label}
-        </p>
+        {/* Label en bas - à l'intérieur du composant - Structure selon Figma */}
+        <div
+          className="absolute box-border content-stretch flex gap-[10px] items-center justify-center overflow-hidden"
+          style={{
+            left: '24px',
+            top: `${actualHeight - labelHeight}px`,
+            width: `${labelWidth}px`,
+            height: `${labelHeight}px`,
+            padding: '10px',
+          }}
+        >
+          <p
+            className="text-text-s text-foreground-main opacity-50 text-center font-medium w-full break-words"
+            style={{
+              lineHeight: '20px',
+              textAlign: 'center',
+            }}
+          >
+            {label}
+          </p>
+        </div>
       </div>
     );
   }
