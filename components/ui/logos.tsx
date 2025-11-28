@@ -34,7 +34,7 @@ const Logos = React.forwardRef<HTMLDivElement, LogosProps>(
         {...props}
       >
         {logos.map((logo, index) => (
-          <div key={index} className="relative shrink-0" style={{ filter: 'grayscale(100%)' }}>
+          <div key={index} className="relative shrink-0" style={{ filter: 'grayscale(100%) brightness(0) invert(1)' }}>
             <Image
               src={logo}
               alt={`Logo ${index + 1}`}
