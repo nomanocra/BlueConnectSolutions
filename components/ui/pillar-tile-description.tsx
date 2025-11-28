@@ -49,19 +49,17 @@ const PillarTileDescription = React.forwardRef<
       >
         <div className="flex flex-col gap-[24px] h-full p-[32px]">
           {/* Icon */}
-          <div className="bg-[rgba(91,149,213,0.2)] flex items-center justify-center rounded-[8px] w-[48px] h-[48px] shrink-0">
-            <Icon variant={iconVariant} size={32} color="rgba(148, 185, 229, 1)" />
+          <div className="bg-primary-t20 flex items-center justify-center rounded-[8px] w-[48px] h-[48px] shrink-0">
+            <Icon variant={iconVariant} size={32} className="text-primary-1" />
           </div>
 
           {/* Title */}
-          <h3 className="text-title-3 font-semibold text-[#eaeff5] leading-[32px]">
+          <h3 className="text-title-3 font-semibold text-foreground-main leading-[32px]">
             {title}
           </h3>
 
           {/* Description */}
-          <p className="text-text-m text-foreground-terciary leading-normal">
-            {description}
-          </p>
+          <p className="text-text-m text-foreground-terciary">{description}</p>
         </div>
       </div>
     );
@@ -71,4 +69,3 @@ const PillarTileDescription = React.forwardRef<
 PillarTileDescription.displayName = 'PillarTileDescription';
 
 export { PillarTileDescription };
-

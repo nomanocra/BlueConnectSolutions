@@ -1433,6 +1433,9 @@ function ButtonCodeModal({
           </button>
         </div>
 
+        {/* Button Examples */}
+        {buttons && <div className="space-y-4 mb-8">{buttons}</div>}
+
         {/* Code Example */}
         <div>
           <h3 className="text-text-l font-bold text-foreground-main mb-3">
