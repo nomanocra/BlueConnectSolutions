@@ -65,13 +65,13 @@ export default function Home() {
 
               <Pillar
                 label="Edge Compute IoT"
-                height={300}
+                height={200}
                 className="absolute bottom-[73px] left-[calc(50%+175.5px)] -translate-x-1/2"
               />
 
               <Pillar
                 label="Cyber Security"
-                height={100}
+                height={125}
                 className="absolute bottom-[73px] left-[calc(50%-175.5px)] -translate-x-1/2"
               />
               <Pillar
