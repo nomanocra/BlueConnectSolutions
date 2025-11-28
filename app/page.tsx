@@ -170,11 +170,11 @@ export default function Home() {
       <div id="hero">
         <HeroSection onExploreSolutions={scrollToOurSolutions} />
         <KpisSection />
-        <LogosSection />
       </div>
       <div id="our-solutions">
         <OurSolutionsSection />
       </div>
+      <LogosSection />
       <CtaSection />
       <FooterSection />
     </main>

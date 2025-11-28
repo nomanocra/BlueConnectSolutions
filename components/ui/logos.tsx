@@ -22,28 +22,35 @@ const Logos = React.forwardRef<HTMLDivElement, LogosProps>(
       '/logos/logo-6.png',
     ];
 
+    // Dupliquer les logos pour créer une boucle infinie
+    const duplicatedLogos = [...logos, ...logos];
+
     return (
       <div
         ref={ref}
-        className={cn('flex items-center w-fit overflow-hidden', className)}
-        style={{
-          gap: `${gap}px`,
-          paddingLeft: `${paddingX}px`,
-          paddingRight: `${paddingX}px`,
-        }}
+        className={cn('flex items-center overflow-hidden w-full', className)}
         {...props}
       >
-        {logos.map((logo, index) => (
-          <div key={index} className="relative shrink-0" style={{ filter: 'grayscale(100%) brightness(0) invert(1)' }}>
-            <Image
-              src={logo}
-              alt={`Logo ${index + 1}`}
-              width={120}
-              height={60}
-              className="object-contain"
-            />
-          </div>
-        ))}
+        <div
+          className="flex items-center animate-scroll-infinite"
+          style={{
+            gap: `${gap}px`,
+            paddingLeft: `${paddingX}px`,
+            paddingRight: `${paddingX}px`,
+          }}
+        >
+          {duplicatedLogos.map((logo, index) => (
+            <div key={index} className="relative shrink-0" style={{ filter: 'grayscale(100%) brightness(0) invert(1)' }}>
+              <Image
+                src={logo}
+                alt={`Logo ${index + 1}`}
+                width={120}
+                height={60}
+                className="object-contain"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
