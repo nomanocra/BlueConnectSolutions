@@ -182,8 +182,8 @@ export default function Home() {
       <div id="our-solutions">
         <OurSolutionsSection />
       </div>
-      <LogosSection />
       <CtaSection />
+      <LogosSection />
       <FooterSection />
     </main>
   );

@@ -5,6 +5,7 @@ export interface PillarProps {
   label?: string;
   height?: number;
   className?: string;
+  bodyClassName?: string; // Classe pour le body (utilisé pour l'animation GSAP)
 }
 
 // Variables fixes
@@ -17,7 +18,7 @@ const SHADOW_WIDTH = 86;
 const SHADOW_HEIGHT = 35;
 
 const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
-  ({ label = 'Label', height = 200, className, ...props }, ref) => {
+  ({ label = 'Label', height = 200, className, bodyClassName, ...props }, ref) => {
     // Générer des IDs uniques pour les SVG
     const shadowFilterId = useId();
     const bottomGradientId = useId();
@@ -130,7 +131,7 @@ const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
 
           {/* Body - align bottom top (stretch entre top et bottom) */}
           <div
-            className="absolute"
+            className={cn('absolute pillar-body', bodyClassName)}
             style={{
               top: rectangleTop,
               left: losangeLeft,
