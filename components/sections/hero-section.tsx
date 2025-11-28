@@ -17,7 +17,7 @@ export function HeroSection() {
         className="relative pt-20 px-20"
         style={{
           background:
-            'radial-gradient(12% 45% at 17.38% 5.06%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%), radial-gradient(20.08% 49.14% at 71.2% 32%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%),radial-gradient(62% 30% at 50% 32%, rgba(2, 3, 6, 0.00) 45.19%, #020306 84.62%)',
+            'radial-gradient(12% 45% at 17.38% 5.06%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%), radial-gradient(20.08% 49.14% at 71.2% 32%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%),radial-gradient(62% 36.91% at 50% 32%, rgba(2, 3, 6, 0.00) 45.19%, #020306 84.62%)',
         }}
       >
         <div className="max-w-[1200px] mx-auto">
@@ -81,13 +81,13 @@ export function HeroSection() {
 
               {/* PillarIcons - positionnés par rapport au bottom du conteneur */}
 
-              <div className="absolute bottom-[425px] left-[calc(50%-175.5px)] -translate-x-1/2 opacity-10">
+              <div className="absolute bottom-[425px] left-[calc(50%-175.5px)] -translate-x-1/2 ">
                 <PillarIcon iconVariant="security" size={72} />
               </div>
-              <div className="absolute bottom-[325px] left-1/2 -translate-x-1/2 opacity-10">
+              <div className="absolute bottom-[325px] left-1/2 -translate-x-1/2">
                 <PillarIcon iconVariant="broadcast" size={72} />
               </div>
-              <div className="absolute bottom-[500px] left-[calc(50%+175.5px)] -translate-x-1/2 opacity-10">
+              <div className="absolute bottom-[500px] left-[calc(50%+175.5px)] -translate-x-1/2 ">
                 <PillarIcon iconVariant="edge" size={72} />
               </div>
             </div>

@@ -2,7 +2,7 @@ import { Header } from '@/components/ui';
 import { HeroSection } from '@/components/sections/hero-section';
 import { KpisSection } from '@/components/sections/kpis-section';
 import { LogosSection } from '@/components/sections/logos-section';
-import { PillarsSection } from '@/components/sections/pillars-section';
+import { OurSolutionsSection } from '@/components/sections/our-solutions-section';
 import { CtaSection } from '@/components/sections/cta-section';
 import { FooterSection } from '@/components/sections/footer-section';
 
@@ -26,7 +26,7 @@ export default function Home() {
       <HeroSection />
       <KpisSection />
       <LogosSection />
-      <PillarsSection />
+      <OurSolutionsSection />
       <CtaSection />
       <FooterSection />
     </main>
