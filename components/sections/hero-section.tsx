@@ -1,6 +1,10 @@
 import { Button, Token, Pillar, PillarIcon } from '@/components/ui';
 
-export function HeroSection() {
+export interface HeroSectionProps {
+  onExploreSolutions?: () => void;
+}
+
+export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
   return (
     <section className="w-full relative">
       {/* Grille de fond avec animation */}
@@ -71,6 +75,7 @@ export function HeroSection() {
                 variant="ghost"
                 size="M"
                 rightIconVariant="arrow-down"
+                onClick={onExploreSolutions}
               />
             </div>
           </div>
