@@ -437,85 +437,157 @@ export function OurSolutionsSection() {
         }
       }
 
-      // Animation du numéro au-dessus du Pillar
+      // Animation du numéro au-dessus du Pillar avec transition d'opacité
       if (numberRef.current) {
-        // Changer de "1" à "2" quand la deuxième card arrive (20% à 40% du pin)
-        ScrollTrigger.create({
-          trigger: contentRef.current,
-          start: () => `${pinStart + pinDuration * 0.2}`,
-          end: () => `${pinStart + pinDuration * 0.4}`,
-          onEnter: () => {
-            if (numberRef.current) numberRef.current.textContent = '2';
-          },
-          onEnterBack: () => {
-            if (numberRef.current) numberRef.current.textContent = '2';
-          },
-          onLeaveBack: () => {
-            if (numberRef.current) numberRef.current.textContent = '1';
-          },
-        });
+        // Initialiser l'opacité à 1
+        gsap.set(numberRef.current, { opacity: 1 });
 
-        // Changer de "2" à "3" quand la troisième card arrive (60% à 90% du pin)
-        ScrollTrigger.create({
-          trigger: contentRef.current,
-          start: () => `${pinStart + pinDuration * 0.6}`,
-          end: () => `${pinStart + pinDuration * 0.9}`,
-          onEnter: () => {
-            if (numberRef.current) numberRef.current.textContent = '3';
-          },
-          onEnterBack: () => {
-            if (numberRef.current) numberRef.current.textContent = '3';
-          },
-          onLeaveBack: () => {
-            if (numberRef.current) numberRef.current.textContent = '2';
+        // Changer de "1" à "2" - commence avant l'animation de la carte (18% à 22% du pin)
+        let wasForward1to2 = false;
+        const tl1to2 = gsap.timeline({
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: () => `${pinStart + pinDuration * 0.18}`,
+            end: () => `${pinStart + pinDuration * 0.22}`,
+            scrub: 2,
+            onUpdate: (self) => {
+              // Détecter la direction du scroll
+              const isForward = self.direction === 1;
+              wasForward1to2 = isForward;
+            },
           },
         });
+        tl1to2
+          .to(numberRef.current, {
+            opacity: 0,
+            duration: 0.15,
+            ease: 'power2.in',
+          })
+          .call(() => {
+            // Changer le texte exactement quand l'opacité est à 0
+            if (numberRef.current) {
+              numberRef.current.textContent = wasForward1to2 ? '2' : '1';
+            }
+          })
+          .to(numberRef.current, {
+            opacity: 1,
+            duration: 0.15,
+            ease: 'power2.out',
+          });
+
+        // Changer de "2" à "3" - commence avant l'animation de la carte (58% à 62% du pin)
+        let wasForward2to3 = false;
+        const tl2to3 = gsap.timeline({
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: () => `${pinStart + pinDuration * 0.58}`,
+            end: () => `${pinStart + pinDuration * 0.62}`,
+            scrub: 2,
+            onUpdate: (self) => {
+              // Détecter la direction du scroll
+              const isForward = self.direction === 1;
+              wasForward2to3 = isForward;
+            },
+          },
+        });
+        tl2to3
+          .to(numberRef.current, {
+            opacity: 0,
+            duration: 0.15,
+            ease: 'power2.in',
+          })
+          .call(() => {
+            // Changer le texte exactement quand l'opacité est à 0
+            if (numberRef.current) {
+              numberRef.current.textContent = wasForward2to3 ? '3' : '2';
+            }
+          })
+          .to(numberRef.current, {
+            opacity: 1,
+            duration: 0.15,
+            ease: 'power2.out',
+          });
       }
 
-      // Animation du label du Pillar
+      // Animation du label du Pillar avec transition d'opacité
       if (pillarRef.current) {
         const labelElement = pillarRef.current.querySelector(
           'p'
         ) as HTMLParagraphElement;
 
         if (labelElement) {
-          // Changer de "Cyber Security" à "Edge Compute IoT" quand la deuxième card arrive (20% à 40% du pin)
-          ScrollTrigger.create({
-            trigger: contentRef.current,
-            start: () => `${pinStart + pinDuration * 0.2}`,
-            end: () => `${pinStart + pinDuration * 0.4}`,
-            onEnter: () => {
-              if (labelElement)
-                labelElement.textContent = solution2.pillarLabel;
-            },
-            onEnterBack: () => {
-              if (labelElement)
-                labelElement.textContent = solution2.pillarLabel;
-            },
-            onLeaveBack: () => {
-              if (labelElement)
-                labelElement.textContent = solution1.pillarLabel;
-            },
-          });
+          // Initialiser l'opacité à 1
+          gsap.set(labelElement, { opacity: 1 });
 
-          // Changer de "Edge Compute IoT" à "Video Broadcasting" quand la troisième card arrive (60% à 90% du pin)
-          ScrollTrigger.create({
-            trigger: contentRef.current,
-            start: () => `${pinStart + pinDuration * 0.6}`,
-            end: () => `${pinStart + pinDuration * 0.9}`,
-            onEnter: () => {
-              if (labelElement)
-                labelElement.textContent = solution3.pillarLabel;
-            },
-            onEnterBack: () => {
-              if (labelElement)
-                labelElement.textContent = solution3.pillarLabel;
-            },
-            onLeaveBack: () => {
-              if (labelElement)
-                labelElement.textContent = solution2.pillarLabel;
+          // Changer de "Cyber Security" à "Edge Compute IoT" - commence avant l'animation de la carte (18% à 22% du pin)
+          let wasForwardLabel1to2 = false;
+          const tlLabel1to2 = gsap.timeline({
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.18}`,
+              end: () => `${pinStart + pinDuration * 0.22}`,
+              scrub: 2,
+              onUpdate: (self) => {
+                // Détecter la direction du scroll
+                const isForward = self.direction === 1;
+                wasForwardLabel1to2 = isForward;
+              },
             },
           });
+          tlLabel1to2
+            .to(labelElement, {
+              opacity: 0,
+              duration: 0.15,
+              ease: 'power2.in',
+            })
+            .call(() => {
+              // Changer le texte exactement quand l'opacité est à 0
+              if (labelElement) {
+                labelElement.textContent = wasForwardLabel1to2
+                  ? solution2.pillarLabel
+                  : solution1.pillarLabel;
+              }
+            })
+            .to(labelElement, {
+              opacity: 1,
+              duration: 0.15,
+              ease: 'power2.out',
+            });
+
+          // Changer de "Edge Compute IoT" à "Video Broadcasting" - commence avant l'animation de la carte (58% à 62% du pin)
+          let wasForwardLabel2to3 = false;
+          const tlLabel2to3 = gsap.timeline({
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.58}`,
+              end: () => `${pinStart + pinDuration * 0.62}`,
+              scrub: 2,
+              onUpdate: (self) => {
+                // Détecter la direction du scroll
+                const isForward = self.direction === 1;
+                wasForwardLabel2to3 = isForward;
+              },
+            },
+          });
+          tlLabel2to3
+            .to(labelElement, {
+              opacity: 0,
+              duration: 0.15,
+              ease: 'power2.in',
+            })
+            .call(() => {
+              // Changer le texte exactement quand l'opacité est à 0
+              if (labelElement) {
+                labelElement.textContent = wasForwardLabel2to3
+                  ? solution3.pillarLabel
+                  : solution2.pillarLabel;
+              }
+            })
+            .to(labelElement, {
+              opacity: 1,
+              duration: 0.15,
+              ease: 'power2.out',
+            });
         }
       }
 
