@@ -30,7 +30,7 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
       // Créer un ScrollTrigger pour "épingler" le conteneur un peu en dessous du centre
       const pinTrigger = ScrollTrigger.create({
         trigger: illustrationRef.current,
-        start: 'center 60%', // Commence quand le centre de la section arrive à 60% du viewport
+        start: 'center 55%', // Commence quand le centre de la section arrive à 60% du viewport
         end: '+=100%', // Reste épinglé pendant 100% de la hauteur du viewport (durée réduite)
         pin: true, // Épingle le conteneur
         pinSpacing: true, // Ajoute de l'espace pour compenser le pin
@@ -150,7 +150,7 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
         className="relative pt-20 px-20"
         style={{
           background:
-            'radial-gradient(12% 45% at 17.38% 5.06%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%), radial-gradient(20.08% 49.14% at 71.2% 32%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%),radial-gradient(62% 36.91% at 50% 32%, rgba(2, 3, 6, 0.00) 45.19%, #020306 84.62%)',
+            'radial-gradient(12% 20% at 17.38% 5.06%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%), radial-gradient(20.08% 22% at 71.2% 20%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%),radial-gradient(62% 18% at 50% 20%, rgba(2, 3, 6, 0.00) 45.19%, #020306 84.62%)',
         }}
       >
         <div className="max-w-[1200px] mx-auto">
