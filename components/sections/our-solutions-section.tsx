@@ -13,6 +13,7 @@ export function OurSolutionsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const pillarRef = useRef<HTMLDivElement>(null);
+  const numberRef = useRef<HTMLSpanElement>(null);
   const description1Ref = useRef<HTMLDivElement>(null);
   const description2Ref = useRef<HTMLDivElement>(null);
   const description3Ref = useRef<HTMLDivElement>(null);
@@ -162,6 +163,360 @@ export function OurSolutionsSection() {
             },
           });
         }
+
+        // 2. Redescend à 0 avant l'arrivée de la deuxième card
+        gsap.fromTo(
+          bodyElement,
+          {
+            height: targetHeight,
+          },
+          {
+            height: 0,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.05}`, // Commence juste après le début du pin
+              end: () => `${pinStart + pinDuration * 0.18}`, // Se termine avant l'arrivée de la deuxième (qui est à 0.2)
+              scrub: 2,
+            },
+          }
+        );
+        gsap.fromTo(
+          structureElement,
+          {
+            height: targetStructureHeight,
+          },
+          {
+            height: LOSANGE_HEIGHT,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.05}`,
+              end: () => `${pinStart + pinDuration * 0.18}`,
+              scrub: 2,
+            },
+          }
+        );
+        gsap.fromTo(
+          pillarElement,
+          {
+            height: targetTotalHeight,
+          },
+          {
+            height: WRAPPER_HEIGHT + LOSANGE_HEIGHT,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.05}`,
+              end: () => `${pinStart + pinDuration * 0.18}`,
+              scrub: 2,
+            },
+          }
+        );
+        if (bottomLosange) {
+          gsap.fromTo(
+            bottomLosange,
+            {
+              top: targetHeight,
+            },
+            {
+              top: 0,
+              ease: easeConfig,
+              scrollTrigger: {
+                trigger: contentRef.current,
+                start: () => `${pinStart + pinDuration * 0.05}`,
+                end: () => `${pinStart + pinDuration * 0.18}`,
+                scrub: 2,
+              },
+            }
+          );
+        }
+
+        // 3. Remonte à height max quand la deuxième card arrive (20% à 40% du pin)
+        gsap.fromTo(
+          bodyElement,
+          {
+            height: 0,
+          },
+          {
+            height: targetHeight,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.2}`, // En même temps que la deuxième card
+              end: () => `${pinStart + pinDuration * 0.4}`, // Se termine en même temps
+              scrub: 2,
+            },
+          }
+        );
+        gsap.fromTo(
+          structureElement,
+          {
+            height: LOSANGE_HEIGHT,
+          },
+          {
+            height: targetStructureHeight,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.2}`,
+              end: () => `${pinStart + pinDuration * 0.4}`,
+              scrub: 2,
+            },
+          }
+        );
+        gsap.fromTo(
+          pillarElement,
+          {
+            height: WRAPPER_HEIGHT + LOSANGE_HEIGHT,
+          },
+          {
+            height: targetTotalHeight,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.2}`,
+              end: () => `${pinStart + pinDuration * 0.4}`,
+              scrub: 2,
+            },
+          }
+        );
+        if (bottomLosange) {
+          gsap.fromTo(
+            bottomLosange,
+            {
+              top: 0,
+            },
+            {
+              top: targetHeight,
+              ease: easeConfig,
+              scrollTrigger: {
+                trigger: contentRef.current,
+                start: () => `${pinStart + pinDuration * 0.2}`,
+                end: () => `${pinStart + pinDuration * 0.4}`,
+                scrub: 2,
+              },
+            }
+          );
+        }
+
+        // 4. Redescend à 0 avant l'arrivée de la troisième card
+        gsap.fromTo(
+          bodyElement,
+          {
+            height: targetHeight,
+          },
+          {
+            height: 0,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.45}`, // Commence après la deuxième card
+              end: () => `${pinStart + pinDuration * 0.58}`, // Se termine avant l'arrivée de la troisième (qui est à 0.6)
+              scrub: 2,
+            },
+          }
+        );
+        gsap.fromTo(
+          structureElement,
+          {
+            height: targetStructureHeight,
+          },
+          {
+            height: LOSANGE_HEIGHT,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.45}`,
+              end: () => `${pinStart + pinDuration * 0.58}`,
+              scrub: 2,
+            },
+          }
+        );
+        gsap.fromTo(
+          pillarElement,
+          {
+            height: targetTotalHeight,
+          },
+          {
+            height: WRAPPER_HEIGHT + LOSANGE_HEIGHT,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.45}`,
+              end: () => `${pinStart + pinDuration * 0.58}`,
+              scrub: 2,
+            },
+          }
+        );
+        if (bottomLosange) {
+          gsap.fromTo(
+            bottomLosange,
+            {
+              top: targetHeight,
+            },
+            {
+              top: 0,
+              ease: easeConfig,
+              scrollTrigger: {
+                trigger: contentRef.current,
+                start: () => `${pinStart + pinDuration * 0.45}`,
+                end: () => `${pinStart + pinDuration * 0.58}`,
+                scrub: 2,
+              },
+            }
+          );
+        }
+
+        // 5. Remonte à height max quand la troisième card arrive (60% à 80% du pin)
+        gsap.fromTo(
+          bodyElement,
+          {
+            height: 0,
+          },
+          {
+            height: targetHeight,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.6}`, // En même temps que la troisième card
+              end: () => `${pinStart + pinDuration * 0.9}`, // Se termine en même temps
+              scrub: 2,
+            },
+          }
+        );
+        gsap.fromTo(
+          structureElement,
+          {
+            height: LOSANGE_HEIGHT,
+          },
+          {
+            height: targetStructureHeight,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.6}`,
+              end: () => `${pinStart + pinDuration * 0.9}`,
+              scrub: 2,
+            },
+          }
+        );
+        gsap.fromTo(
+          pillarElement,
+          {
+            height: WRAPPER_HEIGHT + LOSANGE_HEIGHT,
+          },
+          {
+            height: targetTotalHeight,
+            ease: easeConfig,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: () => `${pinStart + pinDuration * 0.6}`,
+              end: () => `${pinStart + pinDuration * 0.9}`,
+              scrub: 2,
+            },
+          }
+        );
+        if (bottomLosange) {
+          gsap.fromTo(
+            bottomLosange,
+            {
+              top: 0,
+            },
+            {
+              top: targetHeight,
+              ease: easeConfig,
+              scrollTrigger: {
+                trigger: contentRef.current,
+                start: () => `${pinStart + pinDuration * 0.6}`,
+                end: () => `${pinStart + pinDuration * 0.9}`,
+                scrub: 2,
+              },
+            }
+          );
+        }
+      }
+
+      // Animation du numéro au-dessus du Pillar
+      if (numberRef.current) {
+        // Changer de "1" à "2" quand la deuxième card arrive (20% à 40% du pin)
+        ScrollTrigger.create({
+          trigger: contentRef.current,
+          start: () => `${pinStart + pinDuration * 0.2}`,
+          end: () => `${pinStart + pinDuration * 0.4}`,
+          onEnter: () => {
+            if (numberRef.current) numberRef.current.textContent = '2';
+          },
+          onEnterBack: () => {
+            if (numberRef.current) numberRef.current.textContent = '2';
+          },
+          onLeaveBack: () => {
+            if (numberRef.current) numberRef.current.textContent = '1';
+          },
+        });
+
+        // Changer de "2" à "3" quand la troisième card arrive (60% à 90% du pin)
+        ScrollTrigger.create({
+          trigger: contentRef.current,
+          start: () => `${pinStart + pinDuration * 0.6}`,
+          end: () => `${pinStart + pinDuration * 0.9}`,
+          onEnter: () => {
+            if (numberRef.current) numberRef.current.textContent = '3';
+          },
+          onEnterBack: () => {
+            if (numberRef.current) numberRef.current.textContent = '3';
+          },
+          onLeaveBack: () => {
+            if (numberRef.current) numberRef.current.textContent = '2';
+          },
+        });
+      }
+
+      // Animation du label du Pillar
+      if (pillarRef.current) {
+        const labelElement = pillarRef.current.querySelector(
+          'p'
+        ) as HTMLParagraphElement;
+
+        if (labelElement) {
+          // Changer de "Cyber Security" à "Edge Compute IoT" quand la deuxième card arrive (20% à 40% du pin)
+          ScrollTrigger.create({
+            trigger: contentRef.current,
+            start: () => `${pinStart + pinDuration * 0.2}`,
+            end: () => `${pinStart + pinDuration * 0.4}`,
+            onEnter: () => {
+              if (labelElement)
+                labelElement.textContent = solution2.pillarLabel;
+            },
+            onEnterBack: () => {
+              if (labelElement)
+                labelElement.textContent = solution2.pillarLabel;
+            },
+            onLeaveBack: () => {
+              if (labelElement)
+                labelElement.textContent = solution1.pillarLabel;
+            },
+          });
+
+          // Changer de "Edge Compute IoT" à "Video Broadcasting" quand la troisième card arrive (60% à 90% du pin)
+          ScrollTrigger.create({
+            trigger: contentRef.current,
+            start: () => `${pinStart + pinDuration * 0.6}`,
+            end: () => `${pinStart + pinDuration * 0.9}`,
+            onEnter: () => {
+              if (labelElement)
+                labelElement.textContent = solution3.pillarLabel;
+            },
+            onEnterBack: () => {
+              if (labelElement)
+                labelElement.textContent = solution3.pillarLabel;
+            },
+            onLeaveBack: () => {
+              if (labelElement)
+                labelElement.textContent = solution2.pillarLabel;
+            },
+          });
+        }
       }
 
       // Animation de la deuxième tuile de description (Edge Compute IoT)
@@ -224,7 +579,7 @@ export function OurSolutionsSection() {
           scrollTrigger: {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.6}`, // Commence quand la deuxième se termine (40%)
-            end: () => `${pinStart + pinDuration * 0.8}`, // Se termine à 60% du pin
+            end: () => `${pinStart + pinDuration * 0.9}`, // Se termine à 60% du pin
             scrub: 2, // Rend l'animation réversible et liée au scroll
           },
         });
@@ -243,7 +598,7 @@ export function OurSolutionsSection() {
           scrollTrigger: {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.6}`, // En même temps que la troisième carte
-            end: () => `${pinStart + pinDuration * 0.8}`, // Se termine en même temps
+            end: () => `${pinStart + pinDuration * 0.9}`, // Se termine en même temps
             scrub: 2, // Rend l'animation réversible et liée au scroll
           },
         });
@@ -261,7 +616,7 @@ export function OurSolutionsSection() {
           scrollTrigger: {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.6}`, // En même temps que la troisième carte
-            end: () => `${pinStart + pinDuration * 0.8}`, // Se termine en même temps
+            end: () => `${pinStart + pinDuration * 0.9}`, // Se termine en même temps
             scrub: 2, // Rend l'animation réversible et liée au scroll
           },
         });
@@ -299,7 +654,10 @@ export function OurSolutionsSection() {
               <div className="flex flex-col gap-[20px] h-full items-center justify-end relative">
                 {/* Number */}
                 <div className="flex flex-col h-[56px] justify-center">
-                  <span className="text-[40px] font-black text-white leading-[32px]">
+                  <span
+                    ref={numberRef}
+                    className="text-[40px] font-black text-white leading-[32px]"
+                  >
                     {solution1.number}
                   </span>
                 </div>
