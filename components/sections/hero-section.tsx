@@ -23,10 +23,10 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
 
       {/* Wrapper avec gradient */}
       <div
-        className="relative pt-20 px-20 pb-[40px]"
+        className="relative pt-20 px-20 pb-[80px]"
         style={{
           background:
-            'radial-gradient(12% 35% at 17.38% 5.06%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%), radial-gradient(15% 60% at 71.2% 50%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%),radial-gradient(62% 60% at 50% 50%, rgba(2, 3, 6, 0.00) 45.19%, #020306 84.62%)',
+            'radial-gradient(12% 35% at 17.38% 5.06%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%), radial-gradient(15% 55% at 71.2% 47%, rgba(53, 118, 192, 0.10) 0%, rgba(53, 118, 192, 0.00) 100%),radial-gradient(62% 55% at 50% 47%, rgba(2, 3, 6, 0.00) 45.19%, #020306 84.62%)',
         }}
       >
         <div className="max-w-[1200px] mx-auto">
