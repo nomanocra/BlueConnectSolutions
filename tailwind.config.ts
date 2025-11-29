@@ -39,7 +39,6 @@ const config: Config = {
       },
       fontFamily: {
         geist: ['var(--font-geist-sans)', 'sans-serif'],
-        inter: ['var(--font-inter)', 'sans-serif'],
       },
       fontSize: {
         // Title styles (Geist)
@@ -51,9 +50,9 @@ const config: Config = {
         'text-m': ['16px', { lineHeight: '100%' }],
         'text-s': ['14px', { lineHeight: '100%' }],
         'text-xs': ['12px', { lineHeight: '100%' }],
-        // Body styles (Inter)
+        // Body styles (Geist)
         'body-regular': ['16px', { lineHeight: '24px', fontWeight: '400' }],
-        // Legend styles (Inter)
+        // Legend styles (Geist)
         'legend-m': ['11px', { lineHeight: '100%', fontWeight: '600' }],
         'legend-s': ['10px', { lineHeight: '100%', fontWeight: '600' }],
       },

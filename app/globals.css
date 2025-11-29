@@ -4,16 +4,31 @@
 
 :root {
   --font-geist-sans: 'Geist', sans-serif;
-  --font-inter: 'Inter', sans-serif;
 }
 
 body {
   @apply bg-background-1 text-foreground-main font-geist;
 }
 
-/* Force font-weight rendering for Geist */
+/* Force font-weight rendering for Geist - Support all weights */
 .font-geist {
+  font-weight: 400;
+}
+
+.font-geist.font-thin {
+  font-weight: 100;
+}
+
+.font-geist.font-extralight {
+  font-weight: 200;
+}
+
+.font-geist.font-light {
   font-weight: 300;
+}
+
+.font-geist.font-normal {
+  font-weight: 400;
 }
 
 .font-geist.font-medium {
@@ -26,6 +41,14 @@ body {
 
 .font-geist.font-bold {
   font-weight: 700;
+}
+
+.font-geist.font-extrabold {
+  font-weight: 800;
+}
+
+.font-geist.font-black {
+  font-weight: 900;
 }
 
 /* Hero Section Animations */
