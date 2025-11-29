@@ -1,3 +1,4 @@
+export { BackToTopButton } from './back-to-top-button';
 export { Button, type ButtonProps } from './button';
 export { Header, type HeaderProps } from './header';
 export { Icon, type IconProps, type IconVariant } from './icon';

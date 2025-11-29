@@ -1,6 +1,6 @@
 'use client';
 
-import { Header } from '@/components/ui';
+import { Header, BackToTopButton } from '@/components/ui';
 import {
   HeroSection,
   AnimatedPillarsSection,
@@ -189,6 +189,7 @@ export default function Home() {
       <CtaSection />
       <LogosSection />
       <FooterSection />
+      <BackToTopButton />
     </main>
   );
 }

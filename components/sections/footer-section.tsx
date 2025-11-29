@@ -12,7 +12,7 @@ export function FooterSection() {
             <h3 className="text-text-m font-semibold text-[#eaeff5] leading-[24px]">
               Solutions
             </h3>
-            <div className="flex flex-col gap-3 text-text-s text-foreground-terciary">
+            <div className="flex flex-col gap-3 items-start text-text-s text-foreground-terciary">
               <Link href="#" className="leading-[20px]">
                 Edge Computing
               </Link>
@@ -33,7 +33,7 @@ export function FooterSection() {
             <h3 className="text-text-m font-semibold text-[#eaeff5] leading-[24px]">
               Company
             </h3>
-            <div className="flex flex-col gap-3 text-text-s text-foreground-terciary">
+            <div className="flex flex-col gap-3 items-start text-text-s text-foreground-terciary">
               <Link href="#" className="leading-[20px]">
                 About Us
               </Link>
@@ -54,7 +54,7 @@ export function FooterSection() {
             <h3 className="text-text-m font-semibold text-[#eaeff5] leading-[24px]">
               Resources
             </h3>
-            <div className="flex flex-col gap-3 text-text-s text-foreground-terciary">
+            <div className="flex flex-col gap-3 items-start text-text-s text-foreground-terciary">
               <Link href="#" className="leading-[20px]">
                 Documentation
               </Link>
@@ -75,7 +75,7 @@ export function FooterSection() {
             <h3 className="text-text-m font-semibold text-[#eaeff5] leading-[24px]">
               Legal
             </h3>
-            <div className="flex flex-col gap-3 text-text-s text-foreground-terciary">
+            <div className="flex flex-col gap-3 items-start text-text-s text-foreground-terciary">
               <Link href="#" className="leading-[20px]">
                 Privacy Policy
               </Link>
