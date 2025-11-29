@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 
 const inter = Inter({
@@ -28,7 +29,24 @@ export default function RootLayout({
       lang="fr"
       className={`${GeistSans.variable} ${inter.variable}`.trim()}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Script
+          id="prevent-scroll-restore"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+              }
+              window.scrollTo(0, 0);
+              // Forcer plusieurs fois pour être sûr
+              setTimeout(function() { window.scrollTo(0, 0); }, 0);
+              setTimeout(function() { window.scrollTo(0, 0); }, 10);
+            `,
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

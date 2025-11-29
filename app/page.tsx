@@ -34,6 +34,40 @@ export default function Home() {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
+    
+    // Forcer le scroll à 0 immédiatement et de manière répétée
+    // pour contrer la restauration du navigateur
+    const forceScrollToTop = () => {
+      if (window.scrollY !== 0) {
+        window.scrollTo(0, 0);
+      }
+    };
+    
+    // Forcer immédiatement
+    forceScrollToTop();
+    
+    // Forcer après plusieurs délais pour gérer tous les cas
+    const timeouts = [
+      setTimeout(forceScrollToTop, 0),
+      setTimeout(forceScrollToTop, 10),
+      setTimeout(forceScrollToTop, 50),
+      setTimeout(forceScrollToTop, 100),
+      setTimeout(forceScrollToTop, 200),
+    ];
+    
+    // Écouter les événements de scroll pour forcer si nécessaire
+    const handleScroll = () => {
+      if (window.scrollY !== 0 && document.readyState === 'loading') {
+        window.scrollTo(0, 0);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true, once: true });
+    
+    return () => {
+      timeouts.forEach(clearTimeout);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
