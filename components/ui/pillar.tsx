@@ -18,7 +18,10 @@ const SHADOW_WIDTH = 86;
 const SHADOW_HEIGHT = 35;
 
 const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
-  ({ label = 'Label', height = 200, className, bodyClassName, ...props }, ref) => {
+  (
+    { label = 'Label', height = 200, className, bodyClassName, ...props },
+    ref
+  ) => {
     // Générer des IDs uniques pour les SVG
     const shadowFilterId = useId();
     const bottomGradientId = useId();
@@ -152,6 +155,7 @@ const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
               width: RECTANGLE_WIDTH,
               height: LOSANGE_HEIGHT,
               zIndex: 1,
+              filter: 'drop-shadow(0px -10px 32px rgba(91, 149, 213, 0.5))',
             }}
           >
             <svg

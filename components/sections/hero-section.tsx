@@ -39,7 +39,7 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
       // Configuration partagée pour toutes les animations
       const scrollTriggerConfig = {
         trigger: illustrationRef.current,
-        start: 'top 80%',
+        start: 'top 50%',
         end: () => pinTrigger.end,
         scrub: 3,
       };
@@ -133,9 +133,9 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
 
   return (
     <section className="w-full relative">
-      {/* Grille de fond avec animation */}
+      {/* Grille de fond */}
       <div
-        className="absolute inset-0 animate-grid-fade-in"
+        className="absolute inset-0"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
