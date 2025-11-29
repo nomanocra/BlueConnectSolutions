@@ -163,7 +163,7 @@ const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
               width: RECTANGLE_WIDTH,
               height: LOSANGE_HEIGHT,
               zIndex: 1,
-              filter: 'drop-shadow(0px -10px 32px rgba(91, 149, 213, 0.5))',
+              filter: 'drop-shadow(0px -16px 32px rgba(91, 149, 213, 0.5))',
             }}
           >
             <svg
