@@ -6,6 +6,7 @@ export interface PillarProps {
   height?: number;
   className?: string;
   bodyClassName?: string; // Classe pour le body (utilisé pour l'animation GSAP)
+  style?: React.CSSProperties;
 }
 
 // Variables fixes
@@ -19,7 +20,14 @@ const SHADOW_HEIGHT = 35;
 
 const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
   (
-    { label = 'Label', height = 200, className, bodyClassName, ...props },
+    {
+      label = 'Label',
+      height = 200,
+      className,
+      bodyClassName,
+      style,
+      ...props
+    },
     ref
   ) => {
     // Générer des IDs uniques pour les SVG
@@ -49,7 +57,7 @@ const Pillar = React.forwardRef<HTMLDivElement, PillarProps>(
       <div
         ref={ref}
         className={cn('flex flex-col gap-2', className)}
-        style={{ width: PILLAR_WIDTH, height: totalHeight }}
+        style={{ width: PILLAR_WIDTH, height: totalHeight, ...style }}
         {...props}
       >
         {/* PillarStructure - Contient tous les éléments en position absolute */}

@@ -26,7 +26,7 @@ export function AnimatedPillarsSection() {
       // Créer un ScrollTrigger pour "épingler" le conteneur un peu en dessous du centre
       const pinTrigger = ScrollTrigger.create({
         trigger: illustrationRef.current,
-        start: 'center 55%', // Commence quand le centre de la section arrive à 60% du viewport
+        start: 'center 65%', // Commence quand le centre de la section arrive à 60% du viewport
         end: '+=100%', // Reste épinglé pendant 100% de la hauteur du viewport (durée réduite)
         pin: true, // Épingle le conteneur
         pinSpacing: true, // Ajoute de l'espace pour compenser le pin
@@ -35,9 +35,9 @@ export function AnimatedPillarsSection() {
       // Configuration partagée pour toutes les animations
       const scrollTriggerConfig = {
         trigger: illustrationRef.current,
-        start: 'top 50%',
+        start: 'top 90%',
         end: () => pinTrigger.end,
-        scrub: 3,
+        scrub: 2,
       };
 
       const easeConfig = 'power2.inOut';
@@ -137,7 +137,7 @@ export function AnimatedPillarsSection() {
             ref={illustrationRef}
             className="flex gap-10 items-start justify-center px-20 pb-20"
           >
-            <div className="relative w-full h-[620px]">
+            <div className="relative w-full h-[520px]">
               {/* Pillars */}
 
               <Pillar
@@ -145,18 +145,21 @@ export function AnimatedPillarsSection() {
                 label="Cyber Security"
                 height={0}
                 className="absolute bottom-[73px] left-[calc(50%-175.5px)] -translate-x-1/2"
+                style={{ opacity: 0 }}
               />
               <Pillar
                 ref={pillar2Ref}
                 label="Video Broadcasting"
                 height={0}
                 className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                style={{ opacity: 0 }}
               />
               <Pillar
                 ref={pillar3Ref}
                 label="Edge Compute IoT"
                 height={0}
                 className="absolute bottom-[73px] left-[calc(50%+175.5px)] -translate-x-1/2"
+                style={{ opacity: 0 }}
               />
 
               {/* PillarIcons - positionnés par rapport au bottom du conteneur */}
@@ -189,4 +192,3 @@ export function AnimatedPillarsSection() {
     </section>
   );
 }
-
