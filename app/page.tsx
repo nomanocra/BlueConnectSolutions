@@ -1,12 +1,15 @@
 'use client';
 
 import { Header } from '@/components/ui';
-import { HeroSection } from '@/components/sections/hero-section';
-import { KpisSection } from '@/components/sections/kpis-section';
-import { LogosSection } from '@/components/sections/logos-section';
-import { OurSolutionsSection } from '@/components/sections/our-solutions-section';
-import { CtaSection } from '@/components/sections/cta-section';
-import { FooterSection } from '@/components/sections/footer-section';
+import {
+  HeroSection,
+  AnimatedPillarsSection,
+  KpisSection,
+  LogosSection,
+  OurSolutionsSection,
+  CtaSection,
+  FooterSection,
+} from '@/components/sections';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -177,8 +180,9 @@ export default function Home() {
 
       <div id="hero">
         <HeroSection onExploreSolutions={scrollToOurSolutions} />
-        <KpisSection />
       </div>
+      <AnimatedPillarsSection />
+      <KpisSection />
       <div id="our-solutions">
         <OurSolutionsSection />
       </div>

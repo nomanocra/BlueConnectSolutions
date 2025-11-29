@@ -1,78 +1,19 @@
-'use client';
-
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Kpi } from '@/components/ui';
 
-// Enregistrer le plugin ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
-
 export function KpisSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const kpi1Ref = useRef<HTMLDivElement>(null);
-  const kpi2Ref = useRef<HTMLDivElement>(null);
-  const kpi3Ref = useRef<HTMLDivElement>(null);
-  const kpi4Ref = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      if (!sectionRef.current) return;
-
-      const kpiRefs = [kpi1Ref, kpi2Ref, kpi3Ref, kpi4Ref];
-
-      // Créer une timeline pour animer les KPIs séquentiellement
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          end: 'top 40%',
-          scrub: 1, // Rend l'animation réversible et liée au scroll
-        },
-      });
-
-      kpiRefs.forEach((kpiRef, index) => {
-        const kpiElement = kpiRef.current;
-        if (!kpiElement) return;
-
-        // Initialiser l'état initial (invisible et décalé vers le bas)
-        gsap.set(kpiElement, {
-          opacity: 0,
-          y: 20,
-        });
-
-        // Ajouter l'animation à la timeline avec un délai progressif
-        tl.to(
-          kpiElement,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.3,
-            ease: 'power2.out',
-          },
-          index * 0.1 // Délai progressif entre chaque KPI
-        );
-      });
-    },
-    { scope: sectionRef }
-  );
-
   return (
-    <section ref={sectionRef} className="w-full bg-background-1">
+    <section className="w-full bg-background-1">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-wrap items-center justify-center pb-[120px] pt-[80px] px-[107px] gap-8">
           {/* Premier wrapper avec les 2 premiers KPIs */}
           <div className="flex flex-wrap items-center justify-center gap-12 flex-1 min-w-[300px] sm:min-w-[400px]">
             <Kpi
-              ref={kpi1Ref}
               className="flex flex-col gap-[8px] items-center text-center text-nowrap flex-1 min-w-[169px]"
               value="100%"
               label="Project Guarantee"
               description="High quality products and processes"
             />
             <Kpi
-              ref={kpi2Ref}
               className="flex flex-col gap-[8px] items-center text-center text-nowrap flex-1 min-w-[169px]"
               value="+20"
               label="Years of Experience"
@@ -83,14 +24,12 @@ export function KpisSection() {
           {/* Deuxième wrapper avec les 2 derniers KPIs */}
           <div className="flex flex-wrap items-center justify-center gap-12 flex-1 min-w-[300px] sm:min-w-[400px]">
             <Kpi
-              ref={kpi3Ref}
               className="flex flex-col gap-[8px] items-center text-center text-nowrap flex-1 min-w-[169px]"
               value="24/7"
               label="Support & Monitoring"
               description="Real-time threat detection"
             />
             <Kpi
-              ref={kpi4Ref}
               className="flex flex-col gap-[8px] items-center text-center text-nowrap flex-1 min-w-[169px]"
               value="150+"
               label="Global Deployments"
