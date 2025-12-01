@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { notFound } from 'next/navigation';
 import {
   Button,
   Header,
@@ -200,18 +199,6 @@ function DesignSystemContent() {
 }
 
 export default function DesignSystemPage() {
-  // Bloquer l'accès en production
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      notFound();
-    }
-  }, []);
-
-  // Ne pas afficher le contenu en production
-  if (process.env.NODE_ENV === 'production') {
-    return null;
-  }
-
   return (
     <Suspense
       fallback={
