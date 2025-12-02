@@ -210,7 +210,11 @@ function renderButtonContent(
 
   // Rendre l'icône de droite (priorité au variant, puis à l'icône personnalisée)
   const renderedRightIcon = rightIconVariant ? (
-    <Icon variant={rightIconVariant} size={iconSize[size]} />
+    <Icon
+      variant={rightIconVariant}
+      size={iconSize[size]}
+      className={cn('button-icon', `button-icon-${rightIconVariant}`)}
+    />
   ) : (
     rightIcon
   );
@@ -233,7 +237,9 @@ function renderButtonContent(
         )}
       </span>
       {showRightIcon && renderedRightIcon && (
-        <span className="relative shrink-0">{renderedRightIcon}</span>
+        <span className="relative shrink-0 button-icon-wrapper">
+          {renderedRightIcon}
+        </span>
       )}
     </>
   );

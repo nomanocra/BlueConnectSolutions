@@ -245,3 +245,25 @@ body {
   position: relative;
   z-index: 1;
 }
+
+/* Button Icon Animations */
+.button-icon-wrapper {
+  transition: transform 0.3s ease;
+}
+
+/* Transition par défaut pour toutes les icônes de bouton */
+.button-icon {
+  transition: transform 0.3s ease;
+}
+
+/* Animation pour la flèche droite - se déplace vers la droite au hover */
+button:hover .button-icon-arrow-right,
+a:hover .button-icon-arrow-right {
+  transform: translateX(6px);
+}
+
+/* Animation pour la flèche bas - se déplace vers le bas au hover */
+button:hover .button-icon-arrow-down,
+a:hover .button-icon-arrow-down {
+  transform: translateY(4px);
+}
