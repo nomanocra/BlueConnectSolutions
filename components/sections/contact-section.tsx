@@ -12,9 +12,9 @@ export function ContactSection() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>(
-    'idle'
-  );
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -47,7 +47,7 @@ export function ContactSection() {
         <div className="flex flex-col gap-16 items-center">
           {/* Header */}
           <div className="flex flex-col gap-6 items-center text-center max-w-[720px]">
-            <Token label="Get in Touch" />
+            <Token label="Take a rendez-vous" />
             <h1 className="text-title-1 font-bold text-foreground-main">
               Contact Us
             </h1>
@@ -204,4 +204,3 @@ export function ContactSection() {
     </section>
   );
 }
-
