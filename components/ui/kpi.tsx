@@ -49,5 +49,3 @@ KpiComponent.displayName = 'Kpi';
 
 // Mémoriser le composant pour éviter les re-renders inutiles
 export const Kpi = React.memo(KpiComponent);
-
-export { Kpi };
