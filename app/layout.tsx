@@ -27,10 +27,10 @@ export default function RootLayout({
               if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
               }
-              window.scrollTo(0, 0);
-              // Forcer plusieurs fois pour être sûr
-              setTimeout(function() { window.scrollTo(0, 0); }, 0);
-              setTimeout(function() { window.scrollTo(0, 0); }, 10);
+              // Forcer le scroll à 0 seulement une fois au chargement initial
+              if (window.scrollY !== 0) {
+                window.scrollTo(0, 0);
+              }
             `,
           }}
         />

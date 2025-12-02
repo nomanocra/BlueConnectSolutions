@@ -34,11 +34,14 @@ const KPIS_DATA = [
 
 export function KpisSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const kpiRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      if (!sectionRef.current) return;
+      if (!containerRef.current) return;
+
+      // Sélectionner tous les conteneurs de KPI directement
+      const kpiContainers = containerRef.current.children;
 
       // Créer une timeline pour animer les KPIs séquentiellement
       const tl = gsap.timeline({
@@ -50,9 +53,7 @@ export function KpisSection() {
         },
       });
 
-      kpiRefs.current.forEach((kpiElement, index) => {
-        if (!kpiElement) return;
-
+      Array.from(kpiContainers).forEach((kpiElement, index) => {
         // Initialiser l'état initial (invisible et décalé vers le bas)
         gsap.set(kpiElement, {
           opacity: 0,
@@ -78,15 +79,12 @@ export function KpisSection() {
   return (
     <section ref={sectionRef} className="w-full bg-background-1">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-wrap justify-center items-start gap-4 md:gap-8 pb-[120px] pt-[80px] px-8 md:px-[107px]">
-          {KPIS_DATA.map((kpi, index) => (
-            <div
-              key={`${kpi.value}-${kpi.label}`}
-              ref={(el) => {
-                kpiRefs.current[index] = el;
-              }}
-              className="flex-shrink-0"
-            >
+        <div
+          ref={containerRef}
+          className="flex flex-wrap justify-center items-start gap-4 md:gap-8 pb-[120px] pt-[80px] px-8 md:px-[107px]"
+        >
+          {KPIS_DATA.map((kpi) => (
+            <div key={`${kpi.value}-${kpi.label}`} className="flex-shrink-0">
               <Kpi
                 className="flex flex-col gap-[8px] items-center text-center"
                 value={kpi.value}

@@ -30,76 +30,101 @@ export default function Home() {
 
   useEffect(() => {
     // Désactiver la restauration automatique de la position de scroll
-    // Pour que la page revienne toujours en haut au refresh
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-    
+
+    let userHasScrolled = false;
+    let scrollTimeout: NodeJS.Timeout | null = null;
+    let isInitializing = true;
+
+    // Détecter si l'utilisateur scroll activement
+    const handleUserScroll = () => {
+      userHasScrolled = true;
+      isInitializing = false;
+    };
+
     // Fonction helper pour scroller vers our-solutions
     const scrollToOurSolutionsSection = () => {
+      if (userHasScrolled) return; // Ne pas scroller si l'utilisateur a déjà scrollé
+      
       const section = document.getElementById('our-solutions');
       if (section) {
-        setTimeout(() => {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          setActiveSection('our-solutions');
-        }, 100);
+        // Attendre que le DOM soit prêt et que GSAP soit initialisé
+        requestAnimationFrame(() => {
+          if (!userHasScrolled) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setActiveSection('our-solutions');
+          }
+        });
       }
     };
 
     // Vérifier sessionStorage pour savoir si on doit scroller vers une section
     const scrollToSection = sessionStorage.getItem('scrollToSection');
     if (scrollToSection === 'our-solutions') {
-      // Nettoyer sessionStorage
       sessionStorage.removeItem('scrollToSection');
       
-      // Essayer plusieurs fois pour s'assurer que le DOM est prêt
-      scrollToOurSolutionsSection();
-      setTimeout(scrollToOurSolutionsSection, 200);
-      setTimeout(scrollToOurSolutionsSection, 500);
-      return; // Sortir tôt pour éviter le scroll vers le haut
+      // Attendre que le DOM et les animations soient prêtes
+      const tryScroll = () => {
+        if (document.readyState === 'complete' && !userHasScrolled) {
+          scrollToOurSolutionsSection();
+        } else if (isInitializing) {
+          setTimeout(tryScroll, 100);
+        }
+      };
+      
+      // Essayer après un court délai pour laisser GSAP s'initialiser
+      setTimeout(tryScroll, 300);
+      return;
     }
 
     // Vérifier aussi si on a un hash dans l'URL (pour compatibilité)
     const hash = window.location.hash;
     if (hash === '#our-solutions') {
-      // Essayer plusieurs fois pour s'assurer que le DOM est prêt
-      scrollToOurSolutionsSection();
-      setTimeout(scrollToOurSolutionsSection, 200);
-      setTimeout(scrollToOurSolutionsSection, 500);
-      return; // Sortir tôt pour éviter le scroll vers le haut
+      const tryScroll = () => {
+        if (document.readyState === 'complete' && !userHasScrolled) {
+          scrollToOurSolutionsSection();
+        } else if (isInitializing) {
+          setTimeout(tryScroll, 100);
+        }
+      };
+      
+      setTimeout(tryScroll, 300);
+      return;
     }
 
-    // Pas de hash ni sessionStorage, forcer le scroll à 0
+    // Pas de hash ni sessionStorage, forcer le scroll à 0 seulement au chargement initial
     const forceScrollToTop = () => {
-      if (window.scrollY !== 0) {
+      // Ne forcer que si l'utilisateur n'a pas scrollé et que c'est encore l'initialisation
+      if (!userHasScrolled && isInitializing && window.scrollY !== 0) {
         window.scrollTo(0, 0);
       }
     };
     
-    // Forcer immédiatement
-    forceScrollToTop();
+    // Écouter le scroll utilisateur immédiatement
+    window.addEventListener('scroll', handleUserScroll, { passive: true, once: true });
     
-    // Forcer après plusieurs délais pour gérer tous les cas
-    const timeouts = [
-      setTimeout(forceScrollToTop, 0),
-      setTimeout(forceScrollToTop, 10),
-      setTimeout(forceScrollToTop, 50),
-      setTimeout(forceScrollToTop, 100),
-      setTimeout(forceScrollToTop, 200),
-    ];
+    // Forcer le scroll seulement une fois après que le DOM soit prêt
+    if (document.readyState === 'complete') {
+      requestAnimationFrame(forceScrollToTop);
+    } else {
+      window.addEventListener('load', () => {
+        if (!userHasScrolled) {
+          requestAnimationFrame(forceScrollToTop);
+        }
+        isInitializing = false;
+      }, { once: true });
+    }
     
-    // Écouter les événements de scroll pour forcer si nécessaire
-    const handleScroll = () => {
-      if (window.scrollY !== 0 && document.readyState === 'loading') {
-        window.scrollTo(0, 0);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true, once: true });
+    // Timeout de sécurité pour arrêter l'initialisation après 500ms
+    scrollTimeout = setTimeout(() => {
+      isInitializing = false;
+    }, 500);
     
     return () => {
-      timeouts.forEach(clearTimeout);
-      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      window.removeEventListener('scroll', handleUserScroll);
     };
   }, []);
 
