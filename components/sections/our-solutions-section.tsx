@@ -78,7 +78,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: 'center 90%', // Commence avant le pin (qui est à center 50%)
             end: 'center 60%', // Se termine quand le pin commence
-            scrub: 2, // Rend l'animation réversible et liée au scroll
+            scrub: 1, // Rend l'animation réversible et liée au scroll
           },
         });
       }
@@ -128,7 +128,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: 'center 90%',
             end: 'center 50%', // Se termine au début du pin
-            scrub: 2,
+            scrub: 1,
           },
         });
         gsap.to(structureElement, {
@@ -138,7 +138,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: 'center 90%',
             end: 'center 50%',
-            scrub: 2,
+            scrub: 1,
           },
         });
         gsap.to(pillarElement, {
@@ -148,7 +148,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: 'center 90%',
             end: 'center 50%',
-            scrub: 2,
+            scrub: 1,
           },
         });
         if (bottomLosange) {
@@ -159,7 +159,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: 'center 90%',
               end: 'center 50%',
-              scrub: 2,
+              scrub: 1,
             },
           });
         }
@@ -177,7 +177,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.05}`, // Commence juste après le début du pin
               end: () => `${pinStart + pinDuration * 0.18}`, // Se termine avant l'arrivée de la deuxième (qui est à 0.2)
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -193,7 +193,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.05}`,
               end: () => `${pinStart + pinDuration * 0.18}`,
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -209,7 +209,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.05}`,
               end: () => `${pinStart + pinDuration * 0.18}`,
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -226,7 +226,7 @@ export function OurSolutionsSection() {
                 trigger: contentRef.current,
                 start: () => `${pinStart + pinDuration * 0.05}`,
                 end: () => `${pinStart + pinDuration * 0.18}`,
-                scrub: 2,
+                scrub: 1,
               },
             }
           );
@@ -245,7 +245,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.2}`, // En même temps que la deuxième card
               end: () => `${pinStart + pinDuration * 0.4}`, // Se termine en même temps
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -261,7 +261,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.2}`,
               end: () => `${pinStart + pinDuration * 0.4}`,
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -277,7 +277,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.2}`,
               end: () => `${pinStart + pinDuration * 0.4}`,
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -294,7 +294,7 @@ export function OurSolutionsSection() {
                 trigger: contentRef.current,
                 start: () => `${pinStart + pinDuration * 0.2}`,
                 end: () => `${pinStart + pinDuration * 0.4}`,
-                scrub: 2,
+                scrub: 1,
               },
             }
           );
@@ -313,7 +313,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.45}`, // Commence après la deuxième card
               end: () => `${pinStart + pinDuration * 0.58}`, // Se termine avant l'arrivée de la troisième (qui est à 0.6)
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -329,7 +329,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.45}`,
               end: () => `${pinStart + pinDuration * 0.58}`,
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -345,7 +345,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.45}`,
               end: () => `${pinStart + pinDuration * 0.58}`,
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -362,7 +362,7 @@ export function OurSolutionsSection() {
                 trigger: contentRef.current,
                 start: () => `${pinStart + pinDuration * 0.45}`,
                 end: () => `${pinStart + pinDuration * 0.58}`,
-                scrub: 2,
+                scrub: 1,
               },
             }
           );
@@ -381,7 +381,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.6}`, // En même temps que la troisième card
               end: () => `${pinStart + pinDuration * 0.9}`, // Se termine en même temps
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -397,7 +397,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.6}`,
               end: () => `${pinStart + pinDuration * 0.9}`,
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -413,7 +413,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.6}`,
               end: () => `${pinStart + pinDuration * 0.9}`,
-              scrub: 2,
+              scrub: 1,
             },
           }
         );
@@ -430,7 +430,7 @@ export function OurSolutionsSection() {
                 trigger: contentRef.current,
                 start: () => `${pinStart + pinDuration * 0.6}`,
                 end: () => `${pinStart + pinDuration * 0.9}`,
-                scrub: 2,
+                scrub: 1,
               },
             }
           );
@@ -449,7 +449,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.18}`,
             end: () => `${pinStart + pinDuration * 0.22}`,
-            scrub: 2,
+            scrub: 1,
             onUpdate: (self) => {
               // Détecter la direction du scroll
               const isForward = self.direction === 1;
@@ -482,7 +482,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.58}`,
             end: () => `${pinStart + pinDuration * 0.62}`,
-            scrub: 2,
+            scrub: 1,
             onUpdate: (self) => {
               // Détecter la direction du scroll
               const isForward = self.direction === 1;
@@ -526,7 +526,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.18}`,
               end: () => `${pinStart + pinDuration * 0.22}`,
-              scrub: 2,
+              scrub: 1,
               onUpdate: (self) => {
                 // Détecter la direction du scroll
                 const isForward = self.direction === 1;
@@ -561,7 +561,7 @@ export function OurSolutionsSection() {
               trigger: contentRef.current,
               start: () => `${pinStart + pinDuration * 0.58}`,
               end: () => `${pinStart + pinDuration * 0.62}`,
-              scrub: 2,
+              scrub: 1,
               onUpdate: (self) => {
                 // Détecter la direction du scroll
                 const isForward = self.direction === 1;
@@ -610,7 +610,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.2}`, // 20% après le début du pin
             end: () => `${pinStart + pinDuration * 0.4}`, // 40% après le début du pin
-            scrub: 2, // Rend l'animation réversible et liée au scroll
+            scrub: 1, // Rend l'animation réversible et liée au scroll
           },
         });
       }
@@ -629,7 +629,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.2}`, // En même temps que la deuxième carte
             end: () => `${pinStart + pinDuration * 0.4}`, // Se termine en même temps
-            scrub: 2, // Rend l'animation réversible et liée au scroll
+            scrub: 1, // Rend l'animation réversible et liée au scroll
           },
         });
       }
@@ -652,7 +652,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.6}`, // Commence quand la deuxième se termine (40%)
             end: () => `${pinStart + pinDuration * 0.9}`, // Se termine à 60% du pin
-            scrub: 2, // Rend l'animation réversible et liée au scroll
+            scrub: 1, // Rend l'animation réversible et liée au scroll
           },
         });
       }
@@ -671,7 +671,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.6}`, // En même temps que la troisième carte
             end: () => `${pinStart + pinDuration * 0.9}`, // Se termine en même temps
-            scrub: 2, // Rend l'animation réversible et liée au scroll
+            scrub: 1, // Rend l'animation réversible et liée au scroll
           },
         });
       }
@@ -689,7 +689,7 @@ export function OurSolutionsSection() {
             trigger: contentRef.current,
             start: () => `${pinStart + pinDuration * 0.6}`, // En même temps que la troisième carte
             end: () => `${pinStart + pinDuration * 0.9}`, // Se termine en même temps
-            scrub: 2, // Rend l'animation réversible et liée au scroll
+            scrub: 1, // Rend l'animation réversible et liée au scroll
           },
         });
       }
