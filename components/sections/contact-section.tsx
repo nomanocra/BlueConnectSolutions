@@ -42,7 +42,7 @@ export function ContactSection() {
   };
 
   return (
-    <section className="w-full py-20 px-20 bg-background-1">
+    <section className="w-full pt-20 pb-40 px-20 bg-background-1">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col gap-16 items-center">
           {/* Header */}
