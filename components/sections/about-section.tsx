@@ -3,7 +3,7 @@ import { Token } from '@/components/ui';
 
 export function AboutSection() {
   return (
-    <section className="w-full pt-20 pb-40 px-2 md:px-20 bg-background-1">
+    <section className="w-full pt-8 md:pt-20 pb-40 px-8 md:px-20 bg-background-1">
       <div className="max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Content */}

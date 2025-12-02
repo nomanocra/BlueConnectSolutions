@@ -1,33 +1,69 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Logos } from '@/components/ui';
 
-export function LogosSection() {
-  const [gap, setGap] = useState(200);
-  const [paddingX, setPaddingX] = useState(80);
+// Constantes pour les breakpoints
+const MOBILE_BREAKPOINT = 768;
+const TABLET_BREAKPOINT = 1024;
+
+// Configuration des espacements par breakpoint
+const SPACING_CONFIG = {
+  mobile: { gap: 100, paddingX: 20 },
+  tablet: { gap: 150, paddingX: 60 },
+  desktop: { gap: 200, paddingX: 80 },
+} as const;
+
+// Hook pour calculer les espacements selon la largeur de l'écran
+const useResponsiveSpacing = () => {
+  // Toujours commencer avec les valeurs desktop pour éviter les erreurs d'hydratation
+  // Les valeurs seront mises à jour après le montage côté client
+  const [width, setWidth] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const updateSpacing = () => {
-      if (window.innerWidth < 768) {
-        // Mobile : beaucoup plus rapprochés
-        setGap(100);
-        setPaddingX(20);
-      } else if (window.innerWidth < 1024) {
-        // Tablet : un peu moins qu'en desktop
-        setGap(150);
-        setPaddingX(60);
-      } else {
-        // Desktop : valeurs par défaut
-        setGap(200);
-        setPaddingX(80);
-      }
+    // Marquer comme monté et définir la largeur initiale
+    setMounted(true);
+    setWidth(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    let timeoutId: NodeJS.Timeout;
+
+    const handleResize = () => {
+      // Debounce pour éviter trop de re-renders
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setWidth(window.innerWidth);
+      }, 150);
     };
 
-    updateSpacing();
-    window.addEventListener('resize', updateSpacing);
-    return () => window.removeEventListener('resize', updateSpacing);
-  }, []);
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [mounted]);
+
+  return useMemo(() => {
+    // Si pas encore monté ou width null, utiliser les valeurs desktop (par défaut)
+    if (!mounted || width === null) {
+      return SPACING_CONFIG.desktop;
+    }
+
+    if (width < MOBILE_BREAKPOINT) {
+      return SPACING_CONFIG.mobile;
+    } else if (width < TABLET_BREAKPOINT) {
+      return SPACING_CONFIG.tablet;
+    }
+    return SPACING_CONFIG.desktop;
+  }, [width, mounted]);
+};
+
+export function LogosSection() {
+  const spacing = useResponsiveSpacing();
 
   return (
     <section className="w-full bg-background-1">
@@ -50,7 +86,7 @@ export function LogosSection() {
             />
 
             {/* Logos */}
-            <Logos gap={gap} paddingX={paddingX} />
+            <Logos gap={spacing.gap} paddingX={spacing.paddingX} />
 
             {/* Gradient fade à droite */}
             <div

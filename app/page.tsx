@@ -218,7 +218,7 @@ export default function Home() {
         }}
       >
         <Header
-          logoHref="#home"
+          logoHref="/"
           links={[
             {
               label: 'Home',
