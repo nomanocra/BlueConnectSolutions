@@ -55,37 +55,37 @@ export default function Home() {
       setTimeout(scrollToSection, 500);
     } else {
       // Pas de hash, forcer le scroll à 0
-      const forceScrollToTop = () => {
-        if (window.scrollY !== 0) {
-          window.scrollTo(0, 0);
-        }
-      };
-      
-      // Forcer immédiatement
-      forceScrollToTop();
-      
-      // Forcer après plusieurs délais pour gérer tous les cas
-      const timeouts = [
-        setTimeout(forceScrollToTop, 0),
-        setTimeout(forceScrollToTop, 10),
-        setTimeout(forceScrollToTop, 50),
-        setTimeout(forceScrollToTop, 100),
-        setTimeout(forceScrollToTop, 200),
-      ];
-      
-      // Écouter les événements de scroll pour forcer si nécessaire
-      const handleScroll = () => {
-        if (window.scrollY !== 0 && document.readyState === 'loading') {
-          window.scrollTo(0, 0);
-        }
-      };
-      
-      window.addEventListener('scroll', handleScroll, { passive: true, once: true });
-      
-      return () => {
-        timeouts.forEach(clearTimeout);
-        window.removeEventListener('scroll', handleScroll);
-      };
+    const forceScrollToTop = () => {
+      if (window.scrollY !== 0) {
+        window.scrollTo(0, 0);
+      }
+    };
+    
+    // Forcer immédiatement
+    forceScrollToTop();
+    
+    // Forcer après plusieurs délais pour gérer tous les cas
+    const timeouts = [
+      setTimeout(forceScrollToTop, 0),
+      setTimeout(forceScrollToTop, 10),
+      setTimeout(forceScrollToTop, 50),
+      setTimeout(forceScrollToTop, 100),
+      setTimeout(forceScrollToTop, 200),
+    ];
+    
+    // Écouter les événements de scroll pour forcer si nécessaire
+    const handleScroll = () => {
+      if (window.scrollY !== 0 && document.readyState === 'loading') {
+        window.scrollTo(0, 0);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true, once: true });
+    
+    return () => {
+      timeouts.forEach(clearTimeout);
+      window.removeEventListener('scroll', handleScroll);
+    };
     }
   }, []);
 

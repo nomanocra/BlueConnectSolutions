@@ -1,5 +1,6 @@
 export { BackToTopButton } from './back-to-top-button';
 export { Button, type ButtonProps } from './button';
+export { DotsCanvas } from './dots-canvas';
 export { Header, type HeaderProps } from './header';
 export { Icon, type IconProps, type IconVariant } from './icon';
 export { Kpi, type KpiProps } from './kpi';
