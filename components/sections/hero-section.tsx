@@ -65,6 +65,7 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
                 variant="primary"
                 size="M"
                 rightIconVariant="arrow-right"
+                href="/contact"
               />
               <Button
                 label="Explore Solutions"

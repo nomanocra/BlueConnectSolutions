@@ -1,4 +1,4 @@
-import { Token, Button } from '@/components/ui';
+import Image from 'next/image';
 
 export function AboutSection() {
   return (
@@ -7,8 +7,6 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Content */}
           <div className="flex flex-col gap-8">
-            <Token label="About Us" />
-
             <h2 className="text-title-2 font-bold text-foreground-main">
               Driving Innovation with Made-in-France Excellence
             </h2>
@@ -29,33 +27,17 @@ export function AboutSection() {
                 data protection and compliance.
               </p>
             </div>
-
-            <div className="flex gap-4">
-              <Button
-                label="Learn More"
-                variant="primary"
-                size="M"
-                rightIconVariant="arrow-right"
-              />
-              <Button
-                label="Our Story"
-                variant="ghost"
-                size="M"
-                rightIconVariant="arrow-right"
-              />
-            </div>
           </div>
 
-          {/* Right Column - Visual Placeholder */}
-          <div className="relative w-full h-[500px] rounded-lg bg-background-2 border border-background-4 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-text-m text-foreground-terciary">
-                Visual Content Placeholder
-              </p>
-              <p className="text-text-s text-foreground-terciary mt-2">
-                Image or illustration can be added here
-              </p>
-            </div>
+          {/* Right Column - Image */}
+          <div className="relative w-full h-[500px] rounded-lg overflow-hidden">
+            <Image
+              src="/aboutus.png"
+              alt="About Blue Connect Solutions"
+              fill
+              className="object-cover rounded-lg"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
       </div>

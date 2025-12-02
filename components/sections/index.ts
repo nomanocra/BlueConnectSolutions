@@ -5,4 +5,6 @@ export { LogosSection } from './logos-section';
 export { OurSolutionsSection } from './our-solutions-section';
 export { CtaSection } from './cta-section';
 export { FooterSection } from './footer-section';
+export { AboutSection } from './about-section';
+export { ContactSection } from './contact-section';
 

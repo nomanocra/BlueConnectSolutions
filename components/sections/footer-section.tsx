@@ -34,7 +34,7 @@ export function FooterSection() {
               Company
             </h3>
             <div className="flex flex-col gap-3 items-start text-text-s text-foreground-terciary">
-              <Link href="#" className="leading-[20px]">
+              <Link href="/about" className="leading-[20px]">
                 About Us
               </Link>
               <Link href="#" className="leading-[20px]">
@@ -43,7 +43,7 @@ export function FooterSection() {
               <Link href="#" className="leading-[20px]">
                 Partners
               </Link>
-              <Link href="#" className="leading-[20px]">
+              <Link href="/contact" className="leading-[20px]">
                 Contact
               </Link>
             </div>

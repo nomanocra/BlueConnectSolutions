@@ -35,39 +35,58 @@ export default function Home() {
       history.scrollRestoration = 'manual';
     }
     
-    // Forcer le scroll à 0 immédiatement et de manière répétée
-    // pour contrer la restauration du navigateur
-    const forceScrollToTop = () => {
-      if (window.scrollY !== 0) {
-        window.scrollTo(0, 0);
-      }
-    };
-    
-    // Forcer immédiatement
-    forceScrollToTop();
-    
-    // Forcer après plusieurs délais pour gérer tous les cas
-    const timeouts = [
-      setTimeout(forceScrollToTop, 0),
-      setTimeout(forceScrollToTop, 10),
-      setTimeout(forceScrollToTop, 50),
-      setTimeout(forceScrollToTop, 100),
-      setTimeout(forceScrollToTop, 200),
-    ];
-    
-    // Écouter les événements de scroll pour forcer si nécessaire
-    const handleScroll = () => {
-      if (window.scrollY !== 0 && document.readyState === 'loading') {
-        window.scrollTo(0, 0);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true, once: true });
-    
-    return () => {
-      timeouts.forEach(clearTimeout);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    // Vérifier si on a un hash dans l'URL (ex: depuis About ou Contact)
+    const hash = window.location.hash;
+    if (hash === '#our-solutions') {
+      // Attendre que le DOM soit prêt, puis scroller vers la section
+      const scrollToSection = () => {
+        const section = document.getElementById('our-solutions');
+        if (section) {
+          setTimeout(() => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setActiveSection('our-solutions');
+          }, 100);
+        }
+      };
+      
+      // Essayer plusieurs fois pour s'assurer que le DOM est prêt
+      scrollToSection();
+      setTimeout(scrollToSection, 200);
+      setTimeout(scrollToSection, 500);
+    } else {
+      // Pas de hash, forcer le scroll à 0
+      const forceScrollToTop = () => {
+        if (window.scrollY !== 0) {
+          window.scrollTo(0, 0);
+        }
+      };
+      
+      // Forcer immédiatement
+      forceScrollToTop();
+      
+      // Forcer après plusieurs délais pour gérer tous les cas
+      const timeouts = [
+        setTimeout(forceScrollToTop, 0),
+        setTimeout(forceScrollToTop, 10),
+        setTimeout(forceScrollToTop, 50),
+        setTimeout(forceScrollToTop, 100),
+        setTimeout(forceScrollToTop, 200),
+      ];
+      
+      // Écouter les événements de scroll pour forcer si nécessaire
+      const handleScroll = () => {
+        if (window.scrollY !== 0 && document.readyState === 'loading') {
+          window.scrollTo(0, 0);
+        }
+      };
+      
+      window.addEventListener('scroll', handleScroll, { passive: true, once: true });
+      
+      return () => {
+        timeouts.forEach(clearTimeout);
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
   }, []);
 
   useEffect(() => {
@@ -77,6 +96,7 @@ export default function Home() {
       const link = target.closest('a');
       if (link) {
         const href = link.getAttribute('href');
+        // Gérer les liens avec hash depuis la même page
         if (href === '#our-solutions') {
           e.preventDefault();
           e.stopPropagation();
@@ -91,6 +111,11 @@ export default function Home() {
           setIsScrolling(true);
           window.scrollTo({ top: 0, behavior: 'smooth' });
           setTimeout(() => setIsScrolling(false), 1000);
+        }
+        // Gérer les liens avec hash depuis d'autres pages (ex: /#our-solutions)
+        else if (href && href.startsWith('/#our-solutions')) {
+          // Laisser Next.js gérer la navigation, le hash sera géré par le useEffect de chargement
+          // Pas besoin de preventDefault ici
         }
       }
     };
@@ -201,7 +226,7 @@ export default function Home() {
               selected: activeSection === 'home',
             },
             {
-              label: 'Our Solution',
+              label: 'Our Solutions',
               href: '#our-solutions',
               selected: activeSection === 'our-solutions',
             },
