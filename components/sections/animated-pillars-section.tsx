@@ -130,35 +130,35 @@ export function AnimatedPillarsSection() {
   return (
     <section className="w-full relative">
       {/* Wrapper */}
-      <div className="relative pt-20 px-20">
+      <div className="relative pt-20 px-2 md:px-20">
         <div className="max-w-[1200px] mx-auto">
           {/* AnimatedIllustration */}
           <div
             ref={illustrationRef}
-            className="flex gap-10 items-start justify-center px-20 pb-20"
+            className="flex gap-10 items-start justify-center px-2 md:px-20 pb-20"
           >
-            <div className="relative w-full h-[520px]">
+            <div className="relative w-full h-[400px] md:h-[520px]">
               {/* Pillars */}
 
               <Pillar
                 ref={pillar1Ref}
                 label="Cyber Security"
                 height={0}
-                className="absolute bottom-[73px] left-[calc(50%-175.5px)] -translate-x-1/2"
+                className="absolute bottom-[73px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] -translate-x-1/2 scale-75 md:scale-100 origin-bottom"
                 style={{ opacity: 0 }}
               />
               <Pillar
                 ref={pillar2Ref}
                 label="Video Broadcasting"
                 height={0}
-                className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 scale-75 md:scale-100 origin-bottom"
                 style={{ opacity: 0 }}
               />
               <Pillar
                 ref={pillar3Ref}
                 label="Edge Compute IoT"
                 height={0}
-                className="absolute bottom-[73px] left-[calc(50%+175.5px)] -translate-x-1/2"
+                className="absolute bottom-[73px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] -translate-x-1/2 scale-75 md:scale-100 origin-bottom"
                 style={{ opacity: 0 }}
               />
 
@@ -166,21 +166,21 @@ export function AnimatedPillarsSection() {
 
               <div
                 ref={icon1Ref}
-                className="absolute bottom-[425px] left-[calc(50%-175.5px)] -translate-x-1/2"
+                className="absolute bottom-[320px] md:bottom-[425px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] -translate-x-1/2 scale-75 md:scale-100"
                 style={{ opacity: 0 }}
               >
                 <PillarIcon iconVariant="security" size={72} />
               </div>
               <div
                 ref={icon2Ref}
-                className="absolute bottom-[325px] left-1/2 -translate-x-1/2"
+                className="absolute bottom-[240px] md:bottom-[325px] left-1/2 -translate-x-1/2 scale-75 md:scale-100"
                 style={{ opacity: 0 }}
               >
                 <PillarIcon iconVariant="broadcast" size={72} />
               </div>
               <div
                 ref={icon3Ref}
-                className="absolute bottom-[500px] left-[calc(50%+175.5px)] -translate-x-1/2"
+                className="absolute bottom-[380px] md:bottom-[500px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] -translate-x-1/2 scale-75 md:scale-100"
                 style={{ opacity: 0 }}
               >
                 <PillarIcon iconVariant="edge" size={72} />

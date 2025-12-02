@@ -53,12 +53,12 @@ export default function ContactPage() {
   }, [lastScrollY]);
 
   return (
-    <main className="min-h-screen">
-      {/* Header fixé à 32px du haut, centré, max-width 1200px */}
+    <main className="min-h-screen overflow-x-hidden">
+      {/* Header fixé à 16px du haut, centré, max-width 1200px */}
       <div
-        className={`fixed left-1/2 -translate-x-1/2 w-full max-w-[1200px] px-8 z-50 ${
+        className={`fixed left-1/2 -translate-x-1/2 w-full max-w-[1200px] px-4 md:px-8 z-50 ${
           isHeaderVisible
-            ? 'top-8 opacity-100 pointer-events-auto'
+            ? 'top-4 md:top-8 opacity-100 pointer-events-auto'
             : '-top-20 opacity-0 pointer-events-none'
         }`}
         style={{

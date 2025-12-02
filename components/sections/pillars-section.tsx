@@ -26,17 +26,17 @@ export function PillarsSection() {
   ];
 
   return (
-    <section className="w-full py-20 px-20 bg-background-1">
+    <section className="w-full py-20 px-2 md:px-20 bg-background-1">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col gap-12 items-center justify-center">
           {/* Token */}
           <Token label="Our Three Pillars" />
 
           {/* Title */}
-          <h2 className="text-title-2 font-bold text-center text-foreground-main max-w-[800px]">
+          <p className="text-text-m text-foreground-terciary text-center max-w-[800px]">
             Everything you need to build, secure, and scale your digital
             operations
-          </h2>
+          </p>
 
           {/* Pillars Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mt-8">
@@ -61,7 +61,7 @@ export function PillarsSection() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-text-m text-foreground-secondary leading-relaxed">
+                <p className="text-text-s md:text-text-m text-foreground-secondary leading-relaxed">
                   {pillar.description}
                 </p>
 

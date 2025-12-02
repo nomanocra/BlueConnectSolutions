@@ -42,13 +42,13 @@ export function ContactSection() {
   };
 
   return (
-    <section className="w-full pt-20 pb-40 px-20 bg-background-1">
+    <section className="w-full pt-20 pb-40 px-2 md:px-20 bg-background-1">
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col gap-16 items-center">
           {/* Header */}
           <div className="flex flex-col gap-6 items-center text-center max-w-[720px]">
             <Token label="Take a rendez-vous" />
-            <h1 className="text-title-1 font-bold text-foreground-main">
+            <h1 className="text-title-2 md:text-title-tablet lg:text-title-1 font-bold text-foreground-main">
               Contact Us
             </h1>
             <p className="text-text-l text-foreground-secondary leading-relaxed">

@@ -618,12 +618,17 @@ export function OurSolutionsSection() {
       // Animation de la première carte : se décale vers la gauche et se rétrécit quand la deuxième arrive
       // Part de sa position actuelle (x: 0 après son animation d'arrivée)
       if (description1Ref.current) {
+        // Détecter si on est sur mobile
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const offsetX1 = isMobile ? -20 : -50; // Moins de décalage sur mobile
+        const scale1 = isMobile ? 0.95 : 0.9; // Moins de rétrécissement sur mobile
+
         // S'assurer que la première carte est à sa position finale (x: 0) avant l'animation
         gsap.set(description1Ref.current, { x: 0, scale: 1 });
 
         gsap.to(description1Ref.current, {
-          x: -50, // Décalage vers la gauche depuis sa position actuelle
-          scale: 0.9, // Rétrécissement
+          x: offsetX1, // Décalage vers la gauche depuis sa position actuelle
+          scale: scale1, // Rétrécissement
           ease: 'power2.out',
           scrollTrigger: {
             trigger: contentRef.current,
@@ -660,12 +665,19 @@ export function OurSolutionsSection() {
       // Animation de la première carte : se décale encore plus vers la gauche et se rétrécit encore plus quand la troisième arrive
       // Part de sa position actuelle (x: -50, scale: 0.9) après le premier décalage
       if (description1Ref.current) {
+        // Détecter si on est sur mobile
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const startX1 = isMobile ? -20 : -50;
+        const startScale1 = isMobile ? 0.95 : 0.9;
+        const endX1 = isMobile ? -35 : -100; // Moins de décalage sur mobile
+        const endScale1 = isMobile ? 0.92 : 0.8; // Moins de rétrécissement sur mobile
+
         // S'assurer que la première carte part de sa position actuelle après le premier décalage
-        gsap.set(description1Ref.current, { x: -50, scale: 0.9 });
+        gsap.set(description1Ref.current, { x: startX1, scale: startScale1 });
 
         gsap.to(description1Ref.current, {
-          x: -100, // Décalage encore plus vers la gauche (part de -50)
-          scale: 0.8, // Rétrécissement encore plus (part de 0.9)
+          x: endX1, // Décalage encore plus vers la gauche (part de startX1)
+          scale: endScale1, // Rétrécissement encore plus (part de startScale1)
           ease: 'power2.out',
           scrollTrigger: {
             trigger: contentRef.current,
@@ -678,12 +690,17 @@ export function OurSolutionsSection() {
 
       // Animation de la deuxième carte : se décale vers la gauche et se rétrécit quand la troisième arrive
       if (description2Ref.current) {
+        // Détecter si on est sur mobile
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const offsetX2 = isMobile ? -20 : -50; // Moins de décalage sur mobile
+        const scale2 = isMobile ? 0.95 : 0.9; // Moins de rétrécissement sur mobile
+
         // S'assurer que la deuxième carte est à sa position finale avant l'animation
         gsap.set(description2Ref.current, { x: 0, scale: 1 });
 
         gsap.to(description2Ref.current, {
-          x: -50, // Décalage vers la gauche depuis sa position actuelle
-          scale: 0.9, // Rétrécissement
+          x: offsetX2, // Décalage vers la gauche depuis sa position actuelle
+          scale: scale2, // Rétrécissement
           ease: 'power2.out',
           scrollTrigger: {
             trigger: contentRef.current,
@@ -703,27 +720,27 @@ export function OurSolutionsSection() {
       className="w-full bg-background-2 border-t border-b border-background-4"
     >
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col gap-[120px] items-start px-[80px] py-[120px] w-full">
+        <div className="flex flex-col gap-[120px] items-start px-8 md:px-[80px] py-[120px] w-full">
           {/* Header + Content - Tout sera piné ensemble */}
           <div
             ref={contentRef}
-            className="flex flex-col gap-[120px] items-start w-full"
+            className="flex flex-col gap-8 md:gap-[120px] items-start w-full"
           >
             {/* Header */}
             <div className="flex flex-col gap-[10px] items-start w-full">
-              <h2 className="text-title-2 font-bold text-foreground-main leading-[48px]">
+              <h2 className="text-title-2 md:text-title-tablet lg:text-title-2 font-bold text-foreground-main leading-[48px]">
                 Our Tree Pilars
               </h2>
-              <p className="text-text-l text-foreground-terciary w-[572px]">
+              <p className="text-text-m text-foreground-terciary w-full">
                 Everything you need to build, secure, and scale your digital
                 operations
               </p>
             </div>
 
             {/* Solution - Single Pillar */}
-            <div className="flex gap-[120px] h-[396px] items-center w-full">
+            <div className="flex gap-[120px] h-auto md:h-[396px] min-h-[calc(100vh-300px)] md:min-h-0 items-stretch w-full">
               {/* Left Side - Number and Pillar */}
-              <div className="flex flex-col gap-[20px] h-full items-center justify-end relative">
+              <div className="hidden md:flex flex-col gap-[20px] h-full items-center justify-end relative">
                 {/* Number */}
                 <div className="flex flex-col h-[56px] justify-center">
                   <span
@@ -756,38 +773,38 @@ export function OurSolutionsSection() {
               </div>
 
               {/* Right Side - Description Cards using PillarTileDescription */}
-              <div className="relative flex-1" style={{ height: '396px' }}>
+              <div className="relative flex-1 h-full min-h-[calc(100vh-300px)] md:min-h-0 md:h-[396px]">
                 {/* Première carte - Cyber Security */}
-                <div ref={description1Ref} className="absolute inset-0">
+                <div ref={description1Ref} className="absolute inset-0 h-full">
                   <PillarTileDescription
                     title={solution1.title}
                     description={solution1.description}
                     iconVariant={solution1.iconVariant}
                     width="100%"
                     height={396}
-                    className="h-full"
+                    className="h-full md:h-[396px]"
                   />
                 </div>
                 {/* Deuxième carte - Edge Compute IoT (par-dessus la première) */}
-                <div ref={description2Ref} className="absolute inset-0">
+                <div ref={description2Ref} className="absolute inset-0 h-full">
                   <PillarTileDescription
                     title={solution2.title}
                     description={solution2.description}
                     iconVariant={solution2.iconVariant}
                     width="100%"
                     height={396}
-                    className="h-full"
+                    className="h-full md:h-[396px]"
                   />
                 </div>
                 {/* Troisième carte - Video Broadcasting (par-dessus les deux premières) */}
-                <div ref={description3Ref} className="absolute inset-0">
+                <div ref={description3Ref} className="absolute inset-0 h-full">
                   <PillarTileDescription
                     title={solution3.title}
                     description={solution3.description}
                     iconVariant={solution3.iconVariant}
                     width="100%"
                     height={396}
-                    className="h-full"
+                    className="h-full md:h-[396px]"
                   />
                 </div>
               </div>

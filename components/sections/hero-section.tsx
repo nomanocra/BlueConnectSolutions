@@ -22,10 +22,10 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
       />
 
       {/* Wrapper avec gradient */}
-      <div className="relative pt-20 px-20 pb-[80px] hero-gradient-animated">
+      <div className="relative pt-20 px-2 md:px-20 pb-[80px] hero-gradient-animated">
         <div className="max-w-[1200px] mx-auto">
           {/* TitlesHero */}
-          <div className="flex flex-col gap-10 items-center justify-center pb-5 pt-20 px-20">
+          <div className="flex flex-col gap-10 items-center justify-center pb-5 pt-20 px-2 md:px-20">
             {/* Token */}
             <div
               className="animate-fade-in-up"
@@ -36,16 +36,17 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
 
             {/* Title */}
             <h1
-              className="text-title-1 font-bold text-center text-foreground-main max-w-[820px] animate-fade-in-up"
+              className="text-title-2 md:text-title-tablet lg:text-title-1 font-bold text-center text-foreground-main max-w-[820px] animate-fade-in-up whitespace-pre-line"
               style={{ animationDelay: '50ms' }}
             >
-              Driving the next <br /> wave of{' '}
-              <span className="text-primary-3">Digital Transformation</span>
+              Driving the next{'\n'}wave of{' '}
+              <span className="text-primary-3">Digital</span>{'\n'}
+              <span className="text-primary-3">Transformation</span>
             </h1>
 
             {/* Description */}
             <p
-              className="text-text-m text-foreground-terciary text-center max-w-[720px] leading-[1.5] animate-fade-in-up"
+              className="text-text-s md:text-text-m text-foreground-terciary text-center max-w-[720px] leading-[1.5] animate-fade-in-up"
               style={{ animationDelay: '100ms' }}
             >
               Blue Connect Solutions drives digital transformation through 3

@@ -61,7 +61,7 @@ export function KpisSection() {
   return (
     <section ref={sectionRef} className="w-full bg-background-1">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-wrap items-center justify-center pb-[120px] pt-[80px] px-[107px] gap-8">
+        <div className="flex flex-wrap items-center justify-center pb-[120px] pt-[80px] px-2 md:px-[107px] gap-8">
           {/* Premier wrapper avec les 2 premiers KPIs */}
           <div className="flex flex-wrap items-center justify-center gap-12 flex-1 min-w-[300px] sm:min-w-[400px]">
             <div ref={kpi1Ref}>

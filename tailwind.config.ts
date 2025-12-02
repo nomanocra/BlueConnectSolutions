@@ -43,7 +43,8 @@ const config: Config = {
       fontSize: {
         // Title styles (Geist)
         'title-1': ['82px', { lineHeight: '86px', fontWeight: '700' }],
-        'title-2': ['48px', { lineHeight: '48px', fontWeight: '700' }],
+        'title-2': ['40px', { lineHeight: '44px', fontWeight: '700' }], // Mobile
+        'title-tablet': ['60px', { lineHeight: '64px', fontWeight: '700' }], // Tablet
         'title-3': ['24px', { lineHeight: '32px', fontWeight: '600' }],
         // Text styles (Geist)
         'text-l': ['18px', { lineHeight: '100%' }],

@@ -43,6 +43,7 @@ const PillarTileDescription = React.forwardRef<
         style={{
           width: typeof width === 'number' ? `${width}px` : width,
           height: typeof height === 'number' ? `${height}px` : height,
+          minHeight: '100%',
           background:
             'linear-gradient(to top left, rgba(4,6,10,1) 0%, rgba(6,10,15,1) 40%, rgba(10,14,20,1) 80%, rgba(15,20,28,1) 100%)',
         }}
@@ -63,7 +64,7 @@ const PillarTileDescription = React.forwardRef<
           </h3>
 
           {/* Description */}
-          <p className="text-text-m text-foreground-terciary">{description}</p>
+          <p className="text-text-s md:text-text-m text-foreground-terciary">{description}</p>
         </div>
       </div>
     );
