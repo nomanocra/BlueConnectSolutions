@@ -3,8 +3,10 @@
 import { Header, BackToTopButton } from '@/components/ui';
 import { ContactSection, FooterSection } from '@/components/sections';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ContactPage() {
+  const router = useRouter();
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -52,6 +54,33 @@ export default function ContactPage() {
     return () => window.removeEventListener('scroll', scrollListener);
   }, [lastScrollY]);
 
+  // Intercepter les clics sur "Our Solutions" pour naviguer sans hash
+  useEffect(() => {
+    const handleOurSolutionsClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const link = target.closest('a');
+      if (link) {
+        const href = link.getAttribute('href');
+        // Vérifier si c'est le lien "Our Solutions" (href = '/' depuis cette page)
+        if (href === '/') {
+          const linkText = link.textContent?.trim();
+          // Vérifier si c'est bien le lien "Our Solutions" dans le header
+          if (linkText === 'Our Solutions' || linkText?.includes('Our Solutions')) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Stocker dans sessionStorage qu'on veut scroller vers our-solutions
+            sessionStorage.setItem('scrollToSection', 'our-solutions');
+            // Naviguer vers la page d'accueil sans hash
+            router.push('/');
+          }
+        }
+      }
+    };
+
+    document.addEventListener('click', handleOurSolutionsClick, true);
+    return () => document.removeEventListener('click', handleOurSolutionsClick, true);
+  }, [router]);
+
   return (
     <main className="min-h-screen overflow-x-hidden">
       {/* Header fixé à 16px du haut, centré, max-width 1200px */}
@@ -77,7 +106,7 @@ export default function ContactPage() {
             },
             {
               label: 'Our Solutions',
-              href: '/#our-solutions',
+              href: '/',
               selected: false,
             },
             { label: 'About Us', href: '/about', selected: false },

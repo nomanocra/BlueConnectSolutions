@@ -145,9 +145,9 @@ const NavigationLinks = React.memo<{
 
   return (
     <>
-      {links.map((link) => (
+      {links.map((link, index) => (
         <Link
-          key={link.href}
+          key={`${link.label}-${link.href}-${index}`}
           href={link.href}
           selected={link.selected}
           className={className}

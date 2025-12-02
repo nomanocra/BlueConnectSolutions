@@ -35,26 +35,41 @@ export default function Home() {
       history.scrollRestoration = 'manual';
     }
     
-    // Vérifier si on a un hash dans l'URL (ex: depuis About ou Contact)
-    const hash = window.location.hash;
-    if (hash === '#our-solutions') {
-      // Attendre que le DOM soit prêt, puis scroller vers la section
-      const scrollToSection = () => {
-        const section = document.getElementById('our-solutions');
-        if (section) {
-          setTimeout(() => {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setActiveSection('our-solutions');
-          }, 100);
-        }
-      };
+    // Fonction helper pour scroller vers our-solutions
+    const scrollToOurSolutionsSection = () => {
+      const section = document.getElementById('our-solutions');
+      if (section) {
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setActiveSection('our-solutions');
+        }, 100);
+      }
+    };
+
+    // Vérifier sessionStorage pour savoir si on doit scroller vers une section
+    const scrollToSection = sessionStorage.getItem('scrollToSection');
+    if (scrollToSection === 'our-solutions') {
+      // Nettoyer sessionStorage
+      sessionStorage.removeItem('scrollToSection');
       
       // Essayer plusieurs fois pour s'assurer que le DOM est prêt
-      scrollToSection();
-      setTimeout(scrollToSection, 200);
-      setTimeout(scrollToSection, 500);
-    } else {
-      // Pas de hash, forcer le scroll à 0
+      scrollToOurSolutionsSection();
+      setTimeout(scrollToOurSolutionsSection, 200);
+      setTimeout(scrollToOurSolutionsSection, 500);
+      return; // Sortir tôt pour éviter le scroll vers le haut
+    }
+
+    // Vérifier aussi si on a un hash dans l'URL (pour compatibilité)
+    const hash = window.location.hash;
+    if (hash === '#our-solutions') {
+      // Essayer plusieurs fois pour s'assurer que le DOM est prêt
+      scrollToOurSolutionsSection();
+      setTimeout(scrollToOurSolutionsSection, 200);
+      setTimeout(scrollToOurSolutionsSection, 500);
+      return; // Sortir tôt pour éviter le scroll vers le haut
+    }
+
+    // Pas de hash ni sessionStorage, forcer le scroll à 0
     const forceScrollToTop = () => {
       if (window.scrollY !== 0) {
         window.scrollTo(0, 0);
@@ -86,7 +101,6 @@ export default function Home() {
       timeouts.forEach(clearTimeout);
       window.removeEventListener('scroll', handleScroll);
     };
-    }
   }, []);
 
   useEffect(() => {
