@@ -103,7 +103,7 @@ const useNormalizedCta = (props: {
 
 // Composant partagé pour le bouton CTA
 const CtaButton = React.memo<{
-  label: string;
+  label?: string;
   href?: string;
   onClick?: () => void;
   className?: string;
@@ -137,7 +137,7 @@ CtaButton.displayName = 'CtaButton';
 
 // Composant partagé pour les liens de navigation
 const NavigationLinks = React.memo<{
-  links: Array<{ label: string; href: string; selected?: boolean }>;
+  links?: Array<{ label: string; href: string; selected?: boolean }>;
   onLinkClick?: () => void;
   className?: string;
 }>(({ links, onLinkClick, className }) => {
