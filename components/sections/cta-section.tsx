@@ -6,7 +6,7 @@ export function CtaSection() {
   return (
     <section className="w-full bg-background-1 relative overflow-hidden my-40">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col gap-12 items-center justify-center py-40 px-8 md:px-20 relative z-10">
+        <div className="flex flex-col gap-12 items-center justify-center py-20 px-8 md:px-20 relative z-10">
           {/* Background with animated dots canvas */}
           <DotsCanvas />
 
