@@ -9,18 +9,36 @@ import { Kpi } from '@/components/ui';
 // Enregistrer le plugin ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
+const KPIS_DATA = [
+  {
+    value: '100%',
+    label: 'Project Guarantee',
+    description: 'High quality products and processes',
+  },
+  {
+    value: '+20',
+    label: 'Years of Experience',
+    description: 'Lightning-fast response times',
+  },
+  {
+    value: '24/7',
+    label: 'Support & Monitoring',
+    description: 'Real-time threat detection',
+  },
+  {
+    value: '150+',
+    label: 'Global Deployments',
+    description: 'Worldwide infrastructure',
+  },
+] as const;
+
 export function KpisSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const kpi1Ref = useRef<HTMLDivElement>(null);
-  const kpi2Ref = useRef<HTMLDivElement>(null);
-  const kpi3Ref = useRef<HTMLDivElement>(null);
-  const kpi4Ref = useRef<HTMLDivElement>(null);
+  const kpiRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(
     () => {
       if (!sectionRef.current) return;
-
-      const kpiRefs = [kpi1Ref, kpi2Ref, kpi3Ref, kpi4Ref];
 
       // Créer une timeline pour animer les KPIs séquentiellement
       const tl = gsap.timeline({
@@ -28,12 +46,11 @@ export function KpisSection() {
           trigger: sectionRef.current,
           start: 'top 80%',
           end: 'top 20%',
-          scrub: 3, // Rend l'animation réversible et liée au scroll
+          scrub: 3,
         },
       });
 
-      kpiRefs.forEach((kpiRef, index) => {
-        const kpiElement = kpiRef.current;
+      kpiRefs.current.forEach((kpiElement, index) => {
         if (!kpiElement) return;
 
         // Initialiser l'état initial (invisible et décalé vers le bas)
@@ -51,7 +68,7 @@ export function KpisSection() {
             duration: 0.6,
             ease: 'power2.out',
           },
-          index * 0.1 // Délai progressif entre chaque KPI
+          index * 0.1
         );
       });
     },
@@ -61,46 +78,23 @@ export function KpisSection() {
   return (
     <section ref={sectionRef} className="w-full bg-background-1">
       <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-wrap items-center justify-center pb-[120px] pt-[80px] px-2 md:px-[107px] gap-8">
-          {/* Premier wrapper avec les 2 premiers KPIs */}
-          <div className="flex flex-wrap items-center justify-center gap-12 flex-1 min-w-[300px] sm:min-w-[400px]">
-            <div ref={kpi1Ref}>
+        <div className="flex flex-wrap justify-center items-start gap-4 md:gap-8 pb-[120px] pt-[80px] px-8 md:px-[107px]">
+          {KPIS_DATA.map((kpi, index) => (
+            <div
+              key={`${kpi.value}-${kpi.label}`}
+              ref={(el) => {
+                kpiRefs.current[index] = el;
+              }}
+              className="flex-shrink-0"
+            >
               <Kpi
-                className="flex flex-col gap-[8px] items-center text-center text-nowrap flex-1 min-w-[169px]"
-                value="100%"
-                label="Project Guarantee"
-                description="High quality products and processes"
+                className="flex flex-col gap-[8px] items-center text-center"
+                value={kpi.value}
+                label={kpi.label}
+                description={kpi.description}
               />
             </div>
-            <div ref={kpi2Ref}>
-              <Kpi
-                className="flex flex-col gap-[8px] items-center text-center text-nowrap flex-1 min-w-[169px]"
-                value="+20"
-                label="Years of Experience"
-                description="Lightning-fast response times"
-              />
-            </div>
-          </div>
-
-          {/* Deuxième wrapper avec les 2 derniers KPIs */}
-          <div className="flex flex-wrap items-center justify-center gap-12 flex-1 min-w-[300px] sm:min-w-[400px]">
-            <div ref={kpi3Ref}>
-              <Kpi
-                className="flex flex-col gap-[8px] items-center text-center text-nowrap flex-1 min-w-[169px]"
-                value="24/7"
-                label="Support & Monitoring"
-                description="Real-time threat detection"
-              />
-            </div>
-            <div ref={kpi4Ref}>
-              <Kpi
-                className="flex flex-col gap-[8px] items-center text-center text-nowrap flex-1 min-w-[169px]"
-                value="150+"
-                label="Global Deployments"
-                description="Worldwide infrastructure"
-              />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
