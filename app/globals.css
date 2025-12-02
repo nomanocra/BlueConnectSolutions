@@ -143,16 +143,16 @@ body {
     --gradient-1-y: 5.06%;
   }
   25% {
-    --gradient-1-x: 20%;
-    --gradient-1-y: 7%;
+    --gradient-1-x: 24%;
+    --gradient-1-y: 6%;
   }
   50% {
-    --gradient-1-x: 15%;
-    --gradient-1-y: 3.5%;
+    --gradient-1-x: 12%;
+    --gradient-1-y: 4.5%;
   }
   75% {
-    --gradient-1-x: 18.5%;
-    --gradient-1-y: 6%;
+    --gradient-1-x: 20%;
+    --gradient-1-y: 5.5%;
   }
 }
 
@@ -163,16 +163,16 @@ body {
     --gradient-2-y: 47%;
   }
   25% {
-    --gradient-2-x: 68%;
-    --gradient-2-y: 50%;
+    --gradient-2-x: 65%;
+    --gradient-2-y: 48%;
   }
   50% {
-    --gradient-2-x: 74%;
-    --gradient-2-y: 44%;
+    --gradient-2-x: 77%;
+    --gradient-2-y: 46%;
   }
   75% {
-    --gradient-2-x: 69.5%;
-    --gradient-2-y: 48.5%;
+    --gradient-2-x: 68%;
+    --gradient-2-y: 47.5%;
   }
 }
 
@@ -183,16 +183,16 @@ body {
     --gradient-3-y: 47%;
   }
   25% {
-    --gradient-3-x: 52%;
-    --gradient-3-y: 49%;
+    --gradient-3-x: 55%;
+    --gradient-3-y: 48%;
   }
   50% {
-    --gradient-3-x: 48%;
-    --gradient-3-y: 45%;
+    --gradient-3-x: 45%;
+    --gradient-3-y: 46%;
   }
   75% {
-    --gradient-3-x: 51%;
-    --gradient-3-y: 48%;
+    --gradient-3-x: 53%;
+    --gradient-3-y: 47.5%;
   }
 }
 
@@ -205,7 +205,7 @@ body {
     rgba(2, 3, 6, 0) 45.19%,
     #020306 84.62%
   );
-  animation: gradientFloat3 5s ease-in-out infinite;
+  animation: gradientFloat3 8s ease-in-out infinite;
   overflow: hidden;
 }
 
@@ -226,7 +226,7 @@ body {
     rgba(53, 118, 192, 0.1) 0%,
     rgba(53, 118, 192, 0) 100%
   );
-  animation: gradientFloat1 6s ease-in-out infinite;
+  animation: gradientFloat1 12s ease-in-out infinite;
 }
 
 .hero-gradient-animated::after {
@@ -237,7 +237,7 @@ body {
     rgba(53, 118, 192, 0.1) 0%,
     rgba(53, 118, 192, 0) 100%
   );
-  animation: gradientFloat2 6s ease-in-out infinite;
+  animation: gradientFloat2 10s ease-in-out infinite;
   animation-delay: -8s;
 }
 
