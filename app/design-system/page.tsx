@@ -61,6 +61,9 @@ function DesignSystemContent() {
       : 'colors'
   );
 
+  // État pour le menu mobile
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   // Synchroniser l'état avec l'URL quand le paramètre change
   useEffect(() => {
     if (sectionParam && VALID_SECTIONS.includes(sectionParam)) {
@@ -73,17 +76,82 @@ function DesignSystemContent() {
     setActiveSection(section);
     // Mettre à jour l'URL sans recharger la page
     router.push(`/design-system?section=${section}`, { scroll: false });
+    // Fermer le menu mobile après sélection
+    setIsMenuOpen(false);
   };
 
   return (
     <div className="min-h-screen bg-background-1">
+      {/* Hamburger Menu Button - Visible only on mobile */}
+      <button
+        onClick={() => setIsMenuOpen(true)}
+        className="md:hidden fixed top-6 left-6 z-40 w-10 h-10 flex items-center justify-center bg-background-2 border border-background-4 rounded-lg hover:bg-background-3 transition-colors"
+        aria-label="Open menu"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="text-foreground-main"
+        >
+          <path
+            d="M4 6H20M4 12H20M4 18H20"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      </button>
+
+      {/* Backdrop Overlay - Visible only on mobile when menu is open */}
+      {isMenuOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsMenuOpen(false)}
+        />
+      )}
+
       <div className="flex h-screen">
         {/* Sidebar */}
-        <aside className="w-64 bg-background-2 border-r border-background-4 overflow-y-auto">
+        <aside
+          className={`
+            w-64 bg-background-2 border-r border-background-4 overflow-y-auto
+            md:relative md:translate-x-0
+            fixed inset-y-0 left-0 z-50
+            transform transition-transform duration-300
+            ${isMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+          `}
+        >
           <div className="p-6">
-            <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
-              Design System
-            </h2>
+            {/* Close Button - Visible only on mobile */}
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-title-3 font-semibold text-foreground-main">
+                Design System
+              </h2>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="md:hidden w-8 h-8 flex items-center justify-center text-foreground-secondary hover:text-foreground-main transition-colors"
+                aria-label="Close menu"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M18 6L6 18M6 6L18 18"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
             <nav className="space-y-2">
               <p className="text-legend-m text-foreground-terciary mb-2 px-3">
                 Tokens
@@ -176,7 +244,7 @@ function DesignSystemContent() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto p-8">
+        <main className="flex-1 overflow-y-auto p-8 pt-20 md:pt-8">
           {activeSection === 'colors' && <ColorsSection />}
           {activeSection === 'texts' && <TextsSection />}
           {activeSection === 'svg' && <IconSection />}
