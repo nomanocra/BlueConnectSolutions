@@ -127,7 +127,7 @@ function DesignSystemContent() {
           <div className="p-6">
             {/* Close Button - Visible only on mobile */}
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-title-3 font-semibold text-foreground-main">
+              <h2 className="text-text-l md:text-title-3 font-semibold text-foreground-main">
                 Design System
               </h2>
               <button
