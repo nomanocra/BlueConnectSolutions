@@ -41,8 +41,7 @@ export const LanguageSwitcher = React.memo<LanguageSwitcherProps>(
         onClick={toggleLocale}
         className={cn(
           'flex items-center justify-center p-2 rounded-full',
-          'bg-background-3 border border-background-4',
-          'hover:bg-background-4 hover:scale-105',
+          'hover:bg-white/10',
           'transition-all duration-200',
           'focus:outline-none focus:ring-2 focus:ring-primary-3/20',
           className
