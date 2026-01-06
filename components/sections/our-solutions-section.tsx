@@ -1,14 +1,15 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { Pillar, PillarTileDescription } from '@/components/ui';
 import { useTranslations } from '@/lib/i18n';
 
-// Enregistrer le plugin ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
+// Enregistrer les plugins GSAP
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export function OurSolutionsSection() {
   const t = useTranslations();
@@ -19,6 +20,37 @@ export function OurSolutionsSection() {
   const description1Ref = useRef<HTMLDivElement>(null);
   const description2Ref = useRef<HTMLDivElement>(null);
   const description3Ref = useRef<HTMLDivElement>(null);
+  const pinTriggerRef = useRef<ScrollTrigger | null>(null);
+  const [activeSolution, setActiveSolution] = useState(1);
+
+  const scrollToSolution = useCallback((solutionNumber: number) => {
+    if (!pinTriggerRef.current) return;
+
+    const pinStart = pinTriggerRef.current.start;
+    const pinEnd = pinTriggerRef.current.end;
+    const pinDuration = pinEnd - pinStart;
+
+    let targetScroll: number;
+    switch (solutionNumber) {
+      case 1:
+        targetScroll = pinStart + pinDuration * 0.01;
+        break;
+      case 2:
+        targetScroll = pinStart + pinDuration * 0.35;
+        break;
+      case 3:
+        targetScroll = pinStart + pinDuration * 0.75;
+        break;
+      default:
+        targetScroll = pinStart;
+    }
+
+    gsap.to(window, {
+      scrollTo: targetScroll,
+      duration: 0.8,
+      ease: 'power2.inOut',
+    });
+  }, []);
 
   const solution1 = {
     number: t.solutions.solution1.number,
@@ -55,7 +87,20 @@ export function OurSolutionsSection() {
         end: '+=600%', // Reste épinglé pendant 100% de la hauteur du viewport
         pin: true, // Épingle le conteneur
         pinSpacing: true, // Ajoute de l'espace pour compenser le pin
+        onUpdate: (self) => {
+          const progress = self.progress;
+          if (progress < 0.2) {
+            setActiveSolution(1);
+          } else if (progress < 0.6) {
+            setActiveSolution(2);
+          } else {
+            setActiveSolution(3);
+          }
+        },
       });
+
+      // Stocker la référence pour scrollToSolution
+      pinTriggerRef.current = pinTrigger;
 
       // Animation de la première tuile de description (de la droite vers la gauche avec transparence)
       // L'animation se déclenche juste avant le pin
@@ -733,6 +778,27 @@ export function OurSolutionsSection() {
               <p className="text-text-m text-foreground-terciary w-full">
                 {t.solutions.subtitle}
               </p>
+
+              {/* Navigation Buttons */}
+              <div className="flex gap-2 mt-4">
+                {[
+                  { num: 1, label: solution1.pillarLabel },
+                  { num: 2, label: solution2.pillarLabel },
+                  { num: 3, label: solution3.pillarLabel },
+                ].map(({ num, label }) => (
+                  <button
+                    key={num}
+                    onClick={() => scrollToSolution(num)}
+                    className={`px-4 py-2 rounded-full text-text-s transition-all duration-300 ${
+                      activeSolution === num
+                        ? 'bg-primary-3 text-white'
+                        : 'bg-background-3 text-foreground-secondary hover:bg-background-4'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Solution - Single Pillar */}
