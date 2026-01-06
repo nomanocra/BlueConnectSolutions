@@ -5,7 +5,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { Pillar, PillarTileDescription } from '@/components/ui';
+import { Button, Pillar, PillarTileDescription } from '@/components/ui';
 import { useTranslations } from '@/lib/i18n';
 
 // Enregistrer les plugins GSAP
@@ -30,16 +30,17 @@ export function OurSolutionsSection() {
     const pinEnd = pinTriggerRef.current.end;
     const pinDuration = pinEnd - pinStart;
 
+    // Positions où chaque animation est terminée (pilier en haut, carte visible)
     let targetScroll: number;
     switch (solutionNumber) {
       case 1:
-        targetScroll = pinStart + pinDuration * 0.01;
+        targetScroll = pinStart + pinDuration * 0.02; // Début du pin
         break;
       case 2:
-        targetScroll = pinStart + pinDuration * 0.35;
+        targetScroll = pinStart + pinDuration * 0.42; // Après animation carte 2 (finit à 0.4)
         break;
       case 3:
-        targetScroll = pinStart + pinDuration * 0.75;
+        targetScroll = pinStart + pinDuration * 0.92; // Après animation carte 3 (finit à 0.9)
         break;
       default:
         targetScroll = pinStart;
@@ -780,23 +781,20 @@ export function OurSolutionsSection() {
               </p>
 
               {/* Navigation Buttons */}
-              <div className="flex gap-2 mt-4">
+              <div className="flex p-1 mt-4 bg-background-3 rounded-[10px]">
                 {[
                   { num: 1, label: solution1.pillarLabel },
                   { num: 2, label: solution2.pillarLabel },
                   { num: 3, label: solution3.pillarLabel },
                 ].map(({ num, label }) => (
-                  <button
+                  <Button
                     key={num}
                     onClick={() => scrollToSolution(num)}
-                    className={`px-4 py-2 rounded-full text-text-s transition-all duration-300 ${
-                      activeSolution === num
-                        ? 'bg-primary-3 text-white'
-                        : 'bg-background-3 text-foreground-secondary hover:bg-background-4'
-                    }`}
-                  >
-                    {label}
-                  </button>
+                    variant={activeSolution === num ? 'primary' : 'ghost'}
+                    size="S"
+                    label={`${num}. ${label}`}
+                    className={`min-w-[180px] ${activeSolution !== num ? 'border-0 bg-transparent' : ''}`}
+                  />
                 ))}
               </div>
             </div>
