@@ -137,28 +137,28 @@ export function AnimatedPillarsSection() {
             ref={illustrationRef}
             className="flex gap-10 items-start justify-center px-2 md:px-20 pb-20"
           >
-            <div className="relative w-full h-[400px] md:h-[520px] 2xl:h-[700px]">
+            <div className="relative w-full h-[400px] md:h-[520px] 2xl:h-[600px] 3xl:h-[700px]">
               {/* Pillars */}
 
               <Pillar
                 ref={pillar1Ref}
                 label="Cyber Security"
                 height={0}
-                className="absolute bottom-[33px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] 2xl:left-[calc(50%-240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.35] origin-bottom"
+                className="absolute bottom-[33px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] 2xl:left-[calc(50%-200px)] 3xl:left-[calc(50%-240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35] origin-bottom"
                 style={{ opacity: 0 }}
               />
               <Pillar
                 ref={pillar2Ref}
                 label="Video Broadcasting"
                 height={0}
-                className="absolute -bottom-[40px] left-1/2 -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.35] origin-bottom"
+                className="absolute -bottom-[40px] left-1/2 -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35] origin-bottom"
                 style={{ opacity: 0 }}
               />
               <Pillar
                 ref={pillar3Ref}
                 label="Edge Compute IoT"
                 height={0}
-                className="absolute bottom-[33px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] 2xl:left-[calc(50%+240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.35] origin-bottom"
+                className="absolute bottom-[33px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] 2xl:left-[calc(50%+200px)] 3xl:left-[calc(50%+240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35] origin-bottom"
                 style={{ opacity: 0 }}
               />
 
@@ -166,21 +166,21 @@ export function AnimatedPillarsSection() {
 
               <div
                 ref={icon1Ref}
-                className="absolute bottom-[280px] md:bottom-[385px] 2xl:bottom-[540px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] 2xl:left-[calc(50%-240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.35]"
+                className="absolute bottom-[280px] md:bottom-[385px] 2xl:bottom-[460px] 3xl:bottom-[540px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] 2xl:left-[calc(50%-200px)] 3xl:left-[calc(50%-240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35]"
                 style={{ opacity: 0 }}
               >
                 <PillarIcon iconVariant="security" size={72} />
               </div>
               <div
                 ref={icon2Ref}
-                className="absolute bottom-[200px] md:bottom-[285px] 2xl:bottom-[405px] left-1/2 -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.35]"
+                className="absolute bottom-[200px] md:bottom-[285px] 2xl:bottom-[350px] 3xl:bottom-[405px] left-1/2 -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35]"
                 style={{ opacity: 0 }}
               >
                 <PillarIcon iconVariant="broadcast" size={72} />
               </div>
               <div
                 ref={icon3Ref}
-                className="absolute bottom-[340px] md:bottom-[460px] 2xl:bottom-[640px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] 2xl:left-[calc(50%+240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.35]"
+                className="absolute bottom-[340px] md:bottom-[460px] 2xl:bottom-[545px] 3xl:bottom-[640px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] 2xl:left-[calc(50%+200px)] 3xl:left-[calc(50%+240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35]"
                 style={{ opacity: 0 }}
               >
                 <PillarIcon iconVariant="edge" size={72} />

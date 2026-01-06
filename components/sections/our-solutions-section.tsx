@@ -781,7 +781,7 @@ export function OurSolutionsSection() {
               </p>
 
               {/* Navigation Buttons */}
-              <div className="flex p-1 mt-4 bg-background-3 rounded-[10px]">
+              <div className="flex p-1 mt-4 bg-background-3 rounded-[10px] overflow-x-auto">
                 {[
                   { num: 1, label: solution1.pillarLabel },
                   { num: 2, label: solution2.pillarLabel },
@@ -791,9 +791,9 @@ export function OurSolutionsSection() {
                     key={num}
                     onClick={() => scrollToSolution(num)}
                     variant={activeSolution === num ? 'primary' : 'ghost'}
-                    size="S"
+                    size="XS"
                     label={`${num}. ${label}`}
-                    className={`min-w-[180px] ${activeSolution !== num ? 'border-0 bg-transparent' : ''}`}
+                    className={`min-w-0 md:min-w-[180px] whitespace-nowrap ${activeSolution !== num ? 'border-0 bg-transparent' : ''}`}
                   />
                 ))}
               </div>
