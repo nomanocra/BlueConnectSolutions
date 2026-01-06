@@ -311,6 +311,6 @@ export const translations = {
       copyright: '© 2025 Blue Connect Solutions. Tous droits réservés.',
     },
   },
-} as const;
+};
 
-export type Translations = typeof translations.en;
+export type Translations = (typeof translations)['en'] | (typeof translations)['fr'];
