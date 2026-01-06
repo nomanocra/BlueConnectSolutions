@@ -1,90 +1,64 @@
 'use client';
 
-import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef, useState, useEffect } from 'react';
 import { Kpi } from '@/components/ui';
-
-// Enregistrer le plugin ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
-
-const KPIS_DATA = [
-  {
-    value: '100%',
-    label: 'Project Guarantee',
-    description: 'High quality products and processes',
-  },
-  {
-    value: '+20',
-    label: 'Years of Experience',
-    description: 'Lightning-fast response times',
-  },
-  {
-    value: '24/7',
-    label: 'Support & Monitoring',
-    description: 'Real-time threat detection',
-  },
-  {
-    value: '150+',
-    label: 'Global Deployments',
-    description: 'Worldwide infrastructure',
-  },
-] as const;
+import { useTranslations } from '@/lib/i18n';
 
 export function KpisSection() {
+  const t = useTranslations();
   const sectionRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
 
-      // Sélectionner tous les conteneurs de KPI directement
-      const kpiContainers = containerRef.current.children;
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-      // Créer une timeline pour animer les KPIs séquentiellement
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          end: 'top 20%',
-          scrub: 3,
-        },
-      });
+    return () => observer.disconnect();
+  }, []);
 
-      Array.from(kpiContainers).forEach((kpiElement, index) => {
-        // Initialiser l'état initial (invisible et décalé vers le bas)
-        gsap.set(kpiElement, {
-          opacity: 0,
-          y: 20,
-        });
-
-        // Ajouter l'animation à la timeline avec un délai progressif
-        tl.to(
-          kpiElement,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            ease: 'power2.out',
-          },
-          index * 0.1
-        );
-      });
+  const kpisData = [
+    {
+      value: t.kpis.kpi1.value,
+      label: t.kpis.kpi1.label,
+      description: t.kpis.kpi1.description,
     },
-    { scope: sectionRef }
-  );
+    {
+      value: t.kpis.kpi2.value,
+      label: t.kpis.kpi2.label,
+      description: t.kpis.kpi2.description,
+    },
+    {
+      value: t.kpis.kpi3.value,
+      label: t.kpis.kpi3.label,
+      description: t.kpis.kpi3.description,
+    },
+    {
+      value: t.kpis.kpi4.value,
+      label: t.kpis.kpi4.label,
+      description: t.kpis.kpi4.description,
+    },
+  ];
 
   return (
     <section ref={sectionRef} className="w-full bg-background-1">
       <div className="max-w-[1200px] mx-auto">
-        <div
-          ref={containerRef}
-          className="flex flex-wrap justify-center items-start gap-4 md:gap-8 pb-[120px] pt-[80px] px-8 md:px-[107px]"
-        >
-          {KPIS_DATA.map((kpi) => (
-            <div key={`${kpi.value}-${kpi.label}`} className="flex-shrink-0">
+        <div className="flex flex-wrap justify-center items-start gap-4 md:gap-8 pb-[120px] pt-[80px] px-8 md:px-[107px]">
+          {kpisData.map((kpi, index) => (
+            <div
+              key={`${kpi.value}-${kpi.label}`}
+              className={`flex-shrink-0 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
               <Kpi
                 className="flex flex-col gap-[8px] items-center text-center"
                 value={kpi.value}

@@ -11,8 +11,10 @@ import {
   FooterSection,
 } from '@/components/sections';
 import { useEffect, useState } from 'react';
+import { useTranslations } from '@/lib/i18n';
 
 export default function Home() {
+  const t = useTranslations();
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState<'home' | 'our-solutions'>(
@@ -260,18 +262,18 @@ export default function Home() {
           logoHref="/"
           links={[
             {
-              label: 'Home',
+              label: t.nav.home,
               href: '#home',
               selected: activeSection === 'home',
             },
             {
-              label: 'Our Solutions',
+              label: t.nav.ourSolutions,
               href: '#our-solutions',
               selected: activeSection === 'our-solutions',
             },
-            { label: 'About Us', href: '/about', selected: false },
+            { label: t.nav.aboutUs, href: '/about', selected: false },
           ]}
-          ctaLabel="Contact Us"
+          ctaLabel={t.nav.contactUs}
           ctaHref="/contact"
         />
       </div>

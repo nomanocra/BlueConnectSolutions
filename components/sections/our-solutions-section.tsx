@@ -5,11 +5,13 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Pillar, PillarTileDescription } from '@/components/ui';
+import { useTranslations } from '@/lib/i18n';
 
 // Enregistrer le plugin ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
 export function OurSolutionsSection() {
+  const t = useTranslations();
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const pillarRef = useRef<HTMLDivElement>(null);
@@ -19,30 +21,27 @@ export function OurSolutionsSection() {
   const description3Ref = useRef<HTMLDivElement>(null);
 
   const solution1 = {
-    number: '1',
-    title: '1. Cyber-Security',
-    description:
-      'Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management.',
+    number: t.solutions.solution1.number,
+    title: t.solutions.solution1.title,
+    description: t.solutions.solution1.description,
     iconVariant: 'security' as const,
-    pillarLabel: 'Cyber Security',
+    pillarLabel: t.solutions.solution1.pillarLabel,
   };
 
   const solution2 = {
-    number: '2',
-    title: '2. Edge Compute IoT',
-    description:
-      'Edge computing solutions for IoT deployments with low latency processing, real-time analytics, and seamless device management.',
+    number: t.solutions.solution2.number,
+    title: t.solutions.solution2.title,
+    description: t.solutions.solution2.description,
     iconVariant: 'edge' as const,
-    pillarLabel: 'Edge Compute IoT',
+    pillarLabel: t.solutions.solution2.pillarLabel,
   };
 
   const solution3 = {
-    number: '3',
-    title: '3. Video Broadcasting',
-    description:
-      'High-performance video streaming and broadcasting solutions with ultra-low latency, multi-format support, and global CDN integration.',
+    number: t.solutions.solution3.number,
+    title: t.solutions.solution3.title,
+    description: t.solutions.solution3.description,
     iconVariant: 'broadcast' as const,
-    pillarLabel: 'Video Broadcasting',
+    pillarLabel: t.solutions.solution3.pillarLabel,
   };
 
   useGSAP(
@@ -729,11 +728,10 @@ export function OurSolutionsSection() {
             {/* Header */}
             <div className="flex flex-col gap-[10px] items-start w-full">
               <h2 className="text-title-2 md:text-title-tablet lg:text-title-2 font-bold text-foreground-main leading-[48px]">
-                Our Tree Pilars
+                {t.solutions.title}
               </h2>
               <p className="text-text-m text-foreground-terciary w-full">
-                Everything you need to build, secure, and scale your digital
-                operations
+                {t.solutions.subtitle}
               </p>
             </div>
 

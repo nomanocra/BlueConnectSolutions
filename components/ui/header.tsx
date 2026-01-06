@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { Logo } from './logo';
 import { Link } from './link';
 import { Button } from './button';
+import { LanguageSwitcher } from './language-switcher';
 
 export interface HeaderProps {
   className?: string;
@@ -192,6 +193,7 @@ const HeaderDesktop = React.forwardRef<HTMLElement, HeaderProps>(
           </NextLink>
 
           <nav className="flex gap-8 items-center shrink-0">
+            <LanguageSwitcher className="shrink-0" />
             <NavigationLinks links={links} className="shrink-0" />
             <CtaButton
               label={cta.label}
@@ -329,6 +331,7 @@ const HeaderMobile = React.forwardRef<HTMLElement, HeaderProps>(
                 : 'max-h-0 opacity-0 pb-0 pointer-events-none'
             )}
           >
+            <LanguageSwitcher className="shrink-0" />
             <NavigationLinks
               links={links}
               onLinkClick={handleLinkClick}

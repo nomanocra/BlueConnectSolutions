@@ -1,7 +1,12 @@
+'use client';
+
 import Image from 'next/image';
 import { Link } from '@/components/ui';
+import { useTranslations } from '@/lib/i18n';
 
 export function FooterSection() {
+  const t = useTranslations();
+
   return (
     <footer className="w-full bg-background-3 border-t border-b border-background-4">
       <div className="max-w-[1200px] mx-auto">
@@ -10,20 +15,20 @@ export function FooterSection() {
           {/* Solutions Column */}
           <div className="flex flex-col gap-4 items-center md:items-start">
             <h3 className="text-text-m font-semibold text-[#eaeff5] leading-[24px]">
-              Solutions
+              {t.footer.solutions.title}
             </h3>
             <div className="flex flex-col gap-3 items-center md:items-start text-text-s text-foreground-terciary">
               <Link href="#" className="leading-[20px]">
-                Edge Computing
+                {t.footer.solutions.edgeComputing}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Cyber-Security
+                {t.footer.solutions.cyberSecurity}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Edge AI
+                {t.footer.solutions.edgeAI}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Smart Infrastructure
+                {t.footer.solutions.smartInfrastructure}
               </Link>
             </div>
           </div>
@@ -31,20 +36,20 @@ export function FooterSection() {
           {/* Company Column */}
           <div className="flex flex-col gap-4 items-center md:items-start">
             <h3 className="text-text-m font-semibold text-[#eaeff5] leading-[24px]">
-              Company
+              {t.footer.company.title}
             </h3>
             <div className="flex flex-col gap-3 items-center md:items-start text-text-s text-foreground-terciary">
               <Link href="/about" className="leading-[20px]">
-                About Us
+                {t.footer.company.aboutUs}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Careers
+                {t.footer.company.careers}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Partners
+                {t.footer.company.partners}
               </Link>
               <Link href="/contact" className="leading-[20px]">
-                Contact
+                {t.footer.company.contact}
               </Link>
             </div>
           </div>
@@ -52,20 +57,20 @@ export function FooterSection() {
           {/* Resources Column */}
           <div className="flex flex-col gap-4 items-center md:items-start">
             <h3 className="text-text-m font-semibold text-[#eaeff5] leading-[24px]">
-              Resources
+              {t.footer.resources.title}
             </h3>
             <div className="flex flex-col gap-3 items-center md:items-start text-text-s text-foreground-terciary">
               <Link href="#" className="leading-[20px]">
-                Documentation
+                {t.footer.resources.documentation}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Blog
+                {t.footer.resources.blog}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Case Studies
+                {t.footer.resources.caseStudies}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Support
+                {t.footer.resources.support}
               </Link>
             </div>
           </div>
@@ -73,20 +78,20 @@ export function FooterSection() {
           {/* Legal Column */}
           <div className="flex flex-col gap-4 items-center md:items-start">
             <h3 className="text-text-m font-semibold text-[#eaeff5] leading-[24px]">
-              Legal
+              {t.footer.legal.title}
             </h3>
             <div className="flex flex-col gap-3 items-center md:items-start text-text-s text-foreground-terciary">
               <Link href="#" className="leading-[20px]">
-                Privacy Policy
+                {t.footer.legal.privacyPolicy}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Terms of Service
+                {t.footer.legal.termsOfService}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Security
+                {t.footer.legal.security}
               </Link>
               <Link href="#" className="leading-[20px]">
-                Compliance
+                {t.footer.legal.compliance}
               </Link>
             </div>
           </div>
@@ -112,7 +117,7 @@ export function FooterSection() {
 
           {/* Copyright */}
           <p className="text-text-s text-foreground-terciary leading-[20px] text-center md:text-left pb-8 md:pb-0">
-            © 2025 Blue Connect Solutions. All rights reserved.
+            {t.footer.copyright}
           </p>
         </div>
       </div>

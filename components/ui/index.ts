@@ -4,6 +4,7 @@ export { DotsCanvas } from './dots-canvas';
 export { Header, type HeaderProps } from './header';
 export { Icon, type IconProps, type IconVariant } from './icon';
 export { Kpi, type KpiProps } from './kpi';
+export { LanguageSwitcher } from './language-switcher';
 export { Link, type LinkProps } from './link';
 export { Logo, type LogoProps } from './logo';
 export { Logos, type LogosProps } from './logos';

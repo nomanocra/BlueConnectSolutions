@@ -4,8 +4,10 @@ import { Header, BackToTopButton } from '@/components/ui';
 import { ContactSection, FooterSection } from '@/components/sections';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from '@/lib/i18n';
 
 export default function ContactPage() {
+  const t = useTranslations();
   const router = useRouter();
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -64,8 +66,8 @@ export default function ContactPage() {
         // Vérifier si c'est le lien "Our Solutions" (href = '/' depuis cette page)
         if (href === '/') {
           const linkText = link.textContent?.trim();
-          // Vérifier si c'est bien le lien "Our Solutions" dans le header
-          if (linkText === 'Our Solutions' || linkText?.includes('Our Solutions')) {
+          // Vérifier si c'est bien le lien "Our Solutions" dans le header (EN ou FR)
+          if (linkText === t.nav.ourSolutions || linkText === 'Our Solutions' || linkText === 'Nos Solutions') {
             e.preventDefault();
             e.stopPropagation();
             // Stocker dans sessionStorage qu'on veut scroller vers our-solutions
@@ -79,7 +81,7 @@ export default function ContactPage() {
 
     document.addEventListener('click', handleOurSolutionsClick, true);
     return () => document.removeEventListener('click', handleOurSolutionsClick, true);
-  }, [router]);
+  }, [router, t.nav.ourSolutions]);
 
   return (
     <main className="min-h-screen overflow-x-hidden">
@@ -100,18 +102,18 @@ export default function ContactPage() {
           logoHref="/"
           links={[
             {
-              label: 'Home',
+              label: t.nav.home,
               href: '/',
               selected: false,
             },
             {
-              label: 'Our Solutions',
+              label: t.nav.ourSolutions,
               href: '/',
               selected: false,
             },
-            { label: 'About Us', href: '/about', selected: false },
+            { label: t.nav.aboutUs, href: '/about', selected: false },
           ]}
-          ctaLabel="Contact Us"
+          ctaLabel={t.nav.contactUs}
           ctaHref="/contact"
         />
       </div>

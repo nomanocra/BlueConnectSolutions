@@ -46,11 +46,11 @@ const config: Config = {
         'title-2': ['40px', { lineHeight: '44px', fontWeight: '700' }], // Mobile
         'title-tablet': ['60px', { lineHeight: '64px', fontWeight: '700' }], // Tablet
         'title-3': ['24px', { lineHeight: '32px', fontWeight: '600' }],
-        // Text styles (Geist)
-        'text-l': ['18px', { lineHeight: '100%' }],
-        'text-m': ['16px', { lineHeight: '100%' }],
-        'text-s': ['14px', { lineHeight: '100%' }],
-        'text-xs': ['12px', { lineHeight: '100%' }],
+        // Text styles (Geist) - line-height 160% pour accessibilité WCAG
+        'text-l': ['18px', { lineHeight: '160%' }],
+        'text-m': ['16px', { lineHeight: '160%' }],
+        'text-s': ['14px', { lineHeight: '160%' }],
+        'text-xs': ['12px', { lineHeight: '160%' }],
         // Body styles (Geist)
         'body-regular': ['16px', { lineHeight: '24px', fontWeight: '400' }],
         // Legend styles (Geist)

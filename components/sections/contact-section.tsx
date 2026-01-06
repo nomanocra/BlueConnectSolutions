@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { Token, Button } from '@/components/ui';
+import { useTranslations } from '@/lib/i18n';
 
 export function ContactSection() {
+  const t = useTranslations();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -47,14 +49,12 @@ export function ContactSection() {
         <div className="flex flex-col gap-16 items-center">
           {/* Header */}
           <div className="flex flex-col gap-6 items-center text-center max-w-[720px]">
-            <Token label="Take a rendez-vous" />
+            <Token label={t.contact.token} />
             <h1 className="text-title-2 md:text-title-tablet lg:text-title-1 font-bold text-foreground-main">
-              Contact Us
+              {t.contact.title}
             </h1>
             <p className="text-text-l text-foreground-secondary leading-relaxed">
-              Have a question or want to learn more about our solutions? We'd
-              love to hear from you. Fill out the form below and we'll get back
-              to you as soon as possible.
+              {t.contact.subtitle}
             </p>
           </div>
 
@@ -69,7 +69,7 @@ export function ContactSection() {
                     htmlFor="name"
                     className="text-text-m font-medium text-foreground-main"
                   >
-                    Name *
+                    {t.contact.form.name} *
                   </label>
                   <input
                     type="text"
@@ -79,7 +79,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     className="w-full h-12 px-4 py-3 rounded-[6px] bg-background-2 border border-background-4 text-text-m text-foreground-main placeholder:text-foreground-terciary focus:outline-none focus:border-primary-3 focus:ring-2 focus:ring-primary-3/20 transition-all"
-                    placeholder="Your full name"
+                    placeholder={t.contact.form.namePlaceholder}
                   />
                 </div>
 
@@ -89,7 +89,7 @@ export function ContactSection() {
                     htmlFor="email"
                     className="text-text-m font-medium text-foreground-main"
                   >
-                    Email *
+                    {t.contact.form.email} *
                   </label>
                   <input
                     type="email"
@@ -99,7 +99,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     className="w-full h-12 px-4 py-3 rounded-[6px] bg-background-2 border border-background-4 text-text-m text-foreground-main placeholder:text-foreground-terciary focus:outline-none focus:border-primary-3 focus:ring-2 focus:ring-primary-3/20 transition-all"
-                    placeholder="your.email@example.com"
+                    placeholder={t.contact.form.emailPlaceholder}
                   />
                 </div>
               </div>
@@ -110,7 +110,7 @@ export function ContactSection() {
                   htmlFor="company"
                   className="text-text-m font-medium text-foreground-main"
                 >
-                  Company
+                  {t.contact.form.company}
                 </label>
                 <input
                   type="text"
@@ -119,7 +119,7 @@ export function ContactSection() {
                   value={formData.company}
                   onChange={handleChange}
                   className="w-full h-12 px-4 py-3 rounded-[6px] bg-background-2 border border-background-4 text-text-m text-foreground-main placeholder:text-foreground-terciary focus:outline-none focus:border-primary-3 focus:ring-2 focus:ring-primary-3/20 transition-all"
-                  placeholder="Your company name"
+                  placeholder={t.contact.form.companyPlaceholder}
                 />
               </div>
 
@@ -129,7 +129,7 @@ export function ContactSection() {
                   htmlFor="message"
                   className="text-text-m font-medium text-foreground-main"
                 >
-                  Message *
+                  {t.contact.form.message} *
                 </label>
                 <textarea
                   id="message"
@@ -139,14 +139,14 @@ export function ContactSection() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 rounded-[6px] bg-background-2 border border-background-4 text-text-m text-foreground-main placeholder:text-foreground-terciary focus:outline-none focus:border-primary-3 focus:ring-2 focus:ring-primary-3/20 transition-all resize-none"
-                  placeholder="Tell us about your project or question..."
+                  placeholder={t.contact.form.messagePlaceholder}
                 />
               </div>
 
               {/* Submit Button */}
               <div className="flex flex-col gap-4">
                 <Button
-                  label={isSubmitting ? 'Sending...' : 'Send Message'}
+                  label={isSubmitting ? t.contact.form.submitting : t.contact.form.submit}
                   variant="primary"
                   size="M"
                   rightIconVariant="arrow-right"
@@ -157,13 +157,12 @@ export function ContactSection() {
                 {/* Status Messages */}
                 {submitStatus === 'success' && (
                   <p className="text-text-m text-primary-3 text-center">
-                    Thank you! Your message has been sent successfully. We'll
-                    get back to you soon.
+                    {t.contact.form.successMessage}
                   </p>
                 )}
                 {submitStatus === 'error' && (
                   <p className="text-text-m text-red-500 text-center">
-                    Something went wrong. Please try again later.
+                    {t.contact.form.errorMessage}
                   </p>
                 )}
               </div>
@@ -174,12 +173,12 @@ export function ContactSection() {
           <div className="w-full max-w-[600px] pt-8 border-t border-background-4">
             <div className="flex flex-col gap-6">
               <h3 className="text-title-3 font-bold text-foreground-main">
-                Other Ways to Reach Us
+                {t.contact.otherWays}
               </h3>
               <div className="flex flex-col gap-4">
                 <div>
                   <p className="text-text-m font-medium text-foreground-main mb-1">
-                    Email
+                    {t.contact.emailLabel}
                   </p>
                   <a
                     href="mailto:contact@blueconnectsolutions.com"
@@ -190,10 +189,10 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-text-m font-medium text-foreground-main mb-1">
-                    Location
+                    {t.contact.locationLabel}
                   </p>
                   <p className="text-text-m text-foreground-secondary">
-                    Occitanie, France
+                    {t.contact.location}
                   </p>
                 </div>
               </div>

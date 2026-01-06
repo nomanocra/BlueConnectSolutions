@@ -1,12 +1,15 @@
 'use client';
 
 import { Button, Token } from '@/components/ui';
+import { useTranslations } from '@/lib/i18n';
 
 export interface HeroSectionProps {
   onExploreSolutions?: () => void;
 }
 
 export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
+  const t = useTranslations();
+
   return (
     <section className="w-full relative">
       {/* Grille de fond */}
@@ -31,10 +34,10 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
               className="animate-fade-in-up"
               style={{ animationDelay: '0ms' }}
             >
-              <Token label="100% French Occitan Solutions" />
+              <Token label={t.hero.token} />
             </div>
 
-            {/* Title */}
+            {/* Title - Non traduit pour garder la forme visuelle */}
             <h1
               className="text-title-2 md:text-title-tablet lg:text-title-1 font-bold text-center text-foreground-main max-w-[820px] animate-fade-in-up whitespace-pre-line"
               style={{ animationDelay: '50ms' }}
@@ -46,14 +49,10 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
 
             {/* Description */}
             <p
-              className="text-text-s md:text-text-m text-foreground-terciary text-center max-w-[720px] leading-[1.5] animate-fade-in-up"
+              className="text-text-s md:text-text-m text-foreground-terciary text-center max-w-[720px] leading-[1.8] animate-fade-in-up"
               style={{ animationDelay: '100ms' }}
             >
-              Blue Connect Solutions drives digital transformation through 3
-              pillars: IoT, Cybersecurity, and Video Broadcasting — Empowered by
-              AI and Made-in-France hardware. We bring together innovation,
-              trust, and performance to shape a smarter and more secure digital
-              world.
+              {t.hero.description}
             </p>
 
             {/* Buttons */}
@@ -62,14 +61,14 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
               style={{ animationDelay: '150ms' }}
             >
               <Button
-                label="Contact Us"
+                label={t.hero.ctaContact}
                 variant="primary"
                 size="M"
                 rightIconVariant="arrow-right"
                 href="/contact"
               />
               <Button
-                label="Explore Solutions"
+                label={t.hero.ctaExplore}
                 variant="ghost"
                 size="M"
                 rightIconVariant="arrow-down"
