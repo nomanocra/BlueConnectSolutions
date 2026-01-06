@@ -43,7 +43,7 @@ export const LanguageSwitcher = React.memo<LanguageSwitcherProps>(
           'flex items-center justify-center p-2 rounded-full',
           'hover:bg-white/10',
           'transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-primary-3/20',
+          'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-3/20',
           className
         )}
         aria-label={`Switch to ${locale === 'en' ? 'French' : 'English'}`}
