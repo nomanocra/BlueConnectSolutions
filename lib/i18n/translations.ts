@@ -19,7 +19,7 @@ export const translations = {
       titleHighlight1: 'Digital',
       titleHighlight2: 'Transformation',
       description:
-        'Blue Connect Solutions drives digital transformation through 3 pillars: IoT, Cybersecurity, and Video Broadcasting — Empowered by AI and Made-in-France hardware. We bring together innovation, trust, and performance to shape a smarter and more secure digital world.',
+        'Blue Connect Solutions drives digital transformation through 3 pillars: IoT, Cybersecurity, and Video Broadcasting — Empowered by AI and hardware designed in France. We bring together innovation, trust, and performance to shape a smarter and more secure digital world.',
       ctaContact: 'Contact Us',
       ctaExplore: 'Explore Solutions',
     },
@@ -38,10 +38,10 @@ export const translations = {
       },
       solution2: {
         number: '2',
-        title: '2. Edge Compute IoT',
+        title: '2. Edge AI',
         description:
-          'Edge computing solutions for IoT deployments with low latency processing, real-time analytics, and seamless device management.',
-        pillarLabel: 'Edge Compute IoT',
+          'Edge AI solutions with low latency processing, real-time analytics, and seamless device management.',
+        pillarLabel: 'Edge AI',
       },
       solution3: {
         number: '3',
@@ -174,7 +174,7 @@ export const translations = {
       titleHighlight1: 'Transformation',
       titleHighlight2: 'Digitale',
       description:
-        "Blue Connect Solutions impulse la transformation digitale autour de 3 piliers : IoT, Cybersecurité et Diffusion Vidéo — Propulsés par l'IA et du hardware Made-in-France. Nous conjuguons innovation, confiance et performance pour façonner un monde numérique plus intelligent et plus sécurisé.",
+        "Blue Connect Solutions accélère la transformation digitale autour de 3 piliers : IoT, Cybersécurité et Diffusion Vidéo — Propulsés par l'IA et du hardware conçu en France. Nous conjuguons innovation, confiance et performance pour façonner un monde numérique plus intelligent et plus sécurisé.",
       ctaContact: 'Nous Contacter',
       ctaExplore: 'Explorer les Solutions',
     },
@@ -193,10 +193,10 @@ export const translations = {
       },
       solution2: {
         number: '2',
-        title: '2. Edge Compute IoT',
+        title: '2. Edge AI',
         description:
-          "Solutions d'edge computing pour les déploiements IoT avec traitement à faible latence, analyse en temps réel et gestion transparente des appareils.",
-        pillarLabel: 'Edge Compute IoT',
+          "Solutions Edge AI avec traitement à faible latence, analyse en temps réel et gestion transparente des appareils.",
+        pillarLabel: 'Edge AI',
       },
       solution3: {
         number: '3',

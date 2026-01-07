@@ -2730,7 +2730,7 @@ function PillarSection() {
             />
           </div>
           <div className="flex flex-wrap gap-8 items-end">
-            <Pillar label="Edge Compute IoT" />
+            <Pillar label="Edge AI" />
             <Pillar label="Small " height={0} />
             <Pillar label="Medium" height={150} />
             <Pillar label="Heigher" height={300} />

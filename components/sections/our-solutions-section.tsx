@@ -784,7 +784,7 @@ export function OurSolutionsSection() {
               <div className="flex w-full md:w-auto p-1 mt-4 bg-background-3 rounded-[10px]">
                 {[
                   { num: 1, label: solution1.pillarLabel, mobileLabel: 'Security' },
-                  { num: 2, label: solution2.pillarLabel, mobileLabel: 'IoT' },
+                  { num: 2, label: solution2.pillarLabel, mobileLabel: 'Edge AI' },
                   { num: 3, label: solution3.pillarLabel, mobileLabel: 'Video' },
                 ].map(({ num, label, mobileLabel }) => (
                   <Button
