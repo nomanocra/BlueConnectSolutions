@@ -57,7 +57,7 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
 
             {/* Buttons */}
             <div
-              className="flex gap-4 items-center justify-center animate-fade-in-up"
+              className="flex flex-wrap gap-4 items-center justify-center animate-fade-in-up"
               style={{ animationDelay: '150ms' }}
             >
               <Button

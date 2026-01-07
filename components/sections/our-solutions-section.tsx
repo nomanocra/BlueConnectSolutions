@@ -781,20 +781,22 @@ export function OurSolutionsSection() {
               </p>
 
               {/* Navigation Buttons */}
-              <div className="flex p-1 mt-4 bg-background-3 rounded-[10px] overflow-x-auto">
+              <div className="flex w-full md:w-auto p-1 mt-4 bg-background-3 rounded-[10px]">
                 {[
-                  { num: 1, label: solution1.pillarLabel },
-                  { num: 2, label: solution2.pillarLabel },
-                  { num: 3, label: solution3.pillarLabel },
-                ].map(({ num, label }) => (
+                  { num: 1, label: solution1.pillarLabel, mobileLabel: 'Security' },
+                  { num: 2, label: solution2.pillarLabel, mobileLabel: 'IoT' },
+                  { num: 3, label: solution3.pillarLabel, mobileLabel: 'Video' },
+                ].map(({ num, label, mobileLabel }) => (
                   <Button
                     key={num}
                     onClick={() => scrollToSolution(num)}
                     variant={activeSolution === num ? 'primary' : 'ghost'}
                     size="XS"
-                    label={`${num}. ${label}`}
-                    className={`min-w-0 md:min-w-[180px] whitespace-nowrap ${activeSolution !== num ? 'border-0 bg-transparent' : ''}`}
-                  />
+                    className={`flex-1 md:flex-none md:min-w-[180px] whitespace-nowrap ${activeSolution !== num ? 'border-0 bg-transparent' : ''}`}
+                  >
+                    <span className="md:hidden">{num}. {mobileLabel}</span>
+                    <span className="hidden md:inline">{num}. {label}</span>
+                  </Button>
                 ))}
               </div>
             </div>
