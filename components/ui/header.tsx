@@ -39,7 +39,7 @@ export interface HeaderProps {
 // Constantes
 const MOBILE_BREAKPOINT = 768;
 const HEADER_BASE_CLASSES =
-  'backdrop-blur-[5px] backdrop-filter bg-background-t80 border border-background-5 border-solid rounded-[24px] w-full relative box-border transition-all duration-300 ease-in-out overflow-hidden';
+  'backdrop-blur-[5px] backdrop-filter bg-background-t80 border border-background-5 border-solid rounded-[24px] w-full relative box-border transition-all duration-300 ease-in-out';
 
 // Icône hamburger menu - mémorisé pour éviter les re-renders inutiles
 const MenuIcon = React.memo(({ isOpen }: { isOpen: boolean }) => {
@@ -187,7 +187,7 @@ const HeaderDesktop = React.forwardRef<HTMLElement, HeaderProps>(
         className={cn(HEADER_BASE_CLASSES, className)}
         {...domProps}
       >
-        <div className="box-border flex items-center justify-between overflow-clip px-5 py-4 rounded-[inherit]">
+        <div className="box-border flex items-center justify-between px-5 py-4 rounded-[inherit]">
           <NextLink href={logoHref || '/'} className="shrink-0">
             <Logo size={32} />
           </NextLink>
@@ -302,18 +302,18 @@ const HeaderMobile = React.forwardRef<HTMLElement, HeaderProps>(
     return (
       <header
         ref={headerRef}
-        className={cn(HEADER_BASE_CLASSES, className)}
+        className={cn(HEADER_BASE_CLASSES, 'overflow-hidden', className)}
         {...domProps}
       >
         <div className="flex flex-col">
           {/* Top bar avec Logo et Menu */}
-          <div className="box-border flex items-center justify-between overflow-clip px-5 py-4 rounded-[inherit]">
+          <div className="box-border flex items-center justify-between px-5 py-4 rounded-[inherit]">
             <NextLink href={logoHref || '/'} className="shrink-0">
               <Logo size={32} />
             </NextLink>
 
             <div className="flex items-center gap-2 shrink-0">
-              <LanguageSwitcher className="shrink-0" />
+              <LanguageSwitcher variant="modal" className="shrink-0" />
               <button
                 onClick={toggleMobileMenu}
                 className="shrink-0 text-foreground-main hover:text-foreground-secondary transition-colors p-2"

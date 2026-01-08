@@ -10,6 +10,25 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.png',
   },
+  openGraph: {
+    title: 'Blue Connect Solutions',
+    description: 'Driving the next wave of Digital Transformation - IoT, Cybersecurity & Video Broadcasting',
+    type: 'website',
+    images: [
+      {
+        url: '/logo.png',
+        width: 512,
+        height: 512,
+        alt: 'Blue Connect Solutions Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Blue Connect Solutions',
+    description: 'Driving the next wave of Digital Transformation',
+    images: ['/logo.png'],
+  },
 };
 
 export default function RootLayout({
