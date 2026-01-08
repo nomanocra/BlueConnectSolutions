@@ -12,7 +12,7 @@ export const translations = {
 
     // Hero Section
     hero: {
-      token: '100% French Occitan Solutions',
+      token: '100% French Solutions',
       title: 'Driving the next wave of Digital Transformation',
       titlePart1: 'Driving the next',
       titlePart2: 'wave of',
@@ -62,6 +62,23 @@ export const translations = {
           { name: 'Celestory', href: 'https://www.celestory.io/', logo: '/logos/Celectrory.png' },
         ],
       },
+    },
+
+    // Hardware Section
+    hardware: {
+      token: 'Designed in France',
+      title: 'Powered by French Excellence',
+      description:
+        'Every Blue Connect solution runs on premium hardware designed in France by Bleujour. Silent, powerful, and built to last — our infrastructure combines cutting-edge performance with minimalist design, ensuring reliability for your most critical operations.',
+      features: [
+        { label: 'Silent Operation', description: 'Fanless technology' },
+        { label: 'Premium Design', description: 'Minimalist & elegant' },
+        { label: 'High Performance', description: 'Professional-grade' },
+        { label: 'Designed in France', description: 'Occitanie' },
+      ],
+      cta: 'Discover Bleujour',
+      ctaHref: 'https://bleujour.com/fr/',
+      imageAlt: 'KUBB by Bleujour',
     },
 
     // KPIs Section
@@ -179,7 +196,7 @@ export const translations = {
 
     // Hero Section
     hero: {
-      token: 'Solutions 100% Occitanes',
+      token: 'Solutions 100% Françaises',
       title: 'Impulser la prochaine vague de Transformation Digitale',
       titlePart1: 'Impulser la prochaine',
       titlePart2: 'vague de',
@@ -229,6 +246,23 @@ export const translations = {
           { name: 'Celestory', href: 'https://www.celestory.io/', logo: '/logos/Celectrory.png' },
         ],
       },
+    },
+
+    // Hardware Section
+    hardware: {
+      token: 'Conçu en France',
+      title: 'Propulsé par l\'Excellence Française',
+      description:
+        'Chaque solution Blue Connect repose sur du hardware premium conçu en France par Bleujour. Silencieux, puissant et durable — notre infrastructure allie performance de pointe et design minimaliste, garantissant fiabilité pour vos opérations les plus critiques.',
+      features: [
+        { label: 'Fonctionnement Silencieux', description: 'Technologie fanless' },
+        { label: 'Design Premium', description: 'Minimaliste & élégant' },
+        { label: 'Haute Performance', description: 'Qualité professionnelle' },
+        { label: 'Conçu en France', description: 'Occitanie' },
+      ],
+      cta: 'Découvrir Bleujour',
+      ctaHref: 'https://bleujour.com/fr/',
+      imageAlt: 'KUBB par Bleujour',
     },
 
     // KPIs Section

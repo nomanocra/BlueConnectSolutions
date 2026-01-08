@@ -767,14 +767,14 @@ export function OurSolutionsSection() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-background-2 border-t border-b border-background-4"
+      className="w-full bg-background-2 border-t border-b border-background-4 scroll-mt-[100px]"
     >
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col gap-[120px] items-start px-8 md:px-[80px] py-[120px] w-full">
           {/* Header + Content - Tout sera piné ensemble */}
           <div
             ref={contentRef}
-            className="flex flex-col gap-8 md:gap-[120px] items-start w-full"
+            className="flex flex-col gap-8 md:gap-[80px] items-start w-full"
           >
             {/* Header */}
             <div className="flex flex-col gap-[10px] items-start w-full">

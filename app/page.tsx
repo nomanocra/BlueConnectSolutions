@@ -7,6 +7,7 @@ import {
   KpisSection,
   LogosSection,
   OurSolutionsSection,
+  HardwareSection,
   CtaSection,
   FooterSection,
 } from '@/components/sections';
@@ -286,6 +287,7 @@ export default function Home() {
       <div id="our-solutions">
         <OurSolutionsSection />
       </div>
+      <HardwareSection />
       <CtaSection />
       <LogosSection />
       <FooterSection />
