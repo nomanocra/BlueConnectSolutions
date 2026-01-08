@@ -188,15 +188,13 @@ const HeaderDesktop = React.forwardRef<HTMLElement, HeaderProps>(
         {...domProps}
       >
         <div className="box-border flex items-center justify-between overflow-clip px-5 py-4 rounded-[inherit]">
-          <div className="flex items-center gap-4 shrink-0">
-            <NextLink href={logoHref || '/'} className="shrink-0">
-              <Logo size={32} />
-            </NextLink>
-            <LanguageSwitcher className="shrink-0" />
-          </div>
+          <NextLink href={logoHref || '/'} className="shrink-0">
+            <Logo size={32} />
+          </NextLink>
 
           <nav className="flex gap-8 items-center shrink-0">
             <NavigationLinks links={links} className="shrink-0" />
+            <LanguageSwitcher className="shrink-0" />
             <CtaButton
               label={cta.label}
               href={cta.href}
@@ -310,21 +308,21 @@ const HeaderMobile = React.forwardRef<HTMLElement, HeaderProps>(
         <div className="flex flex-col">
           {/* Top bar avec Logo et Menu */}
           <div className="box-border flex items-center justify-between overflow-clip px-5 py-4 rounded-[inherit]">
-            <div className="flex items-center gap-4 shrink-0">
-              <NextLink href={logoHref || '/'} className="shrink-0">
-                <Logo size={32} />
-              </NextLink>
-              <LanguageSwitcher className="shrink-0" />
-            </div>
+            <NextLink href={logoHref || '/'} className="shrink-0">
+              <Logo size={32} />
+            </NextLink>
 
-            <button
-              onClick={toggleMobileMenu}
-              className="shrink-0 text-foreground-main hover:text-foreground-secondary transition-colors p-2"
-              aria-label="Toggle menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              <MenuIcon isOpen={isMobileMenuOpen} />
-            </button>
+            <div className="flex items-center gap-2 shrink-0">
+              <LanguageSwitcher className="shrink-0" />
+              <button
+                onClick={toggleMobileMenu}
+                className="shrink-0 text-foreground-main hover:text-foreground-secondary transition-colors p-2"
+                aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
+              >
+                <MenuIcon isOpen={isMobileMenuOpen} />
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
