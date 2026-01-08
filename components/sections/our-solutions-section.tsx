@@ -53,12 +53,15 @@ export function OurSolutionsSection() {
     });
   }, []);
 
+  const solutionsLabel = t.solutions.solutionsLabel;
+
   const solution1 = {
     number: t.solutions.solution1.number,
     title: t.solutions.solution1.title,
     description: t.solutions.solution1.description,
     iconVariant: 'security' as const,
     pillarLabel: t.solutions.solution1.pillarLabel,
+    solutions: t.solutions.solution1.solutions,
   };
 
   const solution2 = {
@@ -67,6 +70,7 @@ export function OurSolutionsSection() {
     description: t.solutions.solution2.description,
     iconVariant: 'edge' as const,
     pillarLabel: t.solutions.solution2.pillarLabel,
+    solutions: t.solutions.solution2.solutions,
   };
 
   const solution3 = {
@@ -75,6 +79,7 @@ export function OurSolutionsSection() {
     description: t.solutions.solution3.description,
     iconVariant: 'broadcast' as const,
     pillarLabel: t.solutions.solution3.pillarLabel,
+    solutions: t.solutions.solution3.solutions,
   };
 
   useGSAP(
@@ -839,33 +844,39 @@ export function OurSolutionsSection() {
               {/* Right Side - Description Cards using PillarTileDescription */}
               <div className="relative flex-1 h-full min-h-[calc(100vh-300px)] md:min-h-0 md:h-[396px]">
                 {/* Première carte - Cyber Security */}
-                <div ref={description1Ref} className="absolute inset-0 h-full">
+                <div ref={description1Ref} className={`absolute inset-0 h-full ${activeSolution !== 1 ? 'pointer-events-none' : ''}`}>
                   <PillarTileDescription
                     title={solution1.title}
                     description={solution1.description}
                     iconVariant={solution1.iconVariant}
+                    solutions={solution1.solutions}
+                    solutionsLabel={solutionsLabel}
                     width="100%"
                     height={396}
                     className="h-full md:h-[396px]"
                   />
                 </div>
-                {/* Deuxième carte - Edge Compute IoT (par-dessus la première) */}
-                <div ref={description2Ref} className="absolute inset-0 h-full">
+                {/* Deuxième carte - Edge AI (par-dessus la première) */}
+                <div ref={description2Ref} className={`absolute inset-0 h-full ${activeSolution !== 2 ? 'pointer-events-none' : ''}`}>
                   <PillarTileDescription
                     title={solution2.title}
                     description={solution2.description}
                     iconVariant={solution2.iconVariant}
+                    solutions={solution2.solutions}
+                    solutionsLabel={solutionsLabel}
                     width="100%"
                     height={396}
                     className="h-full md:h-[396px]"
                   />
                 </div>
                 {/* Troisième carte - Video Broadcasting (par-dessus les deux premières) */}
-                <div ref={description3Ref} className="absolute inset-0 h-full">
+                <div ref={description3Ref} className={`absolute inset-0 h-full ${activeSolution !== 3 ? 'pointer-events-none' : ''}`}>
                   <PillarTileDescription
                     title={solution3.title}
                     description={solution3.description}
                     iconVariant={solution3.iconVariant}
+                    solutions={solution3.solutions}
+                    solutionsLabel={solutionsLabel}
                     width="100%"
                     height={396}
                     className="h-full md:h-[396px]"

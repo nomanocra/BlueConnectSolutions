@@ -29,12 +29,17 @@ export const translations = {
       title: 'Our Tree Pilars',
       subtitle:
         'Everything you need to build, secure, and scale your digital operations',
+      solutionsLabel: 'Solutions',
       solution1: {
         number: '1',
         title: '1. Cyber-Security',
         description:
           'Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management.',
         pillarLabel: 'Cyber Security',
+        solutions: [
+          { name: 'Oxydian', href: 'https://www.oxydian.fr/', logo: '/logos/oxydian.png' },
+          { name: 'Kubb Secure', href: 'https://www.kubb-secure.com/', logo: '/logos/kubbsecure.png' },
+        ],
       },
       solution2: {
         number: '2',
@@ -42,6 +47,9 @@ export const translations = {
         description:
           'Edge AI solutions with low latency processing, real-time analytics, and seamless device management.',
         pillarLabel: 'Edge AI',
+        solutions: [
+          { name: 'SmartConnect IoT', href: 'https://www.smartconnectiot.com/', logo: '/logos/smartconnectiot.svg', padding: 'p-4' },
+        ],
       },
       solution3: {
         number: '3',
@@ -49,6 +57,10 @@ export const translations = {
         description:
           'High-performance video streaming and broadcasting solutions with ultra-low latency, multi-format support, and global CDN integration.',
         pillarLabel: 'Video Broadcasting',
+        solutions: [
+          { name: 'Fusion & Kaptivate', href: 'https://newbluefx.com/emea-fusion/', logo: '/logos/newbluefx.jpeg' },
+          { name: 'Celestory', href: 'https://www.celestory.io/', logo: '/logos/Celectrory.png' },
+        ],
       },
     },
 
@@ -184,12 +196,17 @@ export const translations = {
       title: 'Nos Trois Piliers',
       subtitle:
         'Tout ce dont vous avez besoin pour construire, sécuriser et faire évoluer vos opérations numériques',
+      solutionsLabel: 'Solutions',
       solution1: {
         number: '1',
         title: '1. Cyber-Sécurité',
         description:
           "Solutions de sécurité de niveau entreprise avec détection des menaces en temps réel, réponse automatisée et gestion complète de la conformité.",
         pillarLabel: 'Cyber-Sécurité',
+        solutions: [
+          { name: 'Oxydian', href: 'https://www.oxydian.fr/', logo: '/logos/oxydian.png' },
+          { name: 'Kubb Secure', href: 'https://www.kubb-secure.com/', logo: '/logos/kubbsecure.png' },
+        ],
       },
       solution2: {
         number: '2',
@@ -197,6 +214,9 @@ export const translations = {
         description:
           "Solutions Edge AI avec traitement à faible latence, analyse en temps réel et gestion transparente des appareils.",
         pillarLabel: 'Edge AI',
+        solutions: [
+          { name: 'SmartConnect IoT', href: 'https://www.smartconnectiot.com/', logo: '/logos/smartconnectiot.svg', padding: 'p-4' },
+        ],
       },
       solution3: {
         number: '3',
@@ -204,6 +224,10 @@ export const translations = {
         description:
           'Solutions de streaming et diffusion vidéo haute performance avec latence ultra-faible, support multi-format et intégration CDN mondiale.',
         pillarLabel: 'Diffusion Vidéo',
+        solutions: [
+          { name: 'Fusion & Kaptivate', href: 'https://newbluefx.com/emea-fusion/', logo: '/logos/newbluefx.jpeg' },
+          { name: 'Celestory', href: 'https://www.celestory.io/', logo: '/logos/Celectrory.png' },
+        ],
       },
     },
 
