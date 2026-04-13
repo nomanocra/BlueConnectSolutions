@@ -170,6 +170,15 @@ export const translations = {
       button: 'Contact Us',
     },
 
+    // Promo Popup
+    promo: {
+      badge: 'New',
+      title: 'Discover the SmartBoitier',
+      description: 'Our edge intelligence solution for real-time data collection and processing. Connect, normalize, and analyze — all at the source.',
+      cta: 'Learn More',
+      dismiss: 'Maybe Later',
+    },
+
     // Footer
     footer: {
       solutions: {
@@ -372,6 +381,15 @@ export const translations = {
       description:
         'Rejoignez les organisations leaders dans le monde qui font confiance à BlueConnectSolutions pour accompagner leur transformation digitale.',
       button: 'Nous Contacter',
+    },
+
+    // Promo Popup
+    promo: {
+      badge: 'Nouveau',
+      title: 'Découvrez le SmartBoitier',
+      description: 'Notre solution d\'intelligence edge pour la collecte et le traitement de données en temps réel. Connectez, normalisez, analysez — directement à la source.',
+      cta: 'En savoir plus',
+      dismiss: 'Plus tard',
     },
 
     // Footer
