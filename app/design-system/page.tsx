@@ -621,6 +621,8 @@ function IconSection() {
     'arrow-right',
     'arrow-left',
     'arrow-down',
+    'arrow-top',
+    'open-in-new',
     'security',
     'broadcast',
     'edge',
@@ -862,6 +864,27 @@ function ButtonSection() {
           </div>
         </section>
 
+        {/* Outline Variant */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-title-3 font-semibold text-foreground-main">
+              Outline
+            </h2>
+          </div>
+          <div className="space-y-6">
+            <div className="flex flex-wrap gap-4">
+              <Button label="Size M" variant="outline" size="M" />
+              <Button label="Size S" variant="outline" size="S" />
+              <Button label="Size XS" variant="outline" size="XS" />
+            </div>
+            <div className="flex flex-wrap gap-4">
+              <Button label="Disabled M" variant="outline" size="M" disabled />
+              <Button label="Disabled S" variant="outline" size="S" disabled />
+              <Button label="Disabled XS" variant="outline" size="XS" disabled />
+            </div>
+          </div>
+        </section>
+
         {/* Icons Section */}
         <section>
           <h2 className="text-title-3 font-semibold text-foreground-main mb-6">
@@ -901,6 +924,12 @@ function ButtonSection() {
                     size="M"
                     leftIconVariant="arrow-left"
                   />
+                  <Button
+                    label="Outline"
+                    variant="outline"
+                    size="M"
+                    leftIconVariant="arrow-left"
+                  />
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <Button
@@ -921,6 +950,12 @@ function ButtonSection() {
                     size="S"
                     leftIconVariant="arrow-left"
                   />
+                  <Button
+                    label="Outline"
+                    variant="outline"
+                    size="S"
+                    leftIconVariant="arrow-left"
+                  />
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <Button
@@ -938,6 +973,12 @@ function ButtonSection() {
                   <Button
                     label="Ghost"
                     variant="ghost"
+                    size="XS"
+                    leftIconVariant="arrow-left"
+                  />
+                  <Button
+                    label="Outline"
+                    variant="outline"
                     size="XS"
                     leftIconVariant="arrow-left"
                   />
@@ -978,6 +1019,12 @@ function ButtonSection() {
                     size="M"
                     rightIconVariant="arrow-right"
                   />
+                  <Button
+                    label="Outline"
+                    variant="outline"
+                    size="M"
+                    rightIconVariant="arrow-right"
+                  />
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <Button
@@ -998,6 +1045,12 @@ function ButtonSection() {
                     size="S"
                     rightIconVariant="arrow-right"
                   />
+                  <Button
+                    label="Outline"
+                    variant="outline"
+                    size="S"
+                    rightIconVariant="arrow-right"
+                  />
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <Button
@@ -1015,6 +1068,12 @@ function ButtonSection() {
                   <Button
                     label="Ghost"
                     variant="ghost"
+                    size="XS"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Outline"
+                    variant="outline"
                     size="XS"
                     rightIconVariant="arrow-right"
                   />
@@ -1058,6 +1117,13 @@ function ButtonSection() {
                     leftIconVariant="arrow-left"
                     rightIconVariant="arrow-right"
                   />
+                  <Button
+                    label="Outline"
+                    variant="outline"
+                    size="M"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <Button
@@ -1081,6 +1147,13 @@ function ButtonSection() {
                     leftIconVariant="arrow-left"
                     rightIconVariant="arrow-right"
                   />
+                  <Button
+                    label="Outline"
+                    variant="outline"
+                    size="S"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <Button
@@ -1100,6 +1173,13 @@ function ButtonSection() {
                   <Button
                     label="Ghost"
                     variant="ghost"
+                    size="XS"
+                    leftIconVariant="arrow-left"
+                    rightIconVariant="arrow-right"
+                  />
+                  <Button
+                    label="Outline"
+                    variant="outline"
                     size="XS"
                     leftIconVariant="arrow-left"
                     rightIconVariant="arrow-right"
@@ -1203,6 +1283,12 @@ function ButtonCodeModal({
                   size="M"
                   leftIconVariant="arrow-left"
                 />
+                <Button
+                  label="Outline"
+                  variant="outline"
+                  size="M"
+                  leftIconVariant="arrow-left"
+                />
               </div>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -1223,6 +1309,12 @@ function ButtonCodeModal({
                   size="S"
                   leftIconVariant="arrow-left"
                 />
+                <Button
+                  label="Outline"
+                  variant="outline"
+                  size="S"
+                  leftIconVariant="arrow-left"
+                />
               </div>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -1240,6 +1332,12 @@ function ButtonCodeModal({
                 <Button
                   label="Ghost"
                   variant="ghost"
+                  size="XS"
+                  leftIconVariant="arrow-left"
+                />
+                <Button
+                  label="Outline"
+                  variant="outline"
                   size="XS"
                   leftIconVariant="arrow-left"
                 />
@@ -1291,6 +1389,12 @@ function ButtonCodeModal({
                   size="M"
                   rightIconVariant="arrow-right"
                 />
+                <Button
+                  label="Outline"
+                  variant="outline"
+                  size="M"
+                  rightIconVariant="arrow-right"
+                />
               </div>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -1311,6 +1415,12 @@ function ButtonCodeModal({
                   size="S"
                   rightIconVariant="arrow-right"
                 />
+                <Button
+                  label="Outline"
+                  variant="outline"
+                  size="S"
+                  rightIconVariant="arrow-right"
+                />
               </div>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -1328,6 +1438,12 @@ function ButtonCodeModal({
                 <Button
                   label="Ghost"
                   variant="ghost"
+                  size="XS"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Outline"
+                  variant="outline"
                   size="XS"
                   rightIconVariant="arrow-right"
                 />
@@ -1382,6 +1498,13 @@ function ButtonCodeModal({
                   leftIconVariant="arrow-left"
                   rightIconVariant="arrow-right"
                 />
+                <Button
+                  label="Outline"
+                  variant="outline"
+                  size="M"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
               </div>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -1405,6 +1528,13 @@ function ButtonCodeModal({
                   leftIconVariant="arrow-left"
                   rightIconVariant="arrow-right"
                 />
+                <Button
+                  label="Outline"
+                  variant="outline"
+                  size="S"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
               </div>
               <div className="flex flex-wrap gap-4">
                 <Button
@@ -1424,6 +1554,13 @@ function ButtonCodeModal({
                 <Button
                   label="Ghost"
                   variant="ghost"
+                  size="XS"
+                  leftIconVariant="arrow-left"
+                  rightIconVariant="arrow-right"
+                />
+                <Button
+                  label="Outline"
+                  variant="outline"
                   size="XS"
                   leftIconVariant="arrow-left"
                   rightIconVariant="arrow-right"

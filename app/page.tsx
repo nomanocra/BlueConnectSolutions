@@ -37,7 +37,7 @@ export default function Home() {
   const bannerHeight = useBannerHeight(showBanner, bannerRef);
   useScrollRestoration();
   const isHeaderVisible = useHeaderVisibility();
-  const activeSection = useActiveSectionObserver(isScrolling);
+  const [activeSection, setActiveSection] = useActiveSectionObserver(isScrolling);
 
   const scrollToOurSolutions = (e?: React.MouseEvent) => {
     e?.preventDefault();
@@ -45,10 +45,6 @@ export default function Home() {
     if (section) {
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
-
-  const setActiveSection = (section: 'home' | 'our-solutions') => {
-    // This is handled by useActiveSectionObserver, but we need the function for anchor navigation
   };
 
   useAnchorNavigation(scrollToOurSolutions, setActiveSection, setIsScrolling);

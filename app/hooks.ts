@@ -173,7 +173,7 @@ export function useHeaderVisibility(): boolean {
   return isHeaderVisible;
 }
 
-export function useActiveSectionObserver(isScrolling: boolean): 'home' | 'our-solutions' {
+export function useActiveSectionObserver(isScrolling: boolean): ['home' | 'our-solutions', (section: 'home' | 'our-solutions') => void] {
   const [activeSection, setActiveSection] = useState<'home' | 'our-solutions'>('home');
 
   useEffect(() => {
@@ -211,5 +211,5 @@ export function useActiveSectionObserver(isScrolling: boolean): 'home' | 'our-so
     };
   }, [isScrolling]);
 
-  return activeSection;
+  return [activeSection, setActiveSection];
 }

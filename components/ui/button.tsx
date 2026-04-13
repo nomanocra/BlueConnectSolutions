@@ -16,7 +16,7 @@ export interface ButtonProps
 
   // Variantes
   state?: 'default' | 'hover' | 'pressed';
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'outline';
   size?: 'M' | 'S' | 'XS';
 
   // Comportement
@@ -104,7 +104,7 @@ Button.displayName = 'Button';
 // Fonction pour générer les classes selon les variantes
 function getButtonClasses(
   state: 'default' | 'hover' | 'pressed',
-  variant: 'primary' | 'secondary' | 'ghost',
+  variant: 'primary' | 'secondary' | 'ghost' | 'outline',
   size: 'M' | 'S' | 'XS',
   disabled?: boolean
 ): string {
@@ -138,6 +138,11 @@ function getButtonClasses(
       active:
         'active:bg-[rgba(15,20,28,0.8)] active:border-[rgba(148,185,229,0.8)] active:text-foreground-main',
     },
+    outline: {
+      base: 'bg-transparent border border-white/30 text-white',
+      hover: 'hover:bg-white/10 hover:border-white/50',
+      active: 'active:bg-white/15 active:border-white/60',
+    },
   };
 
   // Si state est défini programmatiquement, on peut forcer l'état
@@ -154,6 +159,10 @@ function getButtonClasses(
       hover: 'bg-[rgba(15,20,28,0.7)] border-[rgba(148,185,229,0.5)]',
       pressed:
         'bg-[rgba(15,20,28,0.8)] border-[rgba(148,185,229,0.8)] text-foreground-main',
+    },
+    outline: {
+      hover: 'bg-white/10 border-white/50',
+      pressed: 'bg-white/15 border-white/60',
     },
   };
 
