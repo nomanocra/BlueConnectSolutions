@@ -186,10 +186,10 @@ export function ContactSection() {
                     {t.contact.emailLabel}
                   </p>
                   <a
-                    href="mailto:contact@blueconnectsolutions.com"
+                    href="mailto:anthony@blueconnectsolutions.com"
                     className="text-text-m text-primary-3 hover:text-primary-2 transition-colors"
                   >
-                    contact@blueconnectsolutions.com
+                    anthony@blueconnectsolutions.com
                   </a>
                 </div>
                 <div>

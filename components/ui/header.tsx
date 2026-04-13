@@ -189,7 +189,7 @@ const HeaderDesktop = React.forwardRef<HTMLElement, HeaderProps>(
       >
         <div className="box-border flex items-center justify-between px-5 py-4 rounded-[inherit]">
           <NextLink href={logoHref || '/'} className="shrink-0">
-            <Logo size={32} />
+            <Logo size={48} />
           </NextLink>
 
           <nav className="flex gap-8 items-center shrink-0">
@@ -309,7 +309,7 @@ const HeaderMobile = React.forwardRef<HTMLElement, HeaderProps>(
           {/* Top bar avec Logo et Menu */}
           <div className="box-border flex items-center justify-between px-5 py-4 rounded-[inherit]">
             <NextLink href={logoHref || '/'} className="shrink-0">
-              <Logo size={32} />
+              <Logo size={48} />
             </NextLink>
 
             <div className="flex items-center gap-2 shrink-0">

@@ -21,7 +21,7 @@ export function FooterSection() {
           <div className="flex gap-4 items-center">
             <div className="relative w-[64px] h-[64px]">
               <Image
-                src="/logo.png"
+                src="/logo2.png"
                 alt="BlueConnectSolutions"
                 width={64}
                 height={64}

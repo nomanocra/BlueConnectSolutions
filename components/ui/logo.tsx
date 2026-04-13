@@ -22,7 +22,7 @@ const Logo = React.forwardRef<HTMLImageElement, LogoProps>(
       width,
       height,
       className,
-      src = '/logo.png', // Logo stocké localement dans public/
+      src = '/logo2.png', // Logo stocké localement dans public/
       alt = 'Logo',
       ...props
     },
