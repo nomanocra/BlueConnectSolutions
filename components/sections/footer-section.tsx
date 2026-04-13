@@ -19,12 +19,12 @@ export function FooterSection() {
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-6 md:gap-0 px-8 md:px-[80px] py-[40px] w-full">
           {/* Logo and Name */}
           <div className="flex gap-4 items-center">
-            <div className="relative w-[40px] h-[40px]">
+            <div className="relative w-[64px] h-[64px]">
               <Image
                 src="/logo.png"
                 alt="BlueConnectSolutions"
-                width={40}
-                height={40}
+                width={64}
+                height={64}
                 className="object-contain"
               />
             </div>
