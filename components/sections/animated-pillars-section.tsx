@@ -26,10 +26,11 @@ export function AnimatedPillarsSection() {
       // Créer un ScrollTrigger pour "épingler" le conteneur un peu en dessous du centre
       const pinTrigger = ScrollTrigger.create({
         trigger: illustrationRef.current,
-        start: 'center 60%', // Commence quand le centre de la section arrive à 60% du viewport
-        end: '+=100%', // Reste épinglé pendant 100% de la hauteur du viewport (durée réduite)
-        pin: true, // Épingle le conteneur
-        pinSpacing: true, // Ajoute de l'espace pour compenser le pin
+        start: 'center 60%',
+        end: '+=100%',
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
       });
 
       // Configuration partagée pour toutes les animations
@@ -37,7 +38,7 @@ export function AnimatedPillarsSection() {
         trigger: illustrationRef.current,
         start: 'top 90%',
         end: () => pinTrigger.end,
-        scrub: 2,
+        scrub: 1,
       };
 
       const easeConfig = 'power2.inOut';

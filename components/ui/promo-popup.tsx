@@ -1,117 +1,147 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { cn } from '@/lib/utils';
 import { useTranslations } from '@/lib/i18n';
-import { Button } from './button';
+
+const STORAGE_KEY = 'hidePromoBanner';
+
+interface PromoBannerProps {
+  onClose: () => void;
+}
+
+const ServerIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0" aria-hidden="true">
+    <rect x="3" y="3" width="18" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+    <rect x="3" y="15" width="18" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+    <rect x="3" y="9" width="18" height="6" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+    <circle cx="7" cy="6" r="1" fill="currentColor"/>
+    <circle cx="10" cy="6" r="1" fill="currentColor"/>
+    <circle cx="7" cy="12" r="1" fill="currentColor"/>
+    <circle cx="10" cy="12" r="1" fill="currentColor"/>
+    <circle cx="7" cy="18" r="1" fill="currentColor"/>
+    <circle cx="10" cy="18" r="1" fill="currentColor"/>
+  </svg>
+);
 
 const CloseIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
-export const PromoPopup = () => {
-  const t = useTranslations();
-  const [isVisible, setIsVisible] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
+export function shouldShowPromoBanner(): boolean {
+  if (typeof window === 'undefined') return true;
+  return localStorage.getItem(STORAGE_KEY) !== 'true';
+}
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 1500);
-    return () => clearTimeout(timer);
+export const PromoBanner = ({ onClose }: PromoBannerProps) => {
+  const t = useTranslations();
+  const [showModal, setShowModal] = useState(false);
+  const modalRef = React.useRef<HTMLDivElement>(null);
+
+  const handleEscapeKey = React.useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setShowModal(false);
+    }
   }, []);
 
-  const handleClose = () => {
-    setIsClosing(true);
-    setTimeout(() => setIsVisible(false), 300);
+  React.useEffect(() => {
+    if (showModal) {
+      const firstButton = modalRef.current?.querySelector('button') as HTMLButtonElement;
+      firstButton?.focus();
+      document.addEventListener('keydown', handleEscapeKey);
+      return () => document.removeEventListener('keydown', handleEscapeKey);
+    }
+  }, [showModal, handleEscapeKey]);
+
+  const handleDontShowAgain = () => {
+    localStorage.setItem(STORAGE_KEY, 'true');
+    onClose();
   };
 
-  if (!isVisible) return null;
-
-  return createPortal(
-    <div
-      className={cn(
-        'fixed inset-0 z-[9998] flex items-center justify-center px-4',
-        'transition-opacity duration-300',
-        isClosing ? 'opacity-0' : 'opacity-100'
-      )}
-      onClick={handleClose}
-    >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-      {/* Popup */}
-      <div
-        className={cn(
-          'relative w-full max-w-lg rounded-2xl overflow-hidden',
-          'border border-background-5',
-          'shadow-2xl shadow-primary-3/10',
-          'transition-all duration-300',
-          isClosing
-            ? 'scale-95 translate-y-4'
-            : 'scale-100 translate-y-0 animate-[slideUp_0.4s_ease-out]'
-        )}
-        style={{
-          background: 'linear-gradient(to top left, rgba(4,6,10,0.98) 0%, rgba(6,10,15,0.98) 40%, rgba(10,14,20,0.98) 80%, rgba(15,20,28,0.98) 100%)',
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Accent gradient top bar */}
-        <div className="h-1 w-full bg-gradient-to-r from-primary-5 via-primary-3 to-primary-1" />
-
-        {/* Close button */}
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 p-1.5 rounded-lg text-foreground-terciary hover:text-foreground-main hover:bg-white/10 transition-colors cursor-pointer"
-          aria-label="Close"
-        >
-          <CloseIcon />
-        </button>
-
-        {/* Content */}
-        <div className="px-6 pt-6 pb-7 md:px-8 md:pt-8 md:pb-9">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-t10 border border-primary-t20 mb-4">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-3 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-2" />
-            </span>
-            <span className="text-text-xs font-semibold text-primary-1 uppercase tracking-wider">
-              {t.promo.badge}
-            </span>
+  return (
+    <>
+      <div className="w-full bg-gradient-to-r from-primary-5 via-primary-3 to-primary-5 overflow-hidden">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-8 py-3 flex items-center gap-4">
+          {/* Server icon */}
+          <div className="text-white/80 hidden sm:block">
+            <ServerIcon />
           </div>
 
-          {/* Title */}
-          <h2 className="text-title-3 text-foreground-main mb-3">
-            {t.promo.title}
-          </h2>
-
-          {/* Description */}
-          <p className="text-text-m text-foreground-secondary leading-relaxed mb-6">
-            {t.promo.description}
-          </p>
-
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button
-              href="https://www.smartconnectiot.com/smartboitier"
-              label={t.promo.cta}
-              variant="primary"
-              size="M"
-              rightIconVariant="arrow-up-right"
-              {...{ target: '_blank', rel: 'noopener noreferrer' }}
-            />
-            <Button
-              label={t.promo.dismiss}
-              variant="ghost"
-              size="M"
-              onClick={handleClose}
-            />
+          {/* Text */}
+          <div className="flex-1 min-w-0">
+            <p className="text-text-s md:text-text-m text-white font-bold">
+              {t.promo.title}
+            </p>
+            <p className="text-text-xs md:text-text-s text-white/70">
+              {t.promo.description}
+            </p>
           </div>
+
+          {/* CTA ghost button */}
+          <a
+            href="https://www.smartconnectiot.com/smartboitier"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 flex items-center gap-1.5 px-3 py-2.5 sm:py-1.5 min-h-[44px] rounded-[6px] text-text-s font-medium text-white border border-white/20 hover:bg-white/10 hover:border-white/40 transition-colors whitespace-nowrap"
+          >
+            {t.promo.cta}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+
+          {/* Close button */}
+          <button
+            onClick={() => setShowModal(true)}
+            className="shrink-0 p-3 -m-1.5 rounded text-white/50 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            <CloseIcon />
+          </button>
         </div>
       </div>
-    </div>,
-    document.body
+
+      {/* Modal de confirmation */}
+      {showModal && typeof document !== 'undefined' && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
+          onClick={() => setShowModal(false)}
+        >
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <div
+            ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="promo-modal-title"
+            className="relative w-full max-w-sm rounded-2xl border border-background-5 p-6 shadow-2xl"
+            style={{
+              background: 'linear-gradient(to top left, rgba(4,6,10,0.98) 0%, rgba(6,10,15,0.98) 40%, rgba(10,14,20,0.98) 80%, rgba(15,20,28,0.98) 100%)',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p id="promo-modal-title" className="text-text-m text-foreground-main font-medium mb-6 text-center">
+              {t.promo.title}
+            </p>
+            <div className="flex flex-col gap-2">
+              <button
+                onClick={onClose}
+                className="w-full py-2.5 px-4 rounded-[6px] bg-primary-3 hover:bg-primary-2 text-foreground-main text-text-s font-medium transition-colors cursor-pointer"
+              >
+                {t.promo.close}
+              </button>
+              <button
+                onClick={handleDontShowAgain}
+                className="w-full py-2.5 px-4 rounded-[6px] border border-background-5 hover:bg-white/5 text-foreground-secondary hover:text-foreground-main text-text-s font-medium transition-colors cursor-pointer"
+              >
+                {t.promo.dontShowAgain}
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 };

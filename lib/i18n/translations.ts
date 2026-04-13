@@ -177,6 +177,8 @@ export const translations = {
       description: 'Our edge intelligence solution for real-time data collection and processing. Connect, normalize, and analyze — all at the source.',
       cta: 'Learn More',
       dismiss: 'Maybe Later',
+      close: 'Close',
+      dontShowAgain: "Don't show again",
     },
 
     // Footer
@@ -390,6 +392,8 @@ export const translations = {
       description: 'Notre solution d\'intelligence edge pour la collecte et le traitement de données en temps réel. Connectez, normalisez, analysez — directement à la source.',
       cta: 'En savoir plus',
       dismiss: 'Plus tard',
+      close: 'Fermer',
+      dontShowAgain: 'Ne plus afficher',
     },
 
     // Footer
