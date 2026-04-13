@@ -19,36 +19,36 @@ export const translations = {
       titleHighlight1: 'Digital',
       titleHighlight2: 'Transformation',
       description:
-        'Blue Connect Solutions drives digital transformation through 3 pillars: IoT, Cybersecurity, and Video Broadcasting — Empowered by AI and hardware designed in France. We bring together innovation, trust, and performance to shape a smarter and more secure digital world.',
+        'BlueConnectSolutions drives digital transformation through 3 pillars: IoT, Cybersecurity, and Video Broadcasting — Empowered by AI and hardware designed in France. We bring together innovation, trust, and performance to shape a smarter and more secure digital world.',
       ctaContact: 'Contact Us',
       ctaExplore: 'Explore Solutions',
     },
 
     // Our Solutions Section
     solutions: {
-      title: 'Our Tree Pilars',
+      title: 'Our Three Pillars',
       subtitle:
         'Everything you need to build, secure, and scale your digital operations',
       solutionsLabel: 'Solutions',
       solution1: {
         number: '1',
-        title: '1. Cyber-Security',
+        title: '1. IoT',
+        description:
+          'IoT solutions with low latency processing, real-time analytics, and seamless device management.',
+        pillarLabel: 'IoT',
+        solutions: [
+          { name: 'SmartConnect IoT', href: 'https://www.smartconnectiot.com/', logo: '/logos/smartconnectiot.svg', padding: 'p-4' },
+        ],
+      },
+      solution2: {
+        number: '2',
+        title: '2. Cyber-Security',
         description:
           'Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management.',
         pillarLabel: 'Cyber Security',
         solutions: [
           { name: 'Oxydian', href: 'https://www.oxydian.fr/', logo: '/logos/oxydian.png' },
           { name: 'Kubb Secure', href: 'https://www.kubb-secure.com/', logo: '/logos/kubbsecure.png' },
-        ],
-      },
-      solution2: {
-        number: '2',
-        title: '2. IoT',
-        description:
-          'IoT solutions with low latency processing, real-time analytics, and seamless device management.',
-        pillarLabel: 'IoT',
-        solutions: [
-          { name: 'SmartConnect IoT', href: 'https://www.smartconnectiot.com/', logo: '/logos/smartconnectiot.svg', padding: 'p-4' },
         ],
       },
       solution3: {
@@ -69,7 +69,7 @@ export const translations = {
       token: 'Designed in France',
       title: 'Powered by French Excellence',
       description:
-        'Every Blue Connect solution runs on premium hardware designed in France by Bleujour. Silent, powerful, and built to last — our infrastructure combines cutting-edge performance with minimalist design, ensuring reliability for your most critical operations.',
+        'Every BlueConnectSolutions solution runs on premium hardware designed in France by Bleujour. Silent, powerful, and built to last — our infrastructure combines cutting-edge performance with minimalist design, ensuring reliability for your most critical operations.',
       features: [
         { label: 'Silent Operation', description: 'Fanless technology' },
         { label: 'Premium Design', description: 'Minimalist & elegant' },
@@ -110,15 +110,15 @@ export const translations = {
       token: 'French Technology',
       title: 'Driving Innovation with Made-in-France Excellence',
       description1:
-        'Blue Connect Solutions is a leading provider of digital transformation solutions, specializing in IoT, Cybersecurity, and Video Broadcasting. Based in Occitanie, France, we combine cutting-edge AI technology with premium Made-in-France hardware to deliver enterprise-grade solutions.',
+        'BlueConnectSolutions is a leading provider of digital transformation solutions, specializing in IoT, Cybersecurity, and Video Broadcasting. Based in Occitanie, France, we combine cutting-edge AI technology with premium Made-in-France hardware to deliver enterprise-grade solutions.',
       description2:
         'Our commitment to innovation, security, and performance has made us a trusted partner for organizations looking to modernize their digital infrastructure while maintaining the highest standards of data protection and compliance.',
-      imageAlt: 'About Blue Connect Solutions',
+      imageAlt: 'About BlueConnectSolutions',
     },
 
     // Contact Section
     contact: {
-      token: 'Take a rendez-vous',
+      token: 'Get in touch',
       title: 'Contact Us',
       subtitle:
         "Have a question or want to learn more about our solutions? We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.",
@@ -147,7 +147,7 @@ export const translations = {
     cta: {
       title: 'Ready to Transform Your Digital Infrastructure?',
       description:
-        'Join leading organizations worldwide who trust Blue Connect Solutions to power their digital transformation journey.',
+        'Join leading organizations worldwide who trust BlueConnectSolutions to power their digital transformation journey.',
       button: 'Contact Us',
     },
 
@@ -181,7 +181,7 @@ export const translations = {
         security: 'Security',
         compliance: 'Compliance',
       },
-      copyright: '© 2025 Blue Connect Solutions. All rights reserved.',
+      copyright: '© 2025 BlueConnectSolutions. All rights reserved.',
     },
   },
 
@@ -190,7 +190,7 @@ export const translations = {
     nav: {
       home: 'Accueil',
       ourSolutions: 'Nos Solutions',
-      aboutUs: 'A propos',
+      aboutUs: 'À propos',
       contactUs: 'Contact',
     },
 
@@ -203,7 +203,7 @@ export const translations = {
       titleHighlight1: 'Transformation',
       titleHighlight2: 'Digitale',
       description:
-        "Blue Connect Solutions accélère la transformation digitale autour de 3 piliers : IoT, Cybersécurité et Diffusion Vidéo — Propulsés par l'IA et du hardware conçu en France. Nous conjuguons innovation, confiance et performance pour façonner un monde numérique plus intelligent et plus sécurisé.",
+        "BlueConnectSolutions accélère la transformation digitale autour de 3 piliers : IoT, Cybersécurité et Diffusion Vidéo — Propulsés par l'IA et du hardware conçu en France. Nous conjuguons innovation, confiance et performance pour façonner un monde numérique plus intelligent et plus sécurisé.",
       ctaContact: 'Nous Contacter',
       ctaExplore: 'Explorer les Solutions',
     },
@@ -216,23 +216,23 @@ export const translations = {
       solutionsLabel: 'Solutions',
       solution1: {
         number: '1',
-        title: '1. Cyber-Sécurité',
+        title: '1. IoT',
+        description:
+          "Solutions IoT avec traitement à faible latence, analyse en temps réel et gestion transparente des appareils.",
+        pillarLabel: 'IoT',
+        solutions: [
+          { name: 'SmartConnect IoT', href: 'https://www.smartconnectiot.com/', logo: '/logos/smartconnectiot.svg', padding: 'p-4' },
+        ],
+      },
+      solution2: {
+        number: '2',
+        title: '2. Cyber-Sécurité',
         description:
           "Solutions de sécurité de niveau entreprise avec détection des menaces en temps réel, réponse automatisée et gestion complète de la conformité.",
         pillarLabel: 'Cyber-Sécurité',
         solutions: [
           { name: 'Oxydian', href: 'https://www.oxydian.fr/', logo: '/logos/oxydian.png' },
           { name: 'Kubb Secure', href: 'https://www.kubb-secure.com/', logo: '/logos/kubbsecure.png' },
-        ],
-      },
-      solution2: {
-        number: '2',
-        title: '2. IoT',
-        description:
-          "Solutions IoT avec traitement à faible latence, analyse en temps réel et gestion transparente des appareils.",
-        pillarLabel: 'IoT',
-        solutions: [
-          { name: 'SmartConnect IoT', href: 'https://www.smartconnectiot.com/', logo: '/logos/smartconnectiot.svg', padding: 'p-4' },
         ],
       },
       solution3: {
@@ -253,7 +253,7 @@ export const translations = {
       token: 'Conçu en France',
       title: 'Propulsé par l\'Excellence Française',
       description:
-        'Chaque solution Blue Connect repose sur du hardware premium conçu en France par Bleujour. Silencieux, puissant et durable — notre infrastructure allie performance de pointe et design minimaliste, garantissant fiabilité pour vos opérations les plus critiques.',
+        'Chaque solution BlueConnectSolutions repose sur du hardware premium conçu en France par Bleujour. Silencieux, puissant et durable — notre infrastructure allie performance de pointe et design minimaliste, garantissant fiabilité pour vos opérations les plus critiques.',
       features: [
         { label: 'Fonctionnement Silencieux', description: 'Technologie fanless' },
         { label: 'Design Premium', description: 'Minimaliste & élégant' },
@@ -294,10 +294,10 @@ export const translations = {
       token: 'Technologie Française',
       title: "Stimuler l'Innovation avec l'Excellence Made-in-France",
       description1:
-        "Blue Connect Solutions est un fournisseur leader de solutions de transformation digitale, spécialisé dans l'IoT, la Cybersécurité et la Diffusion Vidéo. Basés en Occitanie, France, nous combinons une technologie IA de pointe avec du hardware premium Made-in-France pour offrir des solutions de niveau entreprise.",
+        "BlueConnectSolutions est un fournisseur leader de solutions de transformation digitale, spécialisé dans l'IoT, la Cybersécurité et la Diffusion Vidéo. Basés en Occitanie, France, nous combinons une technologie IA de pointe avec du hardware premium Made-in-France pour offrir des solutions de niveau entreprise.",
       description2:
         "Notre engagement envers l'innovation, la sécurité et la performance fait de nous un partenaire de confiance pour les organisations souhaitant moderniser leur infrastructure numérique tout en maintenant les plus hauts standards de protection des données et de conformité.",
-      imageAlt: 'A propos de Blue Connect Solutions',
+      imageAlt: 'À propos de BlueConnectSolutions',
     },
 
     // Contact Section
@@ -332,7 +332,7 @@ export const translations = {
     cta: {
       title: 'Prêt à Transformer Votre Infrastructure Numérique ?',
       description:
-        'Rejoignez les organisations leaders dans le monde qui font confiance à Blue Connect Solutions pour accompagner leur transformation digitale.',
+        'Rejoignez les organisations leaders dans le monde qui font confiance à BlueConnectSolutions pour accompagner leur transformation digitale.',
       button: 'Nous Contacter',
     },
 
@@ -347,7 +347,7 @@ export const translations = {
       },
       company: {
         title: 'Entreprise',
-        aboutUs: 'A propos',
+        aboutUs: 'À propos',
         careers: 'Carrières',
         partners: 'Partenaires',
         contact: 'Contact',
@@ -366,7 +366,7 @@ export const translations = {
         security: 'Sécurité',
         compliance: 'Conformité',
       },
-      copyright: '© 2025 Blue Connect Solutions. Tous droits réservés.',
+      copyright: '© 2025 BlueConnectSolutions. Tous droits réservés.',
     },
   },
 };

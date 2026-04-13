@@ -289,7 +289,7 @@ export default function Home() {
       </div>
       <HardwareSection />
       <CtaSection />
-      <LogosSection />
+      {/* <LogosSection /> */}
       <FooterSection />
       <BackToTopButton />
     </main>

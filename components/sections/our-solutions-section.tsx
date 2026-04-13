@@ -788,8 +788,8 @@ export function OurSolutionsSection() {
               {/* Navigation Buttons */}
               <div className="flex w-full md:w-auto p-1 mt-4 bg-background-3 rounded-[10px]">
                 {[
-                  { num: 1, label: solution1.pillarLabel, mobileLabel: 'Security' },
-                  { num: 2, label: solution2.pillarLabel, mobileLabel: 'IoT' },
+                  { num: 1, label: solution1.pillarLabel, mobileLabel: 'IoT' },
+                  { num: 2, label: solution2.pillarLabel, mobileLabel: 'Security' },
                   { num: 3, label: solution3.pillarLabel, mobileLabel: 'Video' },
                 ].map(({ num, label, mobileLabel }) => (
                   <Button
@@ -843,7 +843,7 @@ export function OurSolutionsSection() {
 
               {/* Right Side - Description Cards using PillarTileDescription */}
               <div className="relative flex-1 h-full min-h-[calc(100vh-300px)] md:min-h-0 md:h-[396px]">
-                {/* Première carte - Cyber Security */}
+                {/* Première carte - IoT */}
                 <div ref={description1Ref} className={`absolute inset-0 h-full ${activeSolution !== 1 ? 'pointer-events-none' : ''}`}>
                   <PillarTileDescription
                     title={solution1.title}
@@ -856,7 +856,7 @@ export function OurSolutionsSection() {
                     className="h-full md:h-[396px]"
                   />
                 </div>
-                {/* Deuxième carte - IoT (par-dessus la première) */}
+                {/* Deuxième carte - Cyber Security (par-dessus la première) */}
                 <div ref={description2Ref} className={`absolute inset-0 h-full ${activeSolution !== 2 ? 'pointer-events-none' : ''}`}>
                   <PillarTileDescription
                     title={solution2.title}

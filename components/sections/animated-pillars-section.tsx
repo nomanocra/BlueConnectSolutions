@@ -47,7 +47,7 @@ export function AnimatedPillarsSection() {
       const WRAPPER_HEIGHT = 70;
 
       // Animation de la hauteur des Pillars (de 0 à leur hauteur finale)
-      const pillarHeights = [175, 150, 250];
+      const pillarHeights = [250, 150, 187];
       const pillarRefs = [pillar1Ref, pillar2Ref, pillar3Ref];
 
       pillarRefs.forEach((pillarRef, index) => {
@@ -142,21 +142,21 @@ export function AnimatedPillarsSection() {
 
               <Pillar
                 ref={pillar1Ref}
-                label="Cyber Security"
+                label="IoT"
                 height={0}
                 className="absolute bottom-[63px] md:bottom-[33px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] 2xl:left-[calc(50%-200px)] 3xl:left-[calc(50%-240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35] origin-bottom"
                 style={{ opacity: 0 }}
               />
               <Pillar
                 ref={pillar2Ref}
-                label="Video Broadcasting"
+                label="Cyber Security"
                 height={0}
                 className="absolute -bottom-[10px] md:-bottom-[40px] left-1/2 -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35] origin-bottom"
                 style={{ opacity: 0 }}
               />
               <Pillar
                 ref={pillar3Ref}
-                label="IoT"
+                label="Video Broadcasting"
                 height={0}
                 className="absolute bottom-[63px] md:bottom-[33px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] 2xl:left-[calc(50%+200px)] 3xl:left-[calc(50%+240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35] origin-bottom"
                 style={{ opacity: 0 }}
@@ -166,24 +166,24 @@ export function AnimatedPillarsSection() {
 
               <div
                 ref={icon1Ref}
-                className="absolute bottom-[310px] md:bottom-[385px] 2xl:bottom-[460px] 3xl:bottom-[540px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] 2xl:left-[calc(50%-200px)] 3xl:left-[calc(50%-240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35]"
+                className="absolute bottom-[370px] md:bottom-[460px] 2xl:bottom-[545px] 3xl:bottom-[640px] left-[calc(50%-120px)] md:left-[calc(50%-175.5px)] 2xl:left-[calc(50%-200px)] 3xl:left-[calc(50%-240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35]"
                 style={{ opacity: 0 }}
               >
-                <PillarIcon iconVariant="security" size={72} />
+                <PillarIcon iconVariant="edge" size={72} />
               </div>
               <div
                 ref={icon2Ref}
                 className="absolute bottom-[230px] md:bottom-[285px] 2xl:bottom-[350px] 3xl:bottom-[405px] left-1/2 -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35]"
                 style={{ opacity: 0 }}
               >
-                <PillarIcon iconVariant="broadcast" size={72} />
+                <PillarIcon iconVariant="security" size={72} />
               </div>
               <div
                 ref={icon3Ref}
-                className="absolute bottom-[370px] md:bottom-[460px] 2xl:bottom-[545px] 3xl:bottom-[640px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] 2xl:left-[calc(50%+200px)] 3xl:left-[calc(50%+240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35]"
+                className="absolute bottom-[322px] md:bottom-[397px] 2xl:bottom-[472px] 3xl:bottom-[552px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] 2xl:left-[calc(50%+200px)] 3xl:left-[calc(50%+240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35]"
                 style={{ opacity: 0 }}
               >
-                <PillarIcon iconVariant="edge" size={72} />
+                <PillarIcon iconVariant="broadcast" size={72} />
               </div>
             </div>
           </div>

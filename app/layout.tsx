@@ -5,13 +5,13 @@ import { Providers } from './providers';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Blue Connect Solutions',
+  title: 'BlueConnectSolutions',
   description: 'Driving the next wave of Digital Transformation',
   icons: {
     icon: '/favicon.png',
   },
   openGraph: {
-    title: 'Blue Connect Solutions',
+    title: 'BlueConnectSolutions',
     description: 'Driving the next wave of Digital Transformation - IoT, Cybersecurity & Video Broadcasting',
     type: 'website',
     images: [
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
         url: '/logo.png',
         width: 512,
         height: 512,
-        alt: 'Blue Connect Solutions Logo',
+        alt: 'BlueConnectSolutions Logo',
       },
     ],
   },
   twitter: {
     card: 'summary',
-    title: 'Blue Connect Solutions',
+    title: 'BlueConnectSolutions',
     description: 'Driving the next wave of Digital Transformation',
     images: ['/logo.png'],
   },
