@@ -1,26 +1,28 @@
+'use client';
+
 import { Token, PillarIcon, Button } from '@/components/ui';
+import { useTranslations } from '@/lib/i18n';
 
 export function PillarsSection() {
+  const t = useTranslations();
+
   const pillars = [
     {
       number: '1',
-      title: 'Cyber-Security',
-      description:
-        'Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management.',
+      title: t.pillars.pillar1.title,
+      description: t.pillars.pillar1.description,
       iconVariant: 'security' as const,
     },
     {
       number: '2',
-      title: 'Video Broadcasting',
-      description:
-        'Advanced video streaming and broadcasting solutions with AI-powered content management and real-time analytics.',
+      title: t.pillars.pillar2.title,
+      description: t.pillars.pillar2.description,
       iconVariant: 'broadcast' as const,
     },
     {
       number: '3',
-      title: 'IoT',
-      description:
-        'Intelligent IoT solutions with Made-in-France hardware for reliable, low-latency operations.',
+      title: t.pillars.pillar3.title,
+      description: t.pillars.pillar3.description,
       iconVariant: 'edge' as const,
     },
   ];
@@ -30,12 +32,11 @@ export function PillarsSection() {
       <div className="max-w-[1200px] mx-auto">
         <div className="flex flex-col gap-12 items-center justify-center">
           {/* Token */}
-          <Token label="Our Three Pillars" />
+          <Token label={t.pillars.token} />
 
           {/* Title */}
           <p className="text-text-m text-foreground-terciary text-center max-w-[800px]">
-            Everything you need to build, secure, and scale your digital
-            operations
+            {t.pillars.subtitle}
           </p>
 
           {/* Pillars Grid */}
@@ -67,7 +68,7 @@ export function PillarsSection() {
 
                 {/* Learn More Button */}
                 <Button
-                  label="Learn More"
+                  label={t.pillars.learnMore}
                   variant="ghost"
                   size="S"
                   rightIconVariant="arrow-right"
@@ -81,4 +82,3 @@ export function PillarsSection() {
     </section>
   );
 }
-

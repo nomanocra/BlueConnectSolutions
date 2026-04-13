@@ -11,13 +11,13 @@ import {
   CtaSection,
   FooterSection,
 } from '@/components/sections';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from '@/lib/i18n';
 
 export default function Home() {
   const t = useTranslations();
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollYRef = useRef(0);
   const [activeSection, setActiveSection] = useState<'home' | 'our-solutions'>(
     'home'
   );
@@ -170,6 +170,7 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const lastScrollY = lastScrollYRef.current;
 
       // Si on est tout en haut (< 100px), toujours afficher le header
       if (currentScrollY < 300) {
@@ -184,7 +185,7 @@ export default function Home() {
         setIsHeaderVisible(true);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollYRef.current = currentScrollY;
     };
 
     // Throttle pour optimiser les performances
@@ -201,7 +202,7 @@ export default function Home() {
 
     window.addEventListener('scroll', scrollListener, { passive: true });
     return () => window.removeEventListener('scroll', scrollListener);
-  }, [lastScrollY]);
+  }, []);
 
   useEffect(() => {
     // Observer pour détecter la section active

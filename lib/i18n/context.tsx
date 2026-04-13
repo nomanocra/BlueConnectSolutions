@@ -18,42 +18,44 @@ interface I18nContextType {
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'preferred-locale';
+const COOKIE_NAME = 'locale';
 
-function detectSystemLocale(): Locale {
-  if (typeof window === 'undefined') return 'en';
-
-  const browserLang = navigator.language || navigator.languages?.[0] || '';
-  return browserLang.toLowerCase().startsWith('fr') ? 'fr' : 'en';
-}
-
-function getStoredLocale(): Locale | null {
-  if (typeof window === 'undefined') return null;
-
-  const stored = localStorage.getItem(STORAGE_KEY);
-  if (stored === 'en' || stored === 'fr') {
-    return stored;
-  }
-  return null;
+function setLocaleCookie(locale: Locale): void {
+  document.cookie = `${COOKIE_NAME}=${locale};path=/;max-age=${60 * 60 * 24 * 365};SameSite=Lax`;
 }
 
 function storeLocale(locale: Locale): void {
   if (typeof window === 'undefined') return;
   localStorage.setItem(STORAGE_KEY, locale);
+  setLocaleCookie(locale);
 }
 
-export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>('en');
-  const [isInitialized, setIsInitialized] = useState(false);
+interface I18nProviderProps {
+  children: ReactNode;
+  initialLocale?: Locale;
+}
+
+export function I18nProvider({ children, initialLocale = 'en' }: I18nProviderProps) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale);
 
   useEffect(() => {
-    // Check stored preference first, then detect system locale
-    const storedLocale = getStoredLocale();
-    const detectedLocale = storedLocale ?? detectSystemLocale();
-    setLocaleState(detectedLocale);
-    setIsInitialized(true);
-
-    // Update HTML lang attribute
-    document.documentElement.lang = detectedLocale;
+    // On first load, if no cookie was set (initialLocale came from server as 'en'),
+    // check localStorage or detect system locale and persist for next time
+    const cookieHasLocale = document.cookie.includes(`${COOKIE_NAME}=`);
+    if (!cookieHasLocale) {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored === 'en' || stored === 'fr') {
+        setLocaleState(stored);
+        setLocaleCookie(stored);
+        document.documentElement.lang = stored;
+      } else {
+        const browserLang = (navigator.language || '').toLowerCase();
+        const detected: Locale = browserLang.startsWith('fr') ? 'fr' : 'en';
+        setLocaleState(detected);
+        storeLocale(detected);
+        document.documentElement.lang = detected;
+      }
+    }
   }, []);
 
   const setLocale = (newLocale: Locale) => {
@@ -63,15 +65,6 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   };
 
   const t = translations[locale];
-
-  // Prevent hydration mismatch by rendering with default locale until initialized
-  if (!isInitialized) {
-    return (
-      <I18nContext.Provider value={{ locale: 'en', setLocale, t: translations.en }}>
-        {children}
-      </I18nContext.Provider>
-    );
-  }
 
   return (
     <I18nContext.Provider value={{ locale, setLocale, t }}>

@@ -37,14 +37,14 @@ export function HeroSection({ onExploreSolutions }: HeroSectionProps = {}) {
               <Token label={t.hero.token} />
             </div>
 
-            {/* Title - Non traduit pour garder la forme visuelle */}
+            {/* Title */}
             <h1
               className="text-title-2 md:text-title-tablet lg:text-title-1 font-bold text-center text-foreground-main max-w-[820px] animate-fade-in-up whitespace-pre-line"
               style={{ animationDelay: '50ms' }}
             >
-              Driving the next{'\n'}wave of{' '}
-              <span className="text-primary-3">Digital</span>{'\n'}
-              <span className="text-primary-3">Transformation</span>
+              {t.hero.titlePart1}{'\n'}{t.hero.titlePart2}{' '}
+              <span className="text-primary-3">{t.hero.titleHighlight1}</span>{'\n'}
+              <span className="text-primary-3">{t.hero.titleHighlight2}</span>
             </h1>
 
             {/* Description */}

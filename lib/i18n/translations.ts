@@ -24,6 +24,25 @@ export const translations = {
       ctaExplore: 'Explore Solutions',
     },
 
+    // Pillars Section (overview cards)
+    pillars: {
+      token: 'Our Three Pillars',
+      subtitle: 'Everything you need to build, secure, and scale your digital operations',
+      learnMore: 'Learn More',
+      pillar1: {
+        title: 'Cyber-Security',
+        description: 'Enterprise-grade security solutions with real-time threat detection, automated response, and comprehensive compliance management.',
+      },
+      pillar2: {
+        title: 'Video Broadcasting',
+        description: 'Advanced video streaming and broadcasting solutions with AI-powered content management and real-time analytics.',
+      },
+      pillar3: {
+        title: 'IoT',
+        description: 'Intelligent IoT solutions with Made-in-France hardware for reliable, low-latency operations.',
+      },
+    },
+
     // Our Solutions Section
     solutions: {
       title: 'Our Three Pillars',
@@ -197,15 +216,34 @@ export const translations = {
     // Hero Section
     hero: {
       token: 'Solutions 100% Françaises',
-      title: 'Impulser la prochaine vague de Transformation Digitale',
-      titlePart1: 'Impulser la prochaine',
-      titlePart2: 'vague de',
-      titleHighlight1: 'Transformation',
-      titleHighlight2: 'Digitale',
+      title: 'Driving the next wave of Digital Transformation',
+      titlePart1: 'Driving the next',
+      titlePart2: 'wave of',
+      titleHighlight1: 'Digital',
+      titleHighlight2: 'Transformation',
       description:
         "BlueConnectSolutions accélère la transformation digitale autour de 3 piliers : IoT, Cybersécurité et Diffusion Vidéo — Propulsés par l'IA et du hardware conçu en France. Nous conjuguons innovation, confiance et performance pour façonner un monde numérique plus intelligent et plus sécurisé.",
       ctaContact: 'Nous Contacter',
       ctaExplore: 'Explorer les Solutions',
+    },
+
+    // Pillars Section (overview cards)
+    pillars: {
+      token: 'Nos Trois Piliers',
+      subtitle: 'Tout ce dont vous avez besoin pour construire, sécuriser et faire évoluer vos opérations numériques',
+      learnMore: 'En Savoir Plus',
+      pillar1: {
+        title: 'Cyber-Sécurité',
+        description: 'Solutions de sécurité de niveau entreprise avec détection des menaces en temps réel, réponse automatisée et gestion complète de la conformité.',
+      },
+      pillar2: {
+        title: 'Diffusion Vidéo',
+        description: 'Solutions avancées de streaming et diffusion vidéo avec gestion de contenu pilotée par IA et analyses en temps réel.',
+      },
+      pillar3: {
+        title: 'IoT',
+        description: 'Solutions IoT intelligentes avec du hardware Made-in-France pour des opérations fiables et à faible latence.',
+      },
     },
 
     // Our Solutions Section
