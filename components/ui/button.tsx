@@ -21,6 +21,8 @@ export interface ButtonProps
 
   // Comportement
   href?: string;
+  target?: string;
+  rel?: string;
   asChild?: boolean;
 }
 
