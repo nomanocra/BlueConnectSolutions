@@ -30,10 +30,15 @@ export function ContactSection() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    // Simuler l'envoi du formulaire
     try {
-      // Ici vous pouvez ajouter votre logique d'envoi (API, email, etc.)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Failed to send');
+
       setSubmitStatus('success');
       setFormData({ name: '', email: '', company: '', message: '' });
     } catch (error) {

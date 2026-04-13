@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "kill $(lsof -ti:3001) 2>/dev/null; next dev --port 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -36,6 +36,7 @@
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-syntax-highlighter": "^16.1.1",
+    "resend": "^6.11.0",
     "tailwind-merge": "^3.5.0",
     "typescript": "^6.0.2"
   },
