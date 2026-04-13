@@ -156,7 +156,7 @@ export function AnimatedPillarsSection() {
               />
               <Pillar
                 ref={pillar3Ref}
-                label="Edge AI"
+                label="IoT"
                 height={0}
                 className="absolute bottom-[63px] md:bottom-[33px] left-[calc(50%+120px)] md:left-[calc(50%+175.5px)] 2xl:left-[calc(50%+200px)] 3xl:left-[calc(50%+240px)] -translate-x-1/2 scale-75 md:scale-100 2xl:scale-[1.2] 3xl:scale-[1.35] origin-bottom"
                 style={{ opacity: 0 }}

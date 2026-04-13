@@ -789,7 +789,7 @@ export function OurSolutionsSection() {
               <div className="flex w-full md:w-auto p-1 mt-4 bg-background-3 rounded-[10px]">
                 {[
                   { num: 1, label: solution1.pillarLabel, mobileLabel: 'Security' },
-                  { num: 2, label: solution2.pillarLabel, mobileLabel: 'Edge AI' },
+                  { num: 2, label: solution2.pillarLabel, mobileLabel: 'IoT' },
                   { num: 3, label: solution3.pillarLabel, mobileLabel: 'Video' },
                 ].map(({ num, label, mobileLabel }) => (
                   <Button
@@ -856,7 +856,7 @@ export function OurSolutionsSection() {
                     className="h-full md:h-[396px]"
                   />
                 </div>
-                {/* Deuxième carte - Edge AI (par-dessus la première) */}
+                {/* Deuxième carte - IoT (par-dessus la première) */}
                 <div ref={description2Ref} className={`absolute inset-0 h-full ${activeSolution !== 2 ? 'pointer-events-none' : ''}`}>
                   <PillarTileDescription
                     title={solution2.title}

@@ -18,9 +18,9 @@ export function PillarsSection() {
     },
     {
       number: '3',
-      title: 'Edge AI',
+      title: 'IoT',
       description:
-        'Intelligent Edge AI solutions with Made-in-France hardware for reliable, low-latency operations.',
+        'Intelligent IoT solutions with Made-in-France hardware for reliable, low-latency operations.',
       iconVariant: 'edge' as const,
     },
   ];

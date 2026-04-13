@@ -43,10 +43,10 @@ export const translations = {
       },
       solution2: {
         number: '2',
-        title: '2. Edge AI',
+        title: '2. IoT',
         description:
-          'Edge AI solutions with low latency processing, real-time analytics, and seamless device management.',
-        pillarLabel: 'Edge AI',
+          'IoT solutions with low latency processing, real-time analytics, and seamless device management.',
+        pillarLabel: 'IoT',
         solutions: [
           { name: 'SmartConnect IoT', href: 'https://www.smartconnectiot.com/', logo: '/logos/smartconnectiot.svg', padding: 'p-4' },
         ],
@@ -157,7 +157,7 @@ export const translations = {
         title: 'Solutions',
         edgeComputing: 'Edge Computing',
         cyberSecurity: 'Cyber-Security',
-        edgeAI: 'Edge AI',
+        edgeAI: 'IoT',
         smartInfrastructure: 'Smart Infrastructure',
       },
       company: {
@@ -227,10 +227,10 @@ export const translations = {
       },
       solution2: {
         number: '2',
-        title: '2. Edge AI',
+        title: '2. IoT',
         description:
-          "Solutions Edge AI avec traitement à faible latence, analyse en temps réel et gestion transparente des appareils.",
-        pillarLabel: 'Edge AI',
+          "Solutions IoT avec traitement à faible latence, analyse en temps réel et gestion transparente des appareils.",
+        pillarLabel: 'IoT',
         solutions: [
           { name: 'SmartConnect IoT', href: 'https://www.smartconnectiot.com/', logo: '/logos/smartconnectiot.svg', padding: 'p-4' },
         ],
@@ -342,7 +342,7 @@ export const translations = {
         title: 'Solutions',
         edgeComputing: 'Edge Computing',
         cyberSecurity: 'Cyber-Sécurité',
-        edgeAI: 'Edge AI',
+        edgeAI: 'IoT',
         smartInfrastructure: 'Infrastructure Intelligente',
       },
       company: {
