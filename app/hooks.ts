@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function useBannerHeight(showBanner: boolean, bannerRef: React.RefObject<HTMLDivElement>) {
+export function useBannerHeight(showBanner: boolean, bannerRef: React.RefObject<HTMLDivElement | null>) {
   const [bannerHeight, setBannerHeight] = useState(0);
 
   useEffect(() => {
