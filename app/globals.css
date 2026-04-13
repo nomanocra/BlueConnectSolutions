@@ -1,6 +1,78 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-3xl: 1920px;
+
+  --color-primary-1: #94b9e5;
+  --color-primary-2: #5b95d5;
+  --color-primary-3: #3576c0;
+  --color-primary-4: #255da4;
+  --color-primary-5: #1f4a85;
+  --color-primary-t10: #3576c01a;
+  --color-primary-t20: #3576c033;
+  --color-primary-t30: #3576c04d;
+
+  --color-background-1: #020306;
+  --color-background-2: #04060a;
+  --color-background-3: #060a0f;
+  --color-background-4: #0a0e14;
+  --color-background-5: #0f141c;
+  --color-background-t80: #060a0fcc;
+
+  --color-foreground-main: #ffffff;
+  --color-foreground-secondary: #b1becb;
+  --color-foreground-terciary: #738292;
+  --color-foreground-negatif: #0f141c;
+
+  --color-text-icon-negatif: #ffffff;
+
+  --font-geist: var(--font-geist-sans), sans-serif;
+
+  --text-title-1: 82px;
+  --text-title-1--line-height: 86px;
+  --text-title-1--font-weight: 700;
+
+  --text-title-2: 40px;
+  --text-title-2--line-height: 44px;
+  --text-title-2--font-weight: 700;
+
+  --text-title-tablet: 60px;
+  --text-title-tablet--line-height: 64px;
+  --text-title-tablet--font-weight: 700;
+
+  --text-title-3: 24px;
+  --text-title-3--line-height: 32px;
+  --text-title-3--font-weight: 600;
+
+  --text-text-l: 18px;
+  --text-text-l--line-height: 160%;
+
+  --text-text-m: 16px;
+  --text-text-m--line-height: 160%;
+
+  --text-text-s: 14px;
+  --text-text-s--line-height: 160%;
+
+  --text-text-xs: 12px;
+  --text-text-xs--line-height: 160%;
+
+  --text-body-regular: 16px;
+  --text-body-regular--line-height: 24px;
+  --text-body-regular--font-weight: 400;
+
+  --text-legend-m: 11px;
+  --text-legend-m--line-height: 100%;
+  --text-legend-m--font-weight: 600;
+
+  --text-legend-s: 10px;
+  --text-legend-s--line-height: 100%;
+  --text-legend-s--font-weight: 600;
+}
 
 :root {
   --font-geist-sans: 'Geist', sans-serif;
